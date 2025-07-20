@@ -1,5 +1,6 @@
 import <iostream>;
 import <string>;
+import Global_Constants;
 
 export module PlayerCharacter;
 
@@ -17,8 +18,8 @@ export class PlayerCharacter {
     protected:
         std::vector<Potion> PotionInUse; // representing the potions the PC is currently using
         void calculateBuff();
-        virtual void AbilityBu();
-        void calcualteTotalDamage();
+        virtual void AbilityBuff();
+        void calculateTotalDamage();
 
     public: 
         void drinkPotion(Potion p); // drinks a potion and gains its effects
@@ -40,9 +41,9 @@ export class PlayerCharacter {
             // calculate the buff gained:
             calculateBuff();
             // check specific race's ability:
-            checkAbility();
+            AbilityBuff();
             // calcualte the total damage to be dealt;
-            calcualteTotalDamage();
+            calculateTotalDamage();
         }
         virtual void takeDamage(int damage);
 };
