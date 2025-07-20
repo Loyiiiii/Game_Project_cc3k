@@ -2,5 +2,8 @@ export module restore_health;
 
 export class RestoreHealth : public Potion {
 public:
-    RestoreHealth(): Potion{Potion_Type::HEALTH_RESTORE, false, 10, 'P'}
+    RestoreHealth(); // Constructor for RestoreHealth potion
+    // Inherits from Potion, which has the type HEALTH_RESTORE, is not temporary,
+    // has an amount of 10, and a symbol 'P'.
+    // The symbol 'P' is used to represent the potion in the game.
 }
