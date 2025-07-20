@@ -20,8 +20,9 @@ export class PlayerCharacter {
     
     public: 
         void drinkPotion(Potion p); // drinks a potion and gains its effects
-        PlayerCharacter(Position pos, int health, int maxHealth, 
-            int atk, int def, int goldATM, Race race, bool has_max_health = false); // default to false, unless Vampire
+        PlayerCharacter(Position pos, int health = 125, int maxHealth = 125, 
+            int atk = 25, int def = 25, int goldATM = 0, Race race = Race::SHADE, bool has_max_health = true);
+
         virtual ~PlayerCharacter() = default; // Virtual destructor for proper inheritance
         // Getters
         Position getPos();
