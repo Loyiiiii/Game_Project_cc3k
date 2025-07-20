@@ -10,3 +10,7 @@ export enum Potion_Type {
     HEALTH_RESTORE, ATK_BOOST,DEF_BOOST, POISION_HEALTH, WOUND_ATK, WOUND_DEF
 };
 
+export struct Position {
+    int row;
+    int col;
+};
