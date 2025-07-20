@@ -7,6 +7,8 @@ PlayerCharacter::PlayerCharacter(Position pos, int health, int maxHealth,
 
 
 void PlayerCharacter::drinkPotion(Potion p) {
+
+    PotionInUse.emplace(p); // first add to the vector. 
     // Positive effects:
     if (p.getType() == Potion_Type::HEALTH_RESTORE) {
         // ...
