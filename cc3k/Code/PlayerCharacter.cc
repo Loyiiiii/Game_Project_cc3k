@@ -17,7 +17,7 @@ export class PlayerCharacter {
     protected:
         std::vector<Potion> PotionInUse; // representing the potions the PC is currently using
         void calculateBuff();
-        virtual void AbilityBuff();
+        virtual void AbilityBu();
         void calcualteTotalDamage();
 
     public: 
@@ -40,7 +40,7 @@ export class PlayerCharacter {
             // calculate the buff gained:
             calculateBuff();
             // check specific race's ability:
-            AbilityBuff();
+            checkAbility();
             // calcualte the total damage to be dealt;
             calcualteTotalDamage();
         }
