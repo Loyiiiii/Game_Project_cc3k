@@ -17,12 +17,11 @@ export class PlayerCharacter {
     // some additional things came to me: 
     protected:
         std::vector<Potion> PotionInUse; // representing the potions the PC is currently using
-        void calculateBuff();
         virtual void AbilityBuff();
         void calculateTotalDamage();
 
     public: 
-        void drinkPotion(Potion p); // drinks a potion and gains its effects
+        void drinkPotion(Potion& p); // drinks a potion and gains its effects
         PlayerCharacter(Position pos, int health = 125, int maxHealth = 125, 
             int atk = 25, int def = 25, int goldATM = 0, Race race = Race::SHADE, bool has_max_health = true);
 
@@ -38,8 +37,6 @@ export class PlayerCharacter {
         Race getRace();
         // Virtual methods that races can override
         void attack() {
-            // calculate the buff gained:
-            calculateBuff();
             // check specific race's ability:
             AbilityBuff();
             // calcualte the total damage to be dealt;

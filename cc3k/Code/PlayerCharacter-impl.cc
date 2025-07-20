@@ -6,28 +6,46 @@ PlayerCharacter::PlayerCharacter(Position pos, int health, int maxHealth,
     goldATM{gold}, race{race}, has_max_health{has_max_health} {}
 
 
-void PlayerCharacter::drinkPotion(Potion p) {
-
+void PlayerCharacter::drinkPotion(Potion& p) {
     PotionInUse.emplace(p); // first add to the vector. 
     // Positive effects:
     if (p.getType() == Potion_Type::HEALTH_RESTORE) {
-        // ...
+        if (has_max_health == true) {
+            // for other races:
+            // can not exceed max health 
+            if (health + p.getAmount() > maxHealth) {
+                health = maxHealth;
+            }
+            else {
+                health += p.getAmount();
+            }
+        }
+        else {
+            // vampire
+            health += p.getAmount();
+            
+        }
     }
     else if (p.getType() == Potion_Type::ATK_BOOST) {
-        // ...
+        atk += p.getAmount();
     }
     else if (p.getType() == Potion_Type::DEF_BOOST) {
-        // ...
+        def += p.getAmount();
     }
     // Negative effects:
     else if (p.getType() == Potion_Type::POISION_HEALTH) {
-        // ...
+        if (health - p.getAmount() < 0) {
+            health = 0;  // can't be negative -> the PC is dead.
+        }
+        else {
+            health += p.getAmount(); // we will add the negative effect - the potion will -10 HP.
+        }
     }
     else if (p.getType() == Potion_Type::WOUND_ATK) {
-        // ...
+        atk += p.getAmount(); // we will add the negative effect - the potion will -5 Atk.
     }
     else if (p.getType() == Potion_Type::WOUND_DEF) {
-        // ...
+        def += p.getAmount(); // we will add the negative effect - the potion will -5 Def.
     }
 }
 
