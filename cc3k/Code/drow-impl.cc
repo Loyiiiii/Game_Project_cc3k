@@ -1,4 +1,4 @@
-import Drow;
+module Drow;
 
 Drow::Drow(Position pos):
     PlayerCharacter(pos, 150, 150, 25, 15, 0, Race::DROW) {}
