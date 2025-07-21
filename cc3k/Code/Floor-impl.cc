@@ -1,8 +1,7 @@
-module Floor;
+module floor;
 
-// copy emptyfloor.txt into the folder
-// use input file stream
-// move each item into the map
+Floor::Floor(int rows, int cols)
+    : numRows{rows}, num{cols}, map{rows, std::vector<Cell>(col, Cell{'.', 0, 0})} {}
 
 // helper: printInfo(PlayerCharacter *pc);
 void printInfo(PlayerCharacter *pc) {
@@ -18,24 +17,20 @@ void printInfo(PlayerCharacter *pc) {
 }
 
 
-void Floor::floor_init(PlayerCharacter *pc):  {
+void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
     // clear the original map
     map.clear()
 
-    std::ifstream file{"emptyfloor.txt"};
+    std::ifstream file{filename};
     std::string line;
-    int lineNum;
-    while (std::getline(file, line)) {
-        // create a vector of Cell
-        std::vector<Cell> row;
-        lineNum = map.size();
-        for (int i = 0; i < 79; i++) {
-            char currSymbol = char(line[i]); // get the current char
-            Cell cell{currSymbol, lineNum, i}
-            cell.setIsPassable(currSymbol == '.');
+    int row = 0;
+    while (std::getline(file, line) && row < numRows) {
+        for (int col = 0; col < numCols; col++) {
+            map[row][col] = Cell{line[col], row, col};
         }
-        map.push_back(std::move(row));
+        row++;
     }
+    // Place player, enemies, potions, gold as needed
     
     std::cout << std::endl;
     printInfo(pc); // print info below the map
@@ -50,4 +45,11 @@ void Floor::printMap() {
         }
         std::cout << std::endl;
     }
+}
+
+void Floor::movePlayer(int oldRow, int oldCol, int newRow, int newCol) {
+    map[oldRow][oldCol].player = nullptr; // remove player from old cell
+    map[newRow][newCol].player = player; // place player in new cell
+    player->setPos(Position(newRow, newCol)); // update player's position
+    map[newRow][newCol].setSymbol(player->getSymbol()); // update cell symbol
 }
