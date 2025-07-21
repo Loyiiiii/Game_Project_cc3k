@@ -5,8 +5,9 @@ import Enemy;
 import Global_Constants;
 import PlayerCharacter;
 
-Human::Human(Position pos, int health, int damage, int defense, bool movable):
-    Enemy(pos, health, damage, defense, movable) {
+// Human: 140HP, 20Atk, 20Def, - drops 2 normal piles when dead
+Human::Human(Position pos):
+    Enemy(pos, 140, 20, 20, true) {
         gold_carried.emplace_back(std::make_unique<NormalGold>());
         gold_carried.emplace_back(std::make_unique<NormalGold>());
     }
@@ -32,4 +33,8 @@ void Human::takeDamage(int damage) {
     else {
         HP -= damage;
     }
+}
+
+char Human::getSymbol() {
+    return 'H';
 }
