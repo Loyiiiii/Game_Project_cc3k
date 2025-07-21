@@ -16,11 +16,11 @@ export class Enemy {
         // Combat utility method
         int calculateDamage(int attackAtk, int defenderDef);
     public:
-        Enemy(Position pos, int HP, int Atk, int Def, bool movable);
+        Enemy(Position pos, int HP, int Atk, int Def, bool movable, bool is_neutral, char symbol);
         virtual ~Enemy();
         // these Pure Virtual Functions are the interface for the Enemy class
         virtual void attack(PlayerCharacter& pc) = 0; // needs to know facing what character
-        virtual void dropGold() = 0;
+        virtual void dropGold(PlayerCharacter& pc) = 0;
         virtual char getSymbol() = 0;
         virtual void takeDamage(int damage) = 0;
         bool is_alive();
