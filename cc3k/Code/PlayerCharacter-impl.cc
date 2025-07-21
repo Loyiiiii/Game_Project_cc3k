@@ -88,3 +88,12 @@ Race PlayerCharacter::getRace() {
 void PlayerCharacter::attack() {
     // this just deal this->atk damage to the enemy.
 }
+
+void PlayerCharacter::takeDamage(int damage) {
+    if (health - damage < 0) {
+        health = 0;
+    }
+    else {
+        health -= damage;
+    }
+}

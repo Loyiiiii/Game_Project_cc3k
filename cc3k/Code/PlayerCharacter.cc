@@ -34,5 +34,6 @@ export class PlayerCharacter {
         Race getRace();
         // Virtual methods that races can override
         virtual void attack();
+        void takeDamage(int damage);  // Method for taking damage from enemies
 };
 
