@@ -1,19 +1,47 @@
-export module Floor;
+export module floor;
 
 import <iostream>;
 import <vector>;
 import <string>;
+import <memory>;
 import Cell;
+import Enemy;
+import Potion;
+import Gold;
+import PlayerCharacter;
 import Global_Constants;
 
 export class Floor {
-    int maxRow = 30;
-    int maxCol = 79;
+    int numRows = 30;
+    int numCols = 79;
     std::vector<std::vector<Cell>> map;
+    // container for Enemy, Potions, Gold
+    std::vector<std::unique_ptr<Enemy>> enemies;
+    std::vector<std::unique_ptr<Potion>> potions;
+    std::vector<std::unique_ptr<Gold>> goldsPiles;
+
+    PlayerCharacter *player = nullptr; // to know where the player is on the floor
 
 public:
-    void floor_init();
+    Floor(int rows = 30, int cols = 79);
+
+    void floor_init(PlayerCharacter *pc); // Pass player pointer for initialization
     void loadMap();
     void printMap();
+
+    // add/remove methods
+    void addEnemy(std::unique_ptr<Enemy> e);
+    void addPotion(std::unique_ptr<Potion> p);
+    void addGold(std::unique_ptr<Gold> g);
+
+    // Accessor
+    const std::vector<std::unique_ptr<Enemy>>& getEnemies() const;
+    const std::vector<std::unique_ptr<Potion>>& getPotions() const;
+    const std::vector<std::unique_ptr<Gold>>& getGoldPiles() const;
+
+    // move the player character
+    void movePlayer(int oldRow, int oldCol, int newRow, int newCol);
+
+    void clear();
 
 };

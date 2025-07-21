@@ -10,22 +10,15 @@ import gold;
 
 export class Cell {
     // what does this cell represent
-    char symbol;
-    bool isPassable;
-    Position pos;
+    char baseSymbol;
+    int row, col; // position of the cell
 
-    PlayerCharacter *pc; // whether a pc is stepping on this cell
-    Enemy *e; // whether an enemy is stepping on this cell
-    Potion *p; // whether a potion is on this cell
-    bool hasGold; // whether this cell has gold
+    PlayerCharacter *pc = nullptr; // whether a pc is stepping on this cell
+    Enemy *e = nullptr; // whether an enemy is stepping on this cell
+    Item *i = nullptr; // whether a potion is on this cell
 
 public:
     Cell(char symbol, int row, int col);
-
-    char getSymbol();
-    void setSymnol(char sym);
-    bool getIsPassable();
-    void setIsPassable(bool val);
 
     // place or remove a character
     void placeCharacter(PlayerCharacter *pc);
@@ -34,9 +27,12 @@ public:
     void placeEnemy(Enemy *e);
     void removeEnemy();
     // place or remove a potion
-    void placePotion(Potion *p);
-    void removePotion();
+    void placeItem(Item *i);
+    void removeItem();
 
-    void placeGold(Gold *g);
-    void removeGold();
+    // Getters
+    char getSymbol() const;
+    char getBaseSymbol() const;
+    int getRow() const;
+    int getCol() const;
 };
