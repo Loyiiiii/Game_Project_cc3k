@@ -10,9 +10,10 @@ export class Potion : public Item {
 
 public:
     Potion(Potion_Type type, bool isTemporary, int amount, char symbol);
-    virtual ~Potion();
+    virtual ~Potion() = default;
 
     Potion_Type getType() const;
+    bool getIsTemporary() const;
     int getAmount() const;
     char getSymbol() const;
 }
