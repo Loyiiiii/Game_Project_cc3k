@@ -1,4 +1,4 @@
-export module Human; 
+export module Human;
 import <vector>;
 import <memory>;
 import Enemy;
@@ -13,8 +13,8 @@ export class Human: public Enemy {
     public:
         Human(Position pos);
         ~Human();
-        void attack(PlayerCharacter& pc) override;
+        void attack(PlayerCharacter& pc) override; // attack PlayerCharacter
         void dropGold() override;
         char getSymbol() override;
-        void takeDamage(int damage) override;
+        void takeDamage(int damage) override; // receive damage from PlayerCharacter
 };

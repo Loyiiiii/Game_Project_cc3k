@@ -1,5 +1,7 @@
 module PlayerCharacter;
 import <cmath>;
+import Global_Constants;
+import Enemy;
 
 PlayerCharacter::PlayerCharacter(Position pos, int health, int maxHealth, 
     int atk, int def, int gold, Race race, bool has_max_health):
@@ -101,6 +103,8 @@ void PlayerCharacter::attack(Enemy& enemy) {
     // Calculate damage using proper formula
     int damage = calculateDamage(this->atk, enemy.getDef());
     enemy.takeDamage(damage);
+    // check if enemy is dead - we will add gold to PC here. 
+    if (!enemy.is_alive()) {
 }
 
 void PlayerCharacter::takeDamage(int damage) {

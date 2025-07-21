@@ -1,4 +1,4 @@
-module Human; 
+module Human;
 import <memory>;
 import NormalGold;
 import Enemy;
@@ -7,13 +7,14 @@ import PlayerCharacter;
 
 // Human: 140HP, 20Atk, 20Def, - drops 2 normal piles when dead
 Human::Human(Position pos):
-    Enemy(pos, 140, 20, 20, true) {
+    Enemy{pos, 140, 20, 20, true} {
         gold_carried.emplace_back(std::make_unique<NormalGold>());
         gold_carried.emplace_back(std::make_unique<NormalGold>());
     }
 
 Human::~Human() {}
 
+// logic to attack PlayerCharacter:
 void Human::attack(PlayerCharacter& pc) {
     int damage = calculateDamage(this->Atk, pc.getDef());
     pc.takeDamage(damage);
