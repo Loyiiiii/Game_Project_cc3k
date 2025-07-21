@@ -1,5 +1,7 @@
 export module restore_health;
 
+import potion;
+
 export class RestoreHealth : public Potion {
 public:
     RestoreHealth(); // Constructor for RestoreHealth potion
