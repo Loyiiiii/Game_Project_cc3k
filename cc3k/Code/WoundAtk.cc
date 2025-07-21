@@ -9,4 +9,4 @@ public:
     // has an amount of -5, and a symbol 'P'.
     // The symbol 'P' is used to represent the potion in the game.
     // The WoundAtk potion temporarily decreases the player's attack by 5.
-}
+};

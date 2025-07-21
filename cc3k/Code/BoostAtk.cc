@@ -11,4 +11,4 @@ public:
     // The BoostAtk potion temporarily increases the player's attack power by 5.
     // It is used to boost the player's attack in combat situations.
     // The potion is temporary, meaning its effects will wear off after a certain period or condition
-}
+};

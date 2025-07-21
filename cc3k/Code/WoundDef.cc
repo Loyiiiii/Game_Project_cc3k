@@ -9,4 +9,4 @@ public:
     // has an amount of -5, and a symbol 'P'.
     // The symbol 'P' is used to represent the potion in the game.
     // The WoundDef potion temporarily decreases the player's defense by 5.
-}
+};

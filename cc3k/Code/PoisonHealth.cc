@@ -9,4 +9,4 @@ public:
     // has an amount of -10, and a symbol 'P'.
     // The symbol 'P' is used to represent the potion in the game.
     // The PoisonHealth potion permanently decreases the player's health by 10.
-}
+};

@@ -16,4 +16,4 @@ public:
     bool getIsTemporary() const;
     int getAmount() const;
     char getSymbol() const;
-}
+};

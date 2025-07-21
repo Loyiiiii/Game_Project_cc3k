@@ -11,4 +11,4 @@ public:
     // The BoostDef potion temporarily increases the player's defense power by 5.
     // It is used to boost the player's defense in combat situations.
     // The potion is temporary, meaning its effects will wear off after getting to a new floor
-}
+};
