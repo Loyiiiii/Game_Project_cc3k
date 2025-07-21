@@ -5,7 +5,7 @@
 
 **ChamberCrawler3000 (CC3k)** is a simplified turn-based rogue-like dungeon crawler built in C++. The player explores a 5-floor dungeon, defeats enemies, collects treasure, and tries to escape alive. Inspired by classic rogue-likes, CC3k features grid-based movement, randomized maps, enemy AI, and player race customization.
 
-This project is designed with a strong emphasis on **object-oriented programming**, including the use of **inheritance, polymorphism, and design patterns** (e.g. Decorator).
+This project is designed with a strong emphasis on **object-oriented programming**, including the use of **inheritance, polymorphism, and design patterns** (e.g. Decorator, Factory).
 
 ---
 
