@@ -11,6 +11,7 @@ export class Enemy {
         Position pos;
         bool movable;
         bool is_neutral;
+        char symbol;
     public:
         Enemy(Position pos, int HP, int Atk, int Def, bool movable);
         virtual ~Enemy();
