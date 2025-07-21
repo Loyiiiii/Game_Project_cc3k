@@ -11,7 +11,7 @@ export class Human: public Enemy {
     private:
     std::vector<std::unique_ptr<NormalGold>> gold_carried;
     public:
-        Human(Position pos, int health, int damage, int defense, bool movable);
+        Human(Position pos);
         ~Human();
         void attack(PlayerCharacter& pc) override;
         void dropGold() override;

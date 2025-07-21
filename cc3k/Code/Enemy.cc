@@ -12,6 +12,9 @@ export class Enemy {
         bool movable;
         bool is_neutral;
         char symbol;
+        
+        // Combat utility method
+        int calculateDamage(int attackAtk, int defenderDef);
     public:
         Enemy(Position pos, int HP, int Atk, int Def, bool movable);
         virtual ~Enemy();
@@ -21,4 +24,7 @@ export class Enemy {
         virtual char getSymbol() = 0;
         virtual void takeDamage(int damage) = 0;
         bool is_alive();
+        // Getters:
+        int getAtk();
+        int getDef();
 };

@@ -50,13 +50,6 @@ void PlayerCharacter::drinkPotion(Potion& p) {
     }
 }
 
-int PlayerCharacter::calculateDamage(int attackerAtk, int defenderDef) {
-    // ceiling((100/(100 + Def (Defender))) * Atk(Attacker))
-    float ratio = 100.0f / (100.0f + defenderDef);  // Float precision
-    float damage = ratio * attackerAtk;
-    return int(std::ceil(damage));
-}
-
 // Some Getters:
 Position PlayerCharacter::getPos() {
     return pos;
@@ -90,8 +83,16 @@ Race PlayerCharacter::getRace() {
     return race; 
 }
 
-// Virtual Methods that can be overridden by subclasses
+// damage calculation:
+int PlayerCharacter::calculateDamage(int attackerAtk, int defenderDef) {
+    // ceiling((100/(100 + Def (Defender))) * Atk(Attacker))
+    float ratio = 100.0 / (100.0 + defenderDef);  // Float precision
+    float damage = ratio * attackerAtk;
+    return int(std::ceil(damage));
+}
 
+
+// Virtual Methods that can be overridden by subclasses
 void PlayerCharacter::attack(Enemy& enemy) {
     // Calculate damage using proper formula
     int damage = calculateDamage(this->atk, enemy.getDef());

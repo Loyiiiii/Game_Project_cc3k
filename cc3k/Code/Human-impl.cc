@@ -15,17 +15,21 @@ Human::Human(Position pos):
 Human::~Human() {}
 
 void Human::attack(PlayerCharacter& pc) {
-    pc.takeDamage(Atk);
+    int damage = calculateDamage(this->Atk, pc.getDef());
+    pc.takeDamage(damage);
 }
 
 void Human::dropGold() {
-    // drop 2 gold
-    gold_carried.pop_back();
-    gold_carried.pop_back();
+    // Transfer gold to game world (placeholder - needs GameWorld integration)
+    for (auto& gold : gold_carried) {
+        // GameWorld::addGold(std::move(gold), this->pos);
+        // For now, just release the gold objects
+    }
+    gold_carried.clear(); // Human no longer carries gold
 }
 
 void Human::takeDamage(int damage) {
-    if (HP - damage < 0) {
+    if (HP - damage <= 0) {
         HP = 0; // dead
         // drop gold:
         dropGold();
