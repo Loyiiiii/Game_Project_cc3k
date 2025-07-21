@@ -4,6 +4,9 @@ import PlayerCharacter;
 import Enemy;
 import Potion;
 import Global_Constants;
+import Position;
+import item;
+import gold;
 
 export class Cell {
     // what does this cell represent
@@ -14,6 +17,7 @@ export class Cell {
     PlayerCharacter *pc; // whether a pc is stepping on this cell
     Enemy *e; // whether an enemy is stepping on this cell
     Potion *p; // whether a potion is on this cell
+    bool hasGold; // whether this cell has gold
 
 public:
     Cell(char symbol, int row, int col);
@@ -32,4 +36,7 @@ public:
     // place or remove a potion
     void placePotion(Potion *p);
     void removePotion();
+
+    void placeGold(Gold *g);
+    void removeGold();
 };
