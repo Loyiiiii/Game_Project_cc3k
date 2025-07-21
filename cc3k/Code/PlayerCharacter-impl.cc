@@ -84,9 +84,9 @@ Race PlayerCharacter::getRace() {
 
 // Virtual Methods that can be overridden by subclasses
 
-// attack() - implement use Template Method Pattern
-void PlayerCharacter::attack() {
+void PlayerCharacter::attack(Enemy& enemy) {
     // this just deal this->atk damage to the enemy.
+    enemy.takeDamage(atk); // enemy will take damage. 
 }
 
 void PlayerCharacter::takeDamage(int damage) {

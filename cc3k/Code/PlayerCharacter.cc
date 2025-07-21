@@ -33,7 +33,7 @@ export class PlayerCharacter {
         int getGoldATM();
         Race getRace();
         // Virtual methods that races can override
-        virtual void attack();
+        virtual void attack(Enemy& enemy);
         void takeDamage(int damage);  // Method for taking damage from enemies
 };
 
