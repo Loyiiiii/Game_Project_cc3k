@@ -18,5 +18,6 @@ export class Enemy {
         virtual void attack(PlayerCharacter& pc) = 0; // needs to know facing what character
         virtual void dropGold() = 0;
         virtual char getSymbol() = 0;
+        virtual void takeDamage(int damage) = 0;
         bool is_alive();
 };
