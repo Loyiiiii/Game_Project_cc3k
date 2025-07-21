@@ -13,7 +13,8 @@ void Vampire::gainHP() {
 Vampire::Vampire(Position pos):
     PlayerCharacter(pos, 50, 50, 25, 25, 0, Race::VAMPIRE, false) {}
 
-void Vampire::attack() {
+void Vampire::attack(Enemy& enemy) {
     gainHP();
-    PlayerCharacter::attack();
+    // needs to check if we are attacking a dwarf -> lose 5HP
+    PlayerCharacter::attack(enemy);
 }
