@@ -16,6 +16,9 @@ export class PlayerCharacter {
     // some additional things came to me: 
     protected:
         std::vector<Potion> PotionInUse; // representing the potions the PC is currently using
+        
+        // Combat utility method
+        int calculateDamage(int attackerAtk, int defenderDef);
 
     public: 
         virtual void drinkPotion(Potion& p); // drinks a potion and gains its effects
@@ -34,6 +37,7 @@ export class PlayerCharacter {
         Race getRace();
         // Virtual methods that races can override
         virtual void attack(Enemy& enemy);
+        
         void takeDamage(int damage);  // Method for taking damage from enemies
 };
 

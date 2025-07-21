@@ -1,4 +1,5 @@
 module PlayerCharacter;
+import <cmath>;
 
 PlayerCharacter::PlayerCharacter(Position pos, int health, int maxHealth, 
     int atk, int def, int gold, Race race, bool has_max_health):
@@ -49,6 +50,13 @@ void PlayerCharacter::drinkPotion(Potion& p) {
     }
 }
 
+int PlayerCharacter::calculateDamage(int attackerAtk, int defenderDef) {
+    // ceiling((100/(100 + Def (Defender))) * Atk(Attacker))
+    float ratio = 100.0f / (100.0f + defenderDef);  // Float precision
+    float damage = ratio * attackerAtk;
+    return int(std::ceil(damage));
+}
+
 // Some Getters:
 Position PlayerCharacter::getPos() {
     return pos;
@@ -85,8 +93,9 @@ Race PlayerCharacter::getRace() {
 // Virtual Methods that can be overridden by subclasses
 
 void PlayerCharacter::attack(Enemy& enemy) {
-    // this just deal this->atk damage to the enemy.
-    enemy.takeDamage(atk); // enemy will take damage. 
+    // Calculate damage using proper formula
+    int damage = calculateDamage(this->atk, enemy.getDef());
+    enemy.takeDamage(damage);
 }
 
 void PlayerCharacter::takeDamage(int damage) {
@@ -97,3 +106,4 @@ void PlayerCharacter::takeDamage(int damage) {
         health -= damage;
     }
 }
+
