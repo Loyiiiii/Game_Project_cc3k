@@ -17,8 +17,6 @@ export class PlayerCharacter {
     // some additional things came to me: 
     protected:
         std::vector<Potion> PotionInUse; // representing the potions the PC is currently using
-        virtual void AbilityBuff();
-        void calculateTotalDamage();
 
     public: 
         virtual void drinkPotion(Potion& p); // drinks a potion and gains its effects
@@ -36,12 +34,6 @@ export class PlayerCharacter {
         int getGoldATM();
         Race getRace();
         // Virtual methods that races can override
-        void attack() {
-            // check specific race's ability:
-            AbilityBuff();
-            // calcualte the total damage to be dealt;
-            calculateTotalDamage();
-        }
-        virtual void takeDamage(int damage);
+        virtual void attack();
 };
 

@@ -86,5 +86,5 @@ Race PlayerCharacter::getRace() {
 
 // attack() - implement use Template Method Pattern
 void PlayerCharacter::attack() {
-    
+    // this just deal this->atk damage to the enemy.
 }
