@@ -83,6 +83,10 @@ Race PlayerCharacter::getRace() {
     return race; 
 }
 
+void PlayerCharacter::addGold(int amount) {
+    goldATM += amount;
+}
+
 // damage calculation:
 int PlayerCharacter::calculateDamage(int attackerAtk, int defenderDef) {
     // ceiling((100/(100 + Def (Defender))) * Atk(Attacker))
