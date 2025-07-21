@@ -1,7 +1,7 @@
 module elf;
 
-Elf::Elf(Position pos, int HP, int Atk, int Def, bool movable)
-    : Enemy{pos, HP, Atk, Def, movable}, symbol{'E'} {}
+Elf::Elf(Position pos, int HP, int Atk, int Def, bool movable, bool is_neutral):
+    Enemy{pos, 140, 30, 10, true, true 'E'} {}
 
 void Elf::attack(PlayerCharacter& pc) {
     // check if player is Drow
@@ -18,8 +18,8 @@ void Elf::attack(PlayerCharacter& pc) {
     }
 }
 
-void Elf::dropGold(int goldAmount) {
-    pc.addGold(goldAmounnt); // Assuming Elf drops 1 gold, may change it to randomly chosen between small and normal
+void Elf::dropGold(PlayerCharacter& pc) {
+    pc.addGold(1); // Assuming Elf drops 1 gold, may change it to randomly chosen between small and normal
 }
 
 char Elf::getSymbol() {

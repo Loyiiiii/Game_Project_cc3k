@@ -3,8 +3,8 @@ import <cmath>;
 import Global_Constants;
 import PlayerCharacter;
 
-Enemy::Enemy(Position pos, int health, int damage, int defense, bool movable):
-pos{pos}, HP{health}, Atk{damage}, Def{defense}, movable{movable} {}
+Enemy::Enemy(Position pos, int health, int damage, int defense, bool movable, bool is_neutral, char symbol):
+    HP{health}, Atk{damage}, Def{defense}, pos{pos}, movable{movable}, is_neutral{is_neutral}, symbol{symbol} {}
 
 Enemy::~Enemy() {}
 

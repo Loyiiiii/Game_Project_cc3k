@@ -6,7 +6,7 @@ import Global_Constants;
 
 export class Elf : public Enemy {
 public:
-    Elf(Position pos, int HP = 140, int Atk = 30, int Def = 10, bool movable = true);
+    Elf(Position pos);
 
     void attack(PlayerCharacter& pc) override;
     void dropGold() override;
