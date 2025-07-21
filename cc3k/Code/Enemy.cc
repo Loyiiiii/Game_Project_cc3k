@@ -27,4 +27,5 @@ export class Enemy {
         // Getters:
         int getAtk();
         int getDef();
+        int getHP();
 };

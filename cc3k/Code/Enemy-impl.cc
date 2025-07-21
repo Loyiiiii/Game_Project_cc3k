@@ -4,7 +4,7 @@ import Global_Constants;
 import PlayerCharacter;
 
 Enemy::Enemy(Position pos, int health, int damage, int defense, bool movable):
-    HP{health}, Atk{damage}, Def{defense}, pos{pos}, movable{movable} {}
+pos{pos}, HP{health}, Atk{damage}, Def{defense}, movable{movable} {}
 
 Enemy::~Enemy() {}
 
@@ -18,6 +18,10 @@ int Enemy::getAtk() {
 }
 int Enemy::getDef() {
     return Def;
+}
+
+int Enemy::getHP() {
+    return HP;
 }
 
 int Enemy::calculateDamage(int attackerAtk, int defenderDef) {
