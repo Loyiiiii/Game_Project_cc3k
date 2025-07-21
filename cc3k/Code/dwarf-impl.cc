@@ -1,7 +1,7 @@
 module dwarf;
 
-Dwarf::Dwarf(Position pos, int HP, int Atk, int Def, bool movable): 
-    Enemy{Pos, HP, Atk, Def, movable}, symbol{'W'} {}
+Dwarf::Dwarf(Position pos): 
+    Enemy{Pos, 100, 20, 30, true, true, 'W'} {}
 
 // note: attack needs to incorporate damage calculation logic.
 void Dwarf::attack(PlayerCharacter& pc) {
