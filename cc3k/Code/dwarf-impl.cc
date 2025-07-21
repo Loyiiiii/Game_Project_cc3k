@@ -1,6 +1,6 @@
 module dwarf;
 
-Dwarf::Dwarf(Position pos, int HP, int Atk, int Def, bool movable, char symbol): 
+Dwarf::Dwarf(Position pos, int HP, int Atk, int Def, bool movable): 
     Enemy{Pos, HP, Atk, Def, movable}, symbol{'W'} {}
 
 // note: attack needs to incorporate damage calculation logic.
@@ -9,7 +9,9 @@ void Dwarf::attack(PlayerCharacter& pc) {
     pc.takeDamage(damage);
 }
 
-void Dwarf::dropGold() {}
+void Dwarf::dropGold(int goldAmount) {
+    pc.addGold(goldAmount); // Assuming Dwarf drops 1 gold, may change it to randomly chosen between small and normal
+}
 
 char Dwarf::getSymbol() {
     return symbol;
