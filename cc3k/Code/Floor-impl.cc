@@ -1,7 +1,6 @@
 module floor;
 
-Floor::Floor(int rows, int cols)
-    : numRows{rows}, num{cols}, map{rows, std::vector<Cell>(col, Cell{'.', 0, 0})} {}
+Floor::Floor(): map{rows, std::vector<Cell>(col, Cell{'.', 0, 0})} {}
 
 // helper: printInfo(PlayerCharacter *pc);
 void printInfo(PlayerCharacter *pc) {

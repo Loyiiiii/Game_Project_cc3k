@@ -28,7 +28,7 @@ export class Floor {
     PlayerCharacter *player = nullptr; // to know where the player is on the floor
 
 public:
-    Floor(int rows = 30, int cols = 79);
+    Floor();
 
     void floor_init(PlayerCharacter *pc); // Pass player pointer for initialization
     void printMap();
@@ -46,7 +46,5 @@ public:
     const std::vector<std::unique_ptr<Gold>>& getGoldPiles() const;
 
     // move the player character
-    void movePlayer(Direction dir);
-
-    void clear();
+    Position movePlayer(Position oldPos, Direction dir);
 };
