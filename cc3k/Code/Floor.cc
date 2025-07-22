@@ -45,7 +45,7 @@ public:
     const std::vector<std::unique_ptr<Gold>>& getGoldPiles() const;
 
     // move the player character
-    void movePlayer(int oldRow, int oldCol, int newRow, int newCol);
+    void movePlayer(Direction dir);
 
     void clear();
 };

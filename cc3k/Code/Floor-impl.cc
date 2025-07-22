@@ -26,7 +26,11 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
     int row = 0;
     while (std::getline(file, line) && row < numRows) {
         for (int col = 0; col < numCols; col++) {
-            map[row][col] = Cell{line[col], row, col};
+            if (line[col] == '|' || line[col] == '-') {
+                map[row][col] = Cell{line[col], row, col, false}; // walls are not passable
+            } else {
+                map[row][col] = Cell{line[col], row, col, true}; // floor cells are passable
+            }
         }
         row++;
     }
@@ -117,6 +121,8 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
         map[enemyPos.row][enemyPos.col].placeEnemy(enemyPtr.get());
         enemies.push_back(std::move(enemyPtr));
     }
+    // assign pc to the player pointer
+    player = pc;
 
     std::cout << std::endl;
 }
@@ -133,9 +139,44 @@ void Floor::printMap(PlayerCharacter *pc) {
     printInfo(pc); // print info below the map
 }
 
-void Floor::movePlayer(int oldRow, int oldCol, int newRow, int newCol) {
-    map[oldRow][oldCol].player = nullptr; // remove player from old cell
-    map[newRow][newCol].player = player; // place player in new cell
-    player->setPos(Position(newRow, newCol)); // update player's position
-    map[newRow][newCol].setSymbol(player->getSymbol()); // update cell symbol
+Position Floor::movePlayer(Position oldPos, Direction dir) {
+    int oldRow = oldPos.row;
+    int oldCol = oldPos.col;
+    int newRow, newCol;
+    if (dir == Direction::N) {
+        newRow = oldRow - 1;
+        newCol = oldCol;
+    } else if (dir == Direction::S) {
+        newRow = oldRow + 1;
+        newCol = oldCol;
+    } else if (dir == Direction::E) {
+        newRow = oldRow;
+        newCol = oldCol + 1;
+    } else if (dir == Direction::W) {
+        newRow = oldRow;
+        newCol = oldCol - 1;
+    } else if (dir == Direction::NE) {
+        newRow = oldRow - 1;
+        newCol = oldCol + 1;
+    } else if (dir == Direction::NW) {
+        newRow = oldRow - 1;
+        newCol = oldCol - 1;
+    } else if (dir == Direction::SE) {
+        newRow = oldRow + 1;
+        newCol = oldCol + 1;
+    } else {
+        newRow = oldRow + 1;
+        newCol = oldCol - 1;
+    }
+    // check if the new position is within bounds and passable
+    if (newRow < 0 || newRow >= numRows || newCol < 0 || newCol >= numCols) {
+        return Position{oldRow, oldCol}; // out of bounds, return old position
+    } else if (!map[newRow][newCol].isPassable()) {
+        return Position{oldRow, oldCol}; // not passable, return old position
+    } else {
+        // move the player character to the new position
+        map[oldRow][oldCol].removeCharacter();
+        map[newRow][newCol].placeCharacter(player);
+        return Position{newRow, newCol}; // return the new position
+    }
 }

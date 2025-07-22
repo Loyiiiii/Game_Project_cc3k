@@ -1,6 +1,7 @@
 module Cell;
 
-Cell::Cell(char symbol, int row, int col): baseSymbol{symbol}, row{row}, col{col} {}
+Cell::Cell(char symbol, int row, int col, bool isPassable): 
+    baseSymbol{symbol}, row{row}, col{col}, isPassable{isPassable} {}
 
 
 void Cell::placeCharacter(PlayerCharacter *pc) { pc = pc; }
