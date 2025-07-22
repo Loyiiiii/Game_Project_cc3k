@@ -26,7 +26,7 @@ public:
     // place or remove a enemy
     void placeEnemy(Enemy *e);
     void removeEnemy();
-    // place or remove a potion
+    // place or remove an item (potion or gold)
     void placeItem(Item *i);
     void removeItem();
 
@@ -35,4 +35,6 @@ public:
     char getBaseSymbol() const;
     int getRow() const;
     int getCol() const;
+    // Setters
+    void setSymbol(char symbol);
 };
