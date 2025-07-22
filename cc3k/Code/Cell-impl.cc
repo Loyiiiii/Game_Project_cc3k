@@ -26,7 +26,7 @@ char Cell::getSymbol() {
         return symbol;
     }
 }
-
 char Cell::getBaseSymbol() const { return baseSymbol; }
 int Cell::getRow() const { return row; }
 int Cell::getCol() const { return col; }
+void Cell::setSymbol(char symbol) { baseSymbol = symbol; }

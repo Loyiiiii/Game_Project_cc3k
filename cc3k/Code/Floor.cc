@@ -4,10 +4,15 @@ import <iostream>;
 import <vector>;
 import <string>;
 import <memory>;
+import <algorithm>;
+import <random>;
+import <cstdlib>;
+
 import Cell;
 import Enemy;
 import Potion;
 import Gold;
+import Position;
 import PlayerCharacter;
 import Global_Constants;
 
