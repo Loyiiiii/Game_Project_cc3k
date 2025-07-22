@@ -9,9 +9,6 @@ public:
     Dwarf(Position pos);
 
     void attack(PlayerCharacter& pc) override;
-    void dropGold(int goldAmount) override;
+    void dropGold(PlayerCharacter& pc) override;
     void takeDamage(int damage) override;
-    bool is_alive();
-    int getAtk();
-    int getDef();
 }

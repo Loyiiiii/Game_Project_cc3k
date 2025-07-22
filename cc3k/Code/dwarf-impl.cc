@@ -1,7 +1,7 @@
 module dwarf;
 
 Dwarf::Dwarf(Position pos): 
-    Enemy{Pos, 100, 20, 30, true, true, 'W'} {}
+    Enemy{pos, 100, 20, 30, true, true, 'W'} {}
 
 // note: attack needs to incorporate damage calculation logic.
 void Dwarf::attack(PlayerCharacter& pc) {
@@ -9,8 +9,8 @@ void Dwarf::attack(PlayerCharacter& pc) {
     pc.takeDamage(damage);
 }
 
-void Dwarf::dropGold(int goldAmount) {
-    pc.addGold(goldAmount); // Assuming Dwarf drops 1 gold, may change it to randomly chosen between small and normal
+void Dwarf::dropGold(PlayerCharacter& pc) {
+    pc.addGold(1); // Assuming Dwarf drops 1 gold, may change it to randomly chosen between small and normal
 }
 
 void Dwarf::takeDamage(int damage) {
@@ -21,14 +21,3 @@ void Dwarf::takeDamage(int damage) {
     }
 }
 
-bool Dwarf::is_alive() {
-    return HP > 0;
-}
-
-int Dwarf::getAtk() {
-    return Atk;
-}
-
-int Dwarf::getDef() {
-    return Def;
-}
