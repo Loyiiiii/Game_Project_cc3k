@@ -14,4 +14,6 @@ export enum class GameResult {
 export class GameInit {
 public:
     void run();
+    string getRaceEmoji(char race);
+    string getRaceName(char race);
 };
