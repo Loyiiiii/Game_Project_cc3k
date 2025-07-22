@@ -31,8 +31,6 @@ void Orcs::dropGold(PlayerCharacter& pc) {
 void Orcs::takeDamage(int dmg) {
     if(HP - dmg < 0) {
         HP = 0; // dead
-        // gold is automatically added to PC.
-        dropGold();
     }
     else {
         HP -= dmg;
