@@ -14,7 +14,6 @@ Human::Human(Position pos):
 
 
 Human::~Human() {}
-
 // logic to attack PlayerCharacter:
 void Human::attack(PlayerCharacter& pc) {
     int damage = calculateDamage(this->Atk, pc.getDef());
