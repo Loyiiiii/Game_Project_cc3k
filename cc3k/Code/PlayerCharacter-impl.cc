@@ -105,6 +105,8 @@ void PlayerCharacter::attack(Enemy& enemy) {
     enemy.takeDamage(damage);
     // check if enemy is dead - we will add gold to PC here. 
     if (!enemy.is_alive()) {
+        enemy.dropGold(*this);
+    }
 }
 
 void PlayerCharacter::takeDamage(int damage) {
