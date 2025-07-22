@@ -6,7 +6,7 @@ import Global_Constants;
 // Orcs: 180HP, 30Atk, 25Def.
 // deals 50% more damage to goblins
 Orcs::Orcs(Position pos):
-    Enemy{pos, 180, 30, 25, true} {}
+    Enemy{pos, 180, 30, 25, true, true, 'O'} {}
 
 void Orcs::attack(PlayerCharacter& pc) {
     int normal_damage = calculateDamage(this->Atk, pc.getDef());
@@ -24,10 +24,6 @@ void Orcs::attack(PlayerCharacter& pc) {
 
 void Orcs::dropGold() {
     pc.addGold(2); // need to figure out how to get the PC here. 
-}
-
-char Orcs::getSymbol() {
-    return 'O';
 }
 
 void Orcs::takeDamage(int dmg) {
