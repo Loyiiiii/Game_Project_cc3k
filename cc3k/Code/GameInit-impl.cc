@@ -2,7 +2,7 @@ module GameInit;
 import <iostream>;
 import <fstream>;
 import <string>;
-import gameboard;
+import GamePlay;
 using namespace std;
 
 string getRaceName(char race) {
