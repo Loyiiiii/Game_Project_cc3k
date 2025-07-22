@@ -10,7 +10,10 @@ void Dwarf::attack(PlayerCharacter& pc) {
 }
 
 void Dwarf::dropGold(PlayerCharacter& pc) {
-    pc.addGold(1); // Assuming Dwarf drops 1 gold, may change it to randomly chosen between small and normal
+    // 50% small gold, 50% normal gold
+    int randomNum = rand() % 2; // 0 or 1
+    int value = (randomNum % 2 == 0) ? 1 : 2; // 1 for small gold, 2 for normal gold
+    pc.addGold(value); // Assuming Dwarf drops 1 gold, may change it to randomly chosen between small and normal
 }
 
 void Dwarf::takeDamage(int damage) {
