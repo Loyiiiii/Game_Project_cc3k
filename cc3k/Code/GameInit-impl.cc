@@ -106,16 +106,14 @@ void GameInit::run() {
 
     GameResult result = gameplay.mainLoop();
 
-    switch (result) {
-        case GameResult::Win:
-            cout << "🏆 Congratulations! You have conquered the dungeon!" << endl;
-            break;
-        case GameResult::Loss:
-            cout << "💀 You have fallen in the depths of the dungeon." << endl;
-            break;
-        case GameResult::Quit:
-            cout << "🚪 You quit the adventure early. Until next time!" << endl;
-            break;
+    if (result == GameResult::Win) {
+        cout << "🏆 Congratulations! You have conquered the dungeon!" << endl;
+    } else if (result == GameResult::Loss) {
+        cout << "💀 You have fallen in the depths of the dungeon." << endl;
+    } else if (result == GameResult::Quit) {
+        cout << "🚪 You quit the adventure early. Until next time!" << endl;
+    } else {
+        return 0;
     }
 }
 
