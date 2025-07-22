@@ -29,7 +29,7 @@ void Orcs::dropGold(PlayerCharacter& pc) {
 }
 
 void Orcs::takeDamage(int dmg) {
-    if(HP - dmg < 0) {
+    if(HP - dmg <= 0) {
         HP = 0; // dead
     }
     else {

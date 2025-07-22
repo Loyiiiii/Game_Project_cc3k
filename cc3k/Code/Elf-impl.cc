@@ -25,7 +25,7 @@ void Elf::dropGold(PlayerCharacter& pc) {
 }
 
 void Elf::takeDamage(int damage) {
-    if (HP - damage < 0) {
+    if (HP - damage <= 0) {
         HP = 0;
     } else {
         HP -= damage;
