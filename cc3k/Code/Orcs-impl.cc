@@ -23,7 +23,10 @@ void Orcs::attack(PlayerCharacter& pc) {
 }
 
 void Orcs::dropGold() {
-    pc.addGold(2); // need to figure out how to get the PC here. 
+    // 50% small gold, 50% normal gold
+    int randomNum = rand() % 2; // 0 or 1
+    int value = (randomNum == 0) ? 1 : 2; // 1: small gold, 2: normal gold
+    pc.addGold(value); // need to figure out how to get the PC here. 
 }
 
 void Orcs::takeDamage(int dmg) {
