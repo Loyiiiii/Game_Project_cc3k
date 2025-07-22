@@ -5,10 +5,10 @@ import PlayerCharacter;
 
 export class Enemy {
     protected:
+        Position pos;
         int HP;
         int Atk;
         int Def;
-        Position pos;
         bool movable;
         bool is_neutral;
         char symbol;
@@ -18,14 +18,14 @@ export class Enemy {
     public:
         Enemy(Position pos, int HP, int Atk, int Def, bool movable, bool is_neutral, char symbol);
         virtual ~Enemy();
+        char getSymbol() const;
+        bool is_alive() const;
         // these Pure Virtual Functions are the interface for the Enemy class
         virtual void attack(PlayerCharacter& pc) = 0; // needs to know facing what character
         virtual void dropGold(PlayerCharacter& pc) = 0;
-        virtual char getSymbol() = 0;
         virtual void takeDamage(int damage) = 0;
-        bool is_alive();
         // Getters:
-        int getAtk();
-        int getDef();
-        int getHP();
+        int getAtk()const;
+        int getDef() const;
+        int getHP() const;
 };

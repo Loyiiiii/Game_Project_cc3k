@@ -8,19 +8,22 @@ Enemy::Enemy(Position pos, int health, int damage, int defense, bool movable, bo
 
 Enemy::~Enemy() {}
 
-bool Enemy::is_alive() {
+bool Enemy::is_alive() const{
     return HP > 0;
 }
 
+char Enemy::getSymbol() const {
+    return symbol;
+}
 // Getters. 
-int Enemy::getAtk() {
+int Enemy::getAtk() const {
     return Atk;
 }
-int Enemy::getDef() {
+int Enemy::getDef() const {
     return Def;
 }
 
-int Enemy::getHP() {
+int Enemy::getHP() const {
     return HP;
 }
 
