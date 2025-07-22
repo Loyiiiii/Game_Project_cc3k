@@ -5,37 +5,38 @@ import <string>;
 import gameboard;
 using namespace std;
 
-void Gameplay::gameInit() {
-    cout << "Welcome to ChamberCrawler3000!" << endl;
-    cout << "Choose your race: s (Shade), d (Drow), v (Vampire), t (Troll), g (Goblin)" << endl;
-    
-    char r;
-    cin >> r;
-
-    PC* base = new BasePC();
-    if (r == 'd') {
-        player = make_unique<DrowPC>(base);
-    } else if (r == 'v') {
-        player = make_unique<VampirePC>(base);
-    } else if (r == 't') {
-        player = make_unique<TrollPC>(base);
-    } else if (r == 'g') {
-        player = make_unique<GoblinPC>(base);
+string getRaceName(char race) {
+    if (race == 's' || race == 'S') {
+        return "Shade";
+    } else if (race == 'd' || race == 'D') {
+        return "Drow";
+    } else if (race == 'v' || race == 'V'){
+        return "Vampire";
+    } else if (race == 't' || race == 'T') {
+        return "Troll";
+    } else if (race == 'g' || race == 'G') {
+        return "Goblin";
     } else {
-        player = make_unique<ShadePC>(base);
+        return "Shade";
     }
-
-    currentFloor = 1;
-    gameOver = false;
-    frozenEnemies = false;
-
-    floor = make_unique<Floor>();
-    floor->generate(player.get(), currentFloor);
-
-    render();
-
-    cout << "Action: Player character has spawned." << endl;
 }
+
+string getRaceEmoji(char race) {
+    if (race == 's' || race == 'S'){
+        return "🧙‍♂️";
+    } else if (race == 'd' || race == 'D') {
+        return "🧪";
+    } else if (race == 'v' || race == 'V') {
+        return "🧛";
+    } else if (race == 't' || race == 'T') {
+        return "🛡️";
+    } else if (race == 'g' || race == 'G') {
+        return "💰";
+    } else {
+        return "🧙‍♂️";
+    }
+}
+
 
 
 void GameInit::run() {
@@ -52,27 +53,27 @@ void GameInit::run() {
 
         cin >> raceChar;
 
-        if (raceChar == "s" && raceChaar == "S") {
+        if (raceChar == 's' || raceChar == 'S') {
             cout << "Character: Shade \n  HP:125 \n  Atk:25 \n  Def:25 " << endl;
             cout << "Special Ability: The settlement of victory gold coins is multiplied by 1.5." << endl;
             cout << "Difficulty: ⭐⭐" << endl;
             cout << "📈 Earn extra gold coins after winning, suitable for players who want to get a high score." << endl;
-        } else if (raceChar == "d" && raceChaar == "D") {
+        } else if (raceChar == 'd' || raceChar == 'D') {
             cout << "Character: Drow \n  HP:150 \n  Atk:25 \n  Def:15 " << endl;
             cout << "Special Ability: The effect of all potions has been reduced to 1.5 times." << endl;
             cout << "Difficulty: ⭐⭐⭐⭐" << endl;
             cout << "🧠 High risk, high reward, suitable for skilled players to precisely stack buffs with potions." << endl;
-        } else if (raceChar == "v" && raceChaar == "V") {
+        } else if (raceChar == 'v' || raceChar == 'V') {
             cout << "Character: Vampire \n  HP:50 \n  Atk:25 \n  Def:25 " << endl;
             cout << "Special Ability: Each successful attack will suck blood +5 HP (no upper limit!), but therapeutic potions cannot be used." << endl;
             cout << "Difficulty: ⭐⭐⭐⭐⭐" << endl;
             cout << "💉 To stay alive by fighting and sucking blood, it is very suitable for the style of sustaining battles through battles." << endl;
-        } else if (raceChar == "t" && raceChaar == "T") {
+        } else if (raceChar == 't' || raceChar == 'T') {
             cout << "Character: Troll \n  HP:120 \n  Atk:25 \n  Def:15 " << endl;
             cout << "Special Ability: Automatically restore +5 HP each round (i.e., after the player action)." << endl;
             cout << "Difficulty: ⭐" << endl;
             cout << "💪 Tank-type characters, good news for steady players or new players." << endl;
-        } else if (raceChar == "g" && raceChaar == "G") {
+        } else if (raceChar == 'g' || raceChar == 'G') {
             cout << "Character: Goblin \n  HP:110 \n  Atk:15 \n  Def:20 " << endl;
             cout << "Special Ability: Each time you kill an enemy, you will steal an additional 5 gold." << endl;
             cout << "Difficulty: ⭐⭐⭐" << endl;
@@ -85,11 +86,14 @@ void GameInit::run() {
             cout << "📈 Earn extra gold coins after winning, suitable for players who want to get a high score." << endl;
         } 
 
+        string name = getRaceName(raceChar);
+        string emoji = getRaceEmoji(raceChar);
+
         cout << "\nYou have chosen: " << raceChar << "! \nAre you sure? (y to confirm, other to reselect): ";
         char choice;
         cin >> choice;
 
-        if (choice != 'y' && choice != 'Y') {
+        if (choice == 'y' || choice == 'Y') {
             break;
         }
     }

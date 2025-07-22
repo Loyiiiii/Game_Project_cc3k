@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
         char choice;
         cin >> choice;
 
-        if (choice != 'y' && choice != 'Y') {
+        if (choice != 'y' || choice != 'Y') {
             break;
         }
     }
