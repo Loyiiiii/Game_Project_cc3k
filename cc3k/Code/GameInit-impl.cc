@@ -4,27 +4,8 @@ import <fstream>;
 import <string>;
 import <memory>;
 import GamePlay;
-import PlayerCharacter;
 import Global_Constants;
 using namespace std;
-
-unique_ptr<PlayerCharacter> GameInit::curr_game_PC(Position start_pos, Race start_race) {
-    if (start_race == Race::DROW) {
-        return make_unique<Drow>(start_pos);
-    }
-    else if (start_race == Race::VAMPIRE) {
-        return make_unique<Vampire>(start_pos);
-    }
-    else if (start_race == Race::TROLL){
-        return make_unique<Troll>(start_pos); 
-    }
-    else if (start_race == Race::GOBLIN) {
-        return make_unique<Goblin>(start_pos); 
-    }
-    else {
-        return make_unique<Shade>(start_pos); 
-    }
-}
 
 string GameInit::getRaceName(char race) {
     if (race == 's' || race == 'S') {
@@ -119,22 +100,24 @@ void GameInit::run() {
         }
     }
     
+    Race PlayerCharacterChoice;
+
     if (raceChar == 's' || raceChar == 'S') {
-        curr_game_PC Race::SHADE;
+        PlayerCharacterChoice = SHADE;
     } else if (raceChar == 'd' || raceChar == 'D') {
-        return Race::DROW;
+        PlayerCharacterChoice = DROW;
     } else if (raceChar == 'v' || raceChar == 'V') {
-        return Race::VAMPIRE;
+        PlayerCharacterChoice = VAMPIRE;
     } else if (raceChar == 't' || raceChar == 'T') {
-        return Race::TROLL;
+        PlayerCharacterChoice = TROLL;
     } else if (raceChar == 'g' || raceChar == 'G') {
-        return Race::GOBLIN;
+        PlayerCharacterChoice = GOBLIN;
     } else {
-        return Race::SHADE;
+        PlayerCharacterChoice = SHADE;
     }
 
     Gameplay gameplay;
-    gameplay.setPlayerRace(raceChar);
+    gameplay.setPlayerRace(PlayerCharacterChoice);
 
     gameplay.gameInit();
 
