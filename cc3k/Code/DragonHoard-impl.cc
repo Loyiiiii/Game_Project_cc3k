@@ -1,3 +1,8 @@
 module dragon_hoard;
 
-DragonHoard::DragonHoard(): Gold{6, false} {}
+DragonHoard::DragonHoard(Position position): 
+Gold{6, false}, pos{position} {}
+
+Position DragonHoard::getPosition() const {
+    return pos;
+}
