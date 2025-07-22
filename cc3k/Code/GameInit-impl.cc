@@ -5,7 +5,7 @@ import <string>;
 import GamePlay;
 using namespace std;
 
-string getRaceName(char race) {
+string GameInit::getRaceName(char race) {
     if (race == 's' || race == 'S') {
         return "Shade";
     } else if (race == 'd' || race == 'D') {
@@ -21,7 +21,7 @@ string getRaceName(char race) {
     }
 }
 
-string getRaceEmoji(char race) {
+string GameInit::getRaceEmoji(char race) {
     if (race == 's' || race == 'S'){
         return "🧙‍♂️";
     } else if (race == 'd' || race == 'D') {
