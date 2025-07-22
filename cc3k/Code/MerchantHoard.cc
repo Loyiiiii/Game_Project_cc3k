@@ -1,4 +1,4 @@
-export module marchant_hoard;
+export module merchant_hoard;
 
 import gold;
 
