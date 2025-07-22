@@ -22,10 +22,6 @@ void Elf::dropGold(PlayerCharacter& pc) {
     pc.addGold(1); // Assuming Elf drops 1 gold, may change it to randomly chosen between small and normal
 }
 
-char Elf::getSymbol() {
-    return symbol;
-}
-
 void Elf::takeDamage(int damage) {
     if (HP - damage < 0) {
         HP = 0;
