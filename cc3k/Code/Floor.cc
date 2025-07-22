@@ -48,5 +48,4 @@ public:
     void movePlayer(int oldRow, int oldCol, int newRow, int newCol);
 
     void clear();
-
 };
