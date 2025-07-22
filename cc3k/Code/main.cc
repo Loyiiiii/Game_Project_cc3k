@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
         GameInit NewGame;
         NewGame.run(); 
 
-        cout << "\nGame Over! Would you like to play again? (y/n): ";
+        cout << "\nGame Over! Would you like to play again? (y to confirm, other to exit): ";
         char choice;
         cin >> choice;
 
