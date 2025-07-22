@@ -30,4 +30,3 @@ void Dragon::takeDamage(int dmg) {
     }
 }
 
-
