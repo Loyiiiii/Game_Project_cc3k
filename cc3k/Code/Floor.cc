@@ -31,13 +31,14 @@ public:
     Floor(int rows = 30, int cols = 79);
 
     void floor_init(PlayerCharacter *pc); // Pass player pointer for initialization
-    void loadMap();
     void printMap();
 
+    /*
     // add/remove methods
     void addEnemy(std::unique_ptr<Enemy> e);
     void addPotion(std::unique_ptr<Potion> p);
     void addGold(std::unique_ptr<Gold> g);
+    */
 
     // Accessor
     const std::vector<std::unique_ptr<Enemy>>& getEnemies() const;

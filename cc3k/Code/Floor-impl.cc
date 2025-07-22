@@ -127,7 +127,6 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
     std::cout << std::endl;
 }
 
-void Floor::loadMap()
 
 void Floor::printMap(PlayerCharacter *pc) {
     for (int i = 0; i < maxRow; i++) {
@@ -138,6 +137,19 @@ void Floor::printMap(PlayerCharacter *pc) {
     }
     printInfo(pc); // print info below the map
 }
+
+
+// Accessor
+const std::vector<std::unique_ptr<Enemy>>& Floor::getEnemies() const {
+    return enemies;
+}
+const std::vector<std::unique_ptr<Potion>>& Floor::getPotions() const {
+    return potions;
+}
+const std::vector<std::unique_ptr<Gold>>& Floor::getGoldPiles() const {
+    return goldsPiles;
+}
+
 
 Position Floor::movePlayer(Position oldPos, Direction dir) {
     int oldRow = oldPos.row;
