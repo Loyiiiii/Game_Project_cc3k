@@ -10,7 +10,6 @@ public:
 
     void attack(PlayerCharacter& pc) override;
     void dropGold(int goldAmount) override;
-    char getSymbol() override;
     void takeDamage(int damage) override;
     bool is_alive();
     int getAtk();

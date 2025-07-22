@@ -13,10 +13,6 @@ void Dwarf::dropGold(int goldAmount) {
     pc.addGold(goldAmount); // Assuming Dwarf drops 1 gold, may change it to randomly chosen between small and normal
 }
 
-char Dwarf::getSymbol() {
-    return symbol;
-}
-
 void Dwarf::takeDamage(int damage) {
     if (HP - damage < 0) {
         HP = 0;
