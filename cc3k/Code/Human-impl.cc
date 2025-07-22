@@ -12,28 +12,31 @@ Human::Human(Position pos):
         gold_carried.emplace_back(std::make_unique<NormalGold>());
     }
 
-Human::~Human() {}
 
+Human::~Human() {}
 // logic to attack PlayerCharacter:
 void Human::attack(PlayerCharacter& pc) {
     int damage = calculateDamage(this->Atk, pc.getDef());
     pc.takeDamage(damage);
 }
 
-void Human::dropGold() {
+void Human::dropGold(PlayerCharacter& pc) {
     // Transfer gold to game world (placeholder - needs GameWorld integration)
     for (auto& gold : gold_carried) {
         // GameWorld::addGold(std::move(gold), this->pos);
         // For now, just release the gold objects
     }
     gold_carried.clear(); // Human no longer carries gold
+
+    // different from Merchant and Dragon - we will drop gold to the game world. 
+    // but do we need to make it pickable? 
+    // temporary solution:
+    pc.addGold(4);
 }
 
 void Human::takeDamage(int damage) {
     if (HP - damage <= 0) {
         HP = 0; // dead
-        // drop gold:
-        dropGold();
     }
     else {
         HP -= damage;

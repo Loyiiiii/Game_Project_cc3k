@@ -1,9 +1,12 @@
 export module dragon_hoard;
 
 import gold;
+import Global_Constants;
 
 export class DragonHoard : public Gold {
+    Position pos;  
 public:
-    DragonHoard(); // Constructor to initialize Dragon Hoard with a specific value and pickability
+    DragonHoard(Position pos); // Constructor takes position parameter
+    Position getPosition() const;   // Getter for position
     // Dragon Hoard is initially unpickable, but can be made pickable later
 };
