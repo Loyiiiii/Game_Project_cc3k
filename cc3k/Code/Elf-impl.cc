@@ -30,14 +30,3 @@ void Elf::takeDamage(int damage) {
     }
 }
 
-bool Elf::is_alive() {
-    return HP > 0;
-}
-
-int Elf::getAtk() {
-    return Atk;
-}
-
-int Elf::getDef() {
-    return Def;
-}
