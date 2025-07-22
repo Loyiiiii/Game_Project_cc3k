@@ -1,6 +1,6 @@
 module floor;
 
-Floor::Floor(): map{rows, std::vector<Cell>(col, Cell{'.', 0, 0})} {}
+Floor::Floor(): map{rows, std::vector<Cell>(col, Cell{'.', 0, 0})}, player{nullptr} {}
 
 // helper: printInfo(PlayerCharacter *pc);
 void printInfo(PlayerCharacter *pc) {
@@ -18,7 +18,7 @@ void printInfo(PlayerCharacter *pc) {
 
 void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
     // clear the original map
-    map.clear()
+    map.clear();
 
     std::ifstream file{filename};
     std::string line;
