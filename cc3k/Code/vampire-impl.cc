@@ -14,7 +14,12 @@ Vampire::Vampire(Position pos):
     PlayerCharacter(pos, 50, 50, 25, 25, 0, Race::VAMPIRE, false) {}
 
 void Vampire::attack(Enemy& enemy) {
-    gainHP();
-    // needs to check if we are attacking a dwarf -> lose 5HP
+    // if encounters a dwarf, lose 5HP instead of gaining 5HP; 
+    if (enemy.getSymbol() == 'D') {
+        takeDamage(5);
+    }
+    else {
+        gainHP();
+    }
     PlayerCharacter::attack(enemy);
 }

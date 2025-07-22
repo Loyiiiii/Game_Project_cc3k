@@ -1,7 +1,7 @@
 module elf;
 
-Elf::Elf(Position pos, int HP, int Atk, int Def, bool movable, bool is_neutral):
-    Enemy{pos, 140, 30, 10, true, true 'E'} {}
+Elf::Elf(Position pos):
+    Enemy{pos, 140, 30, 10, true, true,'E'} {}
 
 void Elf::attack(PlayerCharacter& pc) {
     // check if player is Drow
@@ -20,7 +20,7 @@ void Elf::attack(PlayerCharacter& pc) {
 
 void Elf::dropGold(PlayerCharacter& pc) {
     int randomNum_gold = rand() % 2; // 0 or 1
-    int value = (randomNum == 0) ? 1 : 2; // 1 for small gold, 2 for normal gold
+    int value = (randomNum_gold == 0) ? 1 : 2; // 1 for small gold, 2 for normal gold
     pc.addGold(value); // Assuming Elf drops 1 gold, may change it to randomly chosen between small and normal
 }
 
