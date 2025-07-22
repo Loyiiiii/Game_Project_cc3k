@@ -8,6 +8,6 @@ export class Orcs: public Enemy {
         Orcs(Position pos);
         ~Orcs();
         void attack(PlayerCharacter& pc) override;
-        void dropGold() override;
+        void dropGold(PlayerCharacter& pc) override;
         void takeDamage(int damage) override;
 };

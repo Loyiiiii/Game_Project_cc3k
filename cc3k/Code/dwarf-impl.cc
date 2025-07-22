@@ -17,7 +17,7 @@ void Dwarf::dropGold(PlayerCharacter& pc) {
 }
 
 void Dwarf::takeDamage(int damage) {
-    if (HP - damage < 0) {
+    if (HP - damage <= 0) {
         HP = 0;
     } else {
         HP -= damage;

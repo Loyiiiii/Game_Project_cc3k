@@ -13,7 +13,6 @@ void Orcs::attack(PlayerCharacter& pc) {
     // check if attacking goblin.
     if (pc.getRace() == Race::GOBLIN) {
         // damage is done * 50%. 
-        
         int augmented_dmg = normal_damage * 1.5;
         pc.takeDamage(augmented_dmg);
     }
@@ -22,7 +21,7 @@ void Orcs::attack(PlayerCharacter& pc) {
     }
 }
 
-void Orcs::dropGold() {
+void Orcs::dropGold(PlayerCharacter& pc) {
     // 50% small gold, 50% normal gold
     int randomNum = rand() % 2; // 0 or 1
     int value = (randomNum == 0) ? 1 : 2; // 1: small gold, 2: normal gold
@@ -30,10 +29,8 @@ void Orcs::dropGold() {
 }
 
 void Orcs::takeDamage(int dmg) {
-    if(HP - dmg < 0) {
+    if(HP - dmg <= 0) {
         HP = 0; // dead
-        // gold is automatically added to PC.
-        dropGold();
     }
     else {
         HP -= dmg;
