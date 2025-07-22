@@ -8,7 +8,7 @@ import DragonHoard;
 // guards a treasure hoard. 
 
 export class Dragon: public Enemy {
-    std::unique_ptr<DragonHoard> hoard;
+    std::unique_ptr<DragonHoard> drag_hoard;
     public:
         Dragon(Position pos, std::unique_ptr<DragonHoard> hoard);
         ~Dragon();
