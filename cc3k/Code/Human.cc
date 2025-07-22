@@ -15,6 +15,5 @@ export class Human: public Enemy {
         ~Human();
         void attack(PlayerCharacter& pc) override; // attack PlayerCharacter
         void dropGold() override;
-        char getSymbol() override;
         void takeDamage(int damage) override; // receive damage from PlayerCharacter
 };

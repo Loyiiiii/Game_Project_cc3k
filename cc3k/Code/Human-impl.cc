@@ -40,6 +40,3 @@ void Human::takeDamage(int damage) {
     }
 }
 
-char Human::getSymbol() {
-    return 'H';
-}
