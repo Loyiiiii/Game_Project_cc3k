@@ -5,15 +5,13 @@ import <string>;
 import GamePlay;
 using namespace std;
 
-export class Game {
-    GameBoard* board;
-    int curFloor = 0;
-    int curCha = 
-public:
-    Game();
-    ~Game();
-    void start();
-    void newGame();
-    void showAsset();
+export enum class GameResult {
+    Win,
+    Loss,
+    Quit
+};
 
+export class GameInit {
+public:
+    void run();
 };
