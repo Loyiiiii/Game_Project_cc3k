@@ -21,14 +21,3 @@ void Dwarf::takeDamage(int damage) {
     }
 }
 
-bool Dwarf::is_alive() {
-    return HP > 0;
-}
-
-int Dwarf::getAtk() {
-    return Atk;
-}
-
-int Dwarf::getDef() {
-    return Def;
-}
