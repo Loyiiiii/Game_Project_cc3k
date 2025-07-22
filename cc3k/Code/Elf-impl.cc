@@ -19,7 +19,9 @@ void Elf::attack(PlayerCharacter& pc) {
 }
 
 void Elf::dropGold(PlayerCharacter& pc) {
-    pc.addGold(1); // Assuming Elf drops 1 gold, may change it to randomly chosen between small and normal
+    int randomNum_gold = rand() % 2; // 0 or 1
+    int value = (randomNum == 0) ? 1 : 2; // 1 for small gold, 2 for normal gold
+    pc.addGold(value); // Assuming Elf drops 1 gold, may change it to randomly chosen between small and normal
 }
 
 void Elf::takeDamage(int damage) {
