@@ -53,35 +53,35 @@ void PlayerCharacter::drinkPotion(Potion& p) {
 }
 
 // Some Getters:
-Position PlayerCharacter::getPos() {
+Position PlayerCharacter::getPos() const {
     return pos;
 }
 
-int PlayerCharacter::getHealth() {
+int PlayerCharacter::getHealth() const {
     return health;
 }
 
-int PlayerCharacter::getMaxHealth() {
+int PlayerCharacter::getMaxHealth() const {
     return maxHealth;
 }
 
-bool PlayerCharacter::HasMaxHealth() {
+bool PlayerCharacter::HasMaxHealth() const {
     return has_max_health;
 }
 
-int PlayerCharacter::getAtk() {
+int PlayerCharacter::getAtk() const {
     return atk;
 }
 
-int PlayerCharacter::getDef() {
+int PlayerCharacter::getDef() const {
     return def;
 }
 
-int PlayerCharacter::getGoldATM(){
+int PlayerCharacter::getGoldATM() const {
     return goldATM;
 }
 
-Race PlayerCharacter::getRace() {
+Race PlayerCharacter::getRace() const {
     return race; 
 }
 

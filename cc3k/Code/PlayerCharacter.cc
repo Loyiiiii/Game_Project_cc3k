@@ -27,14 +27,14 @@ export class PlayerCharacter {
 
         virtual ~PlayerCharacter(); // Virtual destructor for proper inheritance
         // Getters
-        Position getPos();
-        int getHealth();
-        int getMaxHealth();
-        bool HasMaxHealth();
-        int getAtk();
-        int getDef();
-        int getGoldATM();
-        Race getRace();
+        Position getPos() const;
+        int getHealth() const;
+        int getMaxHealth() const;
+        bool HasMaxHealth() const;
+        int getAtk() const;
+        int getDef() const;
+        int getGoldATM() const;
+        Race getRace() const;
         void addGold(int amount);
         // Virtual methods that races can override
         virtual void attack(Enemy& enemy);
