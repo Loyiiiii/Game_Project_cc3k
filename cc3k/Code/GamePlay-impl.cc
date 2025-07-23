@@ -119,6 +119,7 @@ unique_ptr<PlayerCharacter> GameInit::curr_game_PC(Position start_pos, Race star
 
 
 // Gameplay.cc (main game loop)
+module GamePlay;
 import <iostream>;
 import <string>;
 import <vector>;
