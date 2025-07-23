@@ -1,22 +1,21 @@
 module gold;
 
-Gold::Gold(int value, bool isPickable): value{value}, isPickable{isPickable} {
-    // Constructor to initialize gold with a value and symbol
-}
+Gold::Gold(int value, bool isPickable):
+    Item{isPickable}, value{value} {}
 
 int Gold::getValue() const {
-    return value; // Getter for the value of gold
+    return value; // return the value of gold. 
 }
 
 char Gold::getSymbol() const {
-    return symbol; // Getter for the symbol of gold
+    return symbol; // return the symbol of gold. 
 }
 
 bool Gold::getIsPickable() const {
-    return isPickable; // Getter for pickability of gold
+    return isPickable; // return the pickability of gold. 
 }
 
 void Gold::setIsPickable(bool pickable) {
-    isPickable = pickable; // Setter for pickability of gold
-    // Dragon Hoard is initially unpickable, but can be made pickable later
+    isPickable = pickable; // set the pickability of gold. 
+    // Dragon Hoard is initially unpickable, but can be made pickable later. 
 }
