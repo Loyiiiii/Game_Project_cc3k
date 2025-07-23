@@ -162,7 +162,7 @@ GameResult Gameplay::mainLoop() {
         //printMap(); // Show the current floor map
         // player->printStats(); // Show player HP, Atk, Def, gold, etc.
         // cout << "Floor: " << currentFloorNum << endl;
-        // cout << "Floor: " << AllFloorLevel.getCurrentFloorNum() << endl;
+        cout << "Floor: " << AllFloorLevel.getCurrentFloorNum() << endl;
         // printMessages(); // Show any queued messages
 
         // 2. Receive and Parse Player Input
@@ -190,6 +190,8 @@ GameResult Gameplay::mainLoop() {
             cout << "Invalid command. Try again." << endl;
             continue;
         }
+
+        // call movePlayer(Position oldPos, Direction dir)
 
         // 3. Handle Player Action
         switch (action) {
