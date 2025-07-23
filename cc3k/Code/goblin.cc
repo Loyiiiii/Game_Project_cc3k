@@ -8,5 +8,5 @@ export class Goblin: public PlayerCharacter{
     private:
         void StealGold();
     public:
-        Goblin(Position pos);
+        Goblin();
 };
