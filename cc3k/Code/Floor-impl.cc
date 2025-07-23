@@ -8,7 +8,7 @@ void printInfo(PlayerCharacter *pc) {
     int hp = pc->getHealth();
     int atk = pc->getAtk();
     int def = pc->getDef();
-    std::cout << "Race: " << race << " " << "Gold: " << endl;
+    std::cout << "Race: " << race << " " << "Gold: " << pc->getGoldATM() << "" << "Floor: " <<  endl;
     std::cout << "HP: " << hp << std::endl;
     std::cout << "Atk: " << atk << std:: endl;
     std::cout << "Def: " << def << std::endl;

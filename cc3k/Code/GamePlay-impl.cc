@@ -133,21 +133,17 @@ import floor_level;
 
 using namespace std;
 
-unique_ptr<PlayerCharacter> Gameplay::setPlayerRace(Position start_pos, Race start_race) {
-    if (start_race == Race::DROW) {
-        return make_unique<Drow>(start_pos);
-    }
-    else if (start_race == Race::VAMPIRE) {
-        return make_unique<Vampire>(start_pos);
-    }
-    else if (start_race == Race::TROLL){
-        return make_unique<Troll>(start_pos); 
-    }
-    else if (start_race == Race::GOBLIN) {
-        return make_unique<Goblin>(start_pos); 
-    }
-    else {
-        return make_unique<Shade>(start_pos); 
+void Gameplay::setPlayerRace(Race race, Position pos) {
+    if (race == Race::DROW) {
+        player = make_unique<Drow>(pos);
+    } else if (race == Race::VAMPIRE) {
+        player = make_unique<Vampire>(pos);
+    } else if (race == Race::TROLL) {
+        player = make_unique<Troll>(pos);
+    } else if (race == Race::GOBLIN) {
+        player = make_unique<Goblin>(pos);
+    } else {
+        player = make_unique<Shade>(pos);
     }
 }
 
@@ -157,16 +153,16 @@ GameResult Gameplay::mainLoop() {
     GameResult result = GameResult::Quit; // default if quit
     FloorLevel::FloorLevel AllFloorLevel;
     AllFloorLevel = FloorLevel(5);
-
     while (!gameOver) {
         // 1. Display the Game State
         Floor* CurrFloor = FloorLevel::getCurrentFloor();
-        CurrFloor->floor_init();
-        CurrFloor->printMap();
+        CurrFloor->floor_init(player.get(), "emptyfloor.txt");
+        CurrFloor->printMap(player.get()); // Show the current floor map
         //printMap(); // Show the current floor map
-        player->printStats(); // Show player HP, Atk, Def, gold, etc.
-        cout << "Floor: " << currentFloorNum << endl;
-        printMessages(); // Show any queued messages
+        // player->printStats(); // Show player HP, Atk, Def, gold, etc.
+        // cout << "Floor: " << currentFloorNum << endl;
+        cout << "Floor: " << AllFloorLevel.getCurrentFloorNum() << endl;
+        // printMessages(); // Show any queued messages
 
         // 2. Receive and Parse Player Input
         string command;

@@ -33,7 +33,7 @@ public:
     Floor();
 
     void floor_init(PlayerCharacter *pc, const std::string &filename); // Pass player pointer for initialization
-    void printMap();
+    void printMap(PlayerCharacter *pc);
 
     /*
     // add/remove methods
