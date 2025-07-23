@@ -72,4 +72,6 @@ private:
 
     Direction parseDirection(const string &dirStr);
     void printHelp();
+
+    Direction parseDirection(const string& dirStr);
 };

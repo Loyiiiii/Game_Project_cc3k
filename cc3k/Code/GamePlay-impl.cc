@@ -148,12 +148,24 @@ void Gameplay::setPlayerRace(Race race, Position pos) {
     }
 }
 
+Direction Gameplay::parseDirection(const string& dirStr) {
+    if (dirStr == "no") return Direction::N;
+    if (dirStr == "so") return Direction::S;
+    if (dirStr == "ea") return Direction::E;
+    if (dirStr == "we") return Direction::W;
+    if (dirStr == "ne") return Direction::NE;
+    if (dirStr == "nw") return Direction::NW;
+    if (dirStr == "se") return Direction::SE;
+    if (dirStr == "sw") return Direction::SW;
+    throw invalid_argument("Invalid direction");
+}
 
 GameResult Gameplay::mainLoop() {
     bool gameOver = false;
     GameResult result = GameResult::Quit; // default if quit
     FloorLevel::FloorLevel AllFloorLevel;
     AllFloorLevel = FloorLevel(5);
+
     while (!gameOver) {
         // 1. Display the Game State
         Floor* CurrFloor = FloorLevel::getCurrentFloor();
@@ -168,6 +180,42 @@ GameResult Gameplay::mainLoop() {
         // 2. Receive and Parse Player Input
         string command;
         cin >> command;
+
+        Direction dir;
+
+        if (command == "u") {
+            string dirStr;
+            cin >> dirStr;
+            dir = parseDirection(dirStr);
+            player->drinkPotion(!Potion& p);//here
+            continue;
+        } else if (command == "a") {
+            string dirStr;
+            cin >> dirStr;
+            dir = parseDirection(dirStr);
+            player->attack(!Enemy& enemy);//here
+            player->takeDamage(!int damage);//here
+            continue
+        } else if (command == "f") {
+
+        } else if (command == "r") {
+
+        } else if (command == "q") {
+            break;
+        } else if (command == "no" || command == "so" ||
+                   command == "ea" || command == "we" ||
+                   command == "ne" || command == "nw" ||
+                   command == "se" || command == "sw")
+        {
+            dir = parseDirection(command);
+            // Move the player
+            Position oldPos = player->getPosition();
+            Position newPos = currentFloor->movePlayer(oldPos, dir);
+            player->setPosition(newPos);
+            continue;
+        } else {
+
+        }
 
         Action action;
         Direction dir;
