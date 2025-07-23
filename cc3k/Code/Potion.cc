@@ -9,7 +9,7 @@ export class Potion : public Item {
     char symbol; // for displaying the potion in the map
 
 public:
-    Potion(Potion_Type type, bool isTemporary, int amount, char symbol);
+    Potion(bool ispickable, Potion_Type type, bool isTemporary, int amount, char symbol);
     virtual ~Potion() = default;
 
     Potion_Type getType() const;
