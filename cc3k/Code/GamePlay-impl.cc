@@ -129,6 +129,7 @@ import Direction;//
 import floor;
 import MapPrinter;//
 import Global_Constants;
+import position;
 import floor_level;
 
 using namespace std;
@@ -189,6 +190,8 @@ GameResult Gameplay::mainLoop() {
             cout << "Invalid command. Try again." << endl;
             continue;
         }
+
+        // call movePlayer(Position oldPos, Direction dir)
 
         // 3. Handle Player Action
         switch (action) {
