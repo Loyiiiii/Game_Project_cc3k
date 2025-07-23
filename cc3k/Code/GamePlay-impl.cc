@@ -17,24 +17,6 @@ void Gameplay::startGame() {
     mainLoop();
 }
 
-void Gameplay::chooseRace() {
-    cout << "Choose your race: s (Shade), d (Drow), v (Vampire), t (Troll), g (Goblin)" << endl;
-    char r;
-    cin >> r;
-
-    PC* base = new BasePC();
-    if (r == 'd') {
-        player = make_unique<DrowPC>(base);
-    } else if (r == 'v') {
-        player = make_unique<VampirePC>(base);
-    } else if (r == 't') {
-        player = make_unique<TrollPC>(base);
-    } else if (r == 'g') {
-        player = make_unique<GoblinPC>(base);
-    } else {
-        player = make_unique<ShadePC>(base);
-    }
-}
 
 void Gameplay::mainLoop() {
     while (!gameOver) {
