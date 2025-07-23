@@ -129,6 +129,7 @@ import Direction;//
 import floor;
 import MapPrinter;//
 import Global_Constants;
+import position;
 import floor_level;
 
 using namespace std;
@@ -161,7 +162,7 @@ GameResult Gameplay::mainLoop() {
         //printMap(); // Show the current floor map
         // player->printStats(); // Show player HP, Atk, Def, gold, etc.
         // cout << "Floor: " << currentFloorNum << endl;
-        cout << "Floor: " << AllFloorLevel.getCurrentFloorNum() << endl;
+        // cout << "Floor: " << AllFloorLevel.getCurrentFloorNum() << endl;
         // printMessages(); // Show any queued messages
 
         // 2. Receive and Parse Player Input
