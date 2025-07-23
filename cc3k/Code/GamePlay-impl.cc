@@ -1,5 +1,5 @@
 //仍需和其他模块进行交互查看如何互相使用！！！
-
+/**
 module GamePlay;
 import <iostream>;
 import <fstream>;
@@ -110,4 +110,103 @@ unique_ptr<PlayerCharacter> GameInit::curr_game_PC(Position start_pos, Race star
     else {
         return make_unique<Shade>(start_pos); 
     }
+}
+**/
+
+
+
+
+
+
+// Gameplay.cc (main game loop)
+import <iostream>;
+import <string>;
+import <vector>;
+import GamePlay;
+import PlayerCharacter;
+import Direction;
+import Floor;
+import MapPrinter;
+import Global_Constants;
+
+using namespace std;
+
+GameResult Gameplay::mainLoop() {
+    bool gameOver = false;
+    GameResult result = GameResult::Quit; // default if quit
+
+    while (!gameOver) {
+        // 1. Display the Game State
+        printMap(); // Show the current floor map
+        player->printStats(); // Show player HP, Atk, Def, gold, etc.
+        cout << "Floor: " << currentFloorNum << endl;
+        printMessages(); // Show any queued messages
+
+        // 2. Receive and Parse Player Input
+        string command;
+        cin >> command;
+
+        Action action;
+        Direction dir;
+
+        if (command == "move") {
+            string dirStr; cin >> dirStr;
+            action = Action::Move;
+            dir = parseDirection(dirStr);
+        } else if (command == "atk") {
+            string dirStr; cin >> dirStr;
+            action = Action::Attack;
+            dir = parseDirection(dirStr);
+        } else if (command == "use") {
+            string dirStr; cin >> dirStr;
+            action = Action::UsePotion;
+            dir = parseDirection(dirStr);
+        } else if (command == "q" || command == "quit") {
+            action = Action::Quit;
+        } else {
+            cout << "Invalid command. Try again." << endl;
+            continue;
+        }
+
+        // 3. Handle Player Action
+        switch (action) {
+            case Action::Move:
+                playerMove(dir);
+                break;
+            case Action::Attack:
+                playerAttack(dir);
+                break;
+            case Action::UsePotion:
+                playerUsePotion(dir);
+                break;
+            case Action::Quit:
+                gameOver = true;
+                result = GameResult::Quit;
+                continue;
+        }
+
+        // 4. Enemy Turn (if not paused)
+        if (!enemyFrozen) {
+            for (auto &enemy : enemies) {
+                if (enemy->isAdjacentTo(*player)) {
+                    enemy->attack(*player);
+                } else {
+                    enemy->moveRandom();
+                }
+            }
+        }
+
+        // 5. Check for End Conditions
+        if (player->isDead()) {
+            gameOver = true;
+            result = GameResult::Loss;
+        } else if (player->isAtStairs() && currentFloorNum == FINAL_FLOOR) {
+            gameOver = true;
+            result = GameResult::Win;
+        }
+
+        // 6. Loop or Exit handled by loop condition
+    }
+
+    return result;
 }
