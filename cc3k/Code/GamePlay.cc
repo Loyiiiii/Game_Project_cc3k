@@ -1,48 +1,13 @@
-/** export module GamePlay;
-import <iostream>;
-import <fstream>;
-import <sstream>;
-import <string>;
-import <utility>;
-import <compare>;
-import <vector>;
-import <algorithm>;
-using namespace std;
-
-class Gameplay {
-    unique_ptr<PC> player;
-    unique_ptr<Floor> floor;
-    bool frozenEnemies = false;
-    bool gameOver = false;
-    int currentFloor = 1;
-
-public:
-    void startGame();
-    void mainLoop();
-
-private:
-    void chooseRace();
-    void generateFloor();
-    void handleCommand(const string& cmd);
-    void updateEnemies();
-    void resolveDeaths();
-    void checkVictoryOrDeath();
-    void render();
-};
-
-//仍需和其他模块进行交互查看如何互相使用
-**/
-
 export module GamePlay;
 import <iostream>;
 import <string>;
 import <vector>;
-import GamePlay;
 import PlayerCharacter;
-import Direction;
-import Floor;
-import MapPrinter;
+import floor;
 import Global_Constants;
+import position;
+import floor_level;
+import potion;
 
 using namespace std;
 
