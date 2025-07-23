@@ -1,6 +1,7 @@
 export module restore_health;
 
 import potion;
+import Global_Constants;
 
 export class RestoreHealth : public Potion {
 public:
