@@ -58,7 +58,7 @@ void PlayerCharacter::drinkPotion(Potion& p) {
 }
 
 // Some Getters:
-Position PlayerCharacter::getPos() const {
+Position PlayerCharacter::getPosition() const {
     return pos;
 }
 

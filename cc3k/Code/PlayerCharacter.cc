@@ -25,7 +25,7 @@ export class PlayerCharacter {
         
         virtual ~PlayerCharacter(); // Virtual destructor for proper inheritance
         // Getters
-        Position getPos() const;
+        Position getPosition() const;
         int getHealth() const;
         int getMaxHealth() const;
         bool HasMaxHealth() const;
