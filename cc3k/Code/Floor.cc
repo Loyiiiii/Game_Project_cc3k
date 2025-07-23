@@ -21,11 +21,11 @@ export class Floor {
     int numCols = 79;
     std::vector<std::vector<Cell>> map;
     // container for Enemy, Potions, Gold
-    /*
+    
     std::vector<std::unique_ptr<Enemy>> enemies;
     std::vector<std::unique_ptr<Potion>> potions;
     std::vector<std::unique_ptr<Gold>> goldsPiles;
-    */
+    
 
     PlayerCharacter *player = nullptr; // to know where the player is on the floor
 

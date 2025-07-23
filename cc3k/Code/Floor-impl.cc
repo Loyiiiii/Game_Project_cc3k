@@ -121,6 +121,8 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
         }
         // place the enemy in the map and store in enemies
         map[enemyPos.row][enemyPos.col].placeEnemy(enemyPtr.get());
+
+        // moves the ownership of the pointer into enemy vector
         enemies.push_back(std::move(enemyPtr));
     }
     // assign pc to the player pointer
