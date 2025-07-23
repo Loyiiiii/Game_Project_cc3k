@@ -50,7 +50,7 @@ export class Gameplay {
 public:
     Gameplay();
 
-    void setPlayerRace(Race race, Position pos);
+    void setPlayerRace(Race race);
     void gameInit();
     GameResult mainLoop();
 
