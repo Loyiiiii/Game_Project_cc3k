@@ -194,3 +194,7 @@ Position Floor::movePlayer(Position oldPos, Direction dir) {
         return Position{newRow, newCol}; // return the new position
     }
 }
+
+Cell& Floor::getTargetCell(int row, int col) {
+    return map[row][col];
+}

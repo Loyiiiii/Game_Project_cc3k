@@ -49,4 +49,5 @@ public:
 
     // move the player character
     Position movePlayer(Position oldPos, Direction dir);
+    Cell& getTargetCell(int row, int col);
 };
