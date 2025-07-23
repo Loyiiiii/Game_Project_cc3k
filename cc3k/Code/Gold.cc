@@ -2,9 +2,10 @@ export module gold;
 
 import item;
 
-export class Gold : public Item {
+export class Gold {
     int value;
     char symbol = 'G'; // Symbol to represent gold in the game
+    bool isPickable; // Indicates if the gold can be picked up
 
 public:
     Gold(int value, bool isPickable); // Constructor to initialize gold with a value and symbol

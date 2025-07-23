@@ -1,7 +1,7 @@
 module gold;
 
 Gold::Gold(int value, bool isPickable):
-    Item{isPickable}, value{value} {}
+    value{value}, isPickable{isPickable} {}
 
 int Gold::getValue() const {
     return value; // return the value of gold. 
