@@ -1,6 +1,7 @@
 export module boost_atk;
 
 import potion;
+import Global_Constants;
 
 export class BoostAtk : public Potion {
 public:

@@ -1,6 +1,7 @@
 export module wound_atk;
 
 import potion;
+import Global_Constants;
 
 export class WoundAtk : public Potion {
 public:

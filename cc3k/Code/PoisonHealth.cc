@@ -1,6 +1,7 @@
 export module poison_health;
 
 import potion;
+import Global_Constants;
 
 export class PoisonHealth : public Potion {
 public:

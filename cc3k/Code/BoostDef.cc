@@ -1,6 +1,7 @@
 export module boost_def;
 
 import potion;
+import Global_Constants;
 
 export class BoostDef : public Potion {
 public:
