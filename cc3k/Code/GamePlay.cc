@@ -33,6 +33,7 @@ private:
 //仍需和其他模块进行交互查看如何互相使用
 **/
 
+export module GamePlay;
 import <iostream>;
 import <string>;
 import <vector>;
