@@ -131,6 +131,7 @@ import MapPrinter;//
 import Global_Constants;
 import position;
 import floor_level;
+import potion;
 
 using namespace std;
 
@@ -160,6 +161,19 @@ Direction Gameplay::parseDirection(const string& dirStr) {
     throw invalid_argument("Invalid direction");
 }
 
+Position Gameplay::getTargetPosition(Position pos, Direction dir) {
+    //Adjust row/col based on your direction enum
+    if(dir == Direction::N) return {pos.row - 1, pos.col};
+    if(dir == Direction::S) return {pos.row + 1, pos.col};
+    if(dir == Direction::E) return {pos.row, pos.col + 1};
+    if(dir == Direction::W) return {pos.row, pos.col - 1};
+    if(dir == Direction::NE) return {pos.row - 1, pos.col + 1};
+    if(dir == Direction::NW) return {pos.row - 1, pos.col - 1};
+    if(dir == Direction::SE) return {pos.row + 1, pos.col + 1};
+    if(dir == Direction::SW) return {pos.row + 1, pos.col - 1};
+    return pos; 
+}
+
 GameResult Gameplay::mainLoop() {
     bool gameOver = false;
     GameResult result = GameResult::Quit; // default if quit
@@ -182,17 +196,24 @@ GameResult Gameplay::mainLoop() {
         cin >> command;
 
         Direction dir;
+        Position targetPosition;
 
         if (command == "u") {
             string dirStr;
             cin >> dirStr;
             dir = parseDirection(dirStr);
-            player->drinkPotion(!Potion& p);//here
+            targetPosition = getTargetPosition(player->getPosition, dir);
+            Cell targetCell = currFloor->getTargetCell(targetPosition.row, targetPosition.col);
+            Potion *targetPotion = targetCell.getPotion();
+            if (targetPotion) {
+                player->drinkPotion(*targetPotion);//here
+            }
             continue;
         } else if (command == "a") {
             string dirStr;
             cin >> dirStr;
             dir = parseDirection(dirStr);
+            targetPosition = getTargetPosition(player->getPosition, dir);
             player->attack(!Enemy& enemy);//here
             player->takeDamage(!int damage);//here
             continue
@@ -215,9 +236,10 @@ GameResult Gameplay::mainLoop() {
             player->setPosition(newPos);
             continue;
         } else {
-
+            continue;
         }
 
+        /** 
         Action action;
         Direction dir;
 
@@ -241,6 +263,7 @@ GameResult Gameplay::mainLoop() {
         }
 
         // call movePlayer(Position oldPos, Direction dir)
+        **/
 
         // 3. Handle Player Action
         switch (action) {
@@ -284,3 +307,5 @@ GameResult Gameplay::mainLoop() {
 
     return result;
 }
+
+
