@@ -44,4 +44,5 @@ public:
     Gold* getGold() const;
     // Setters
     void setSymbol(char symbol);
+    void setIsPassable(bool isPassable);
 };

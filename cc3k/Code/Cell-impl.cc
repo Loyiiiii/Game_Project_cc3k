@@ -43,3 +43,4 @@ Potion* Cell::getPotion() const { return p; }
 Gold* Cell::getGold() const { return g; }
 
 void Cell::setSymbol(char symbol) { baseSymbol = symbol; }
+void setIsPassable(bool isPassable) { this->isPassable = isPassable; }

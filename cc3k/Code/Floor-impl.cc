@@ -53,7 +53,9 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
 
 
     // place the stairway at the second available floor cell
-    map[availableFloorCells[1].row][availableFloorCells[1].col].setSymbol('\\');
+    Position randomStairPos = availableFloorCells[1];
+    stairPos = randomStairPos;
+    map[randomStairPos.row][randomStairPos.col].setSymbol('\\');
 
     // place 10 potions using index 2 - 11
     for (int i = 2; i < 12; i++) {
@@ -200,3 +202,6 @@ Position Floor::movePlayer(Position oldPos, Direction dir) {
 Cell& Floor::getTargetCell(int row, int col) {
     return map[row][col];
 }
+
+Position Floor::getStairPos() const { return stairPos; }
+
