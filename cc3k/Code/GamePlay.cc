@@ -74,4 +74,5 @@ private:
     void printHelp();
 
     Direction parseDirection(const string& dirStr);
+    Position getTargetPosition(Position pos, Direction dir);
 };

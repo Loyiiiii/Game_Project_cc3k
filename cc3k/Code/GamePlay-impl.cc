@@ -191,12 +191,13 @@ GameResult Gameplay::mainLoop() {
         cout << "Floor: " << AllFloorLevel.getCurrentFloorNum() << endl;
         // printMessages(); // Show any queued messages
 
-        // 2. Receive and Parse Player Input
+        // 2. Receive and Parse Player Input + 3. Handle Player Action
         string command;
         cin >> command;
 
         Direction dir;
         Position targetPosition;
+        bool enemyFrozen = false;
 
         if (command == "u") {
             string dirStr;
@@ -206,24 +207,35 @@ GameResult Gameplay::mainLoop() {
             Cell targetCell = currFloor->getTargetCell(targetPosition.row, targetPosition.col);
             Potion *targetPotion = targetCell.getPotion();
             if (targetPotion) {
-                player->drinkPotion(*targetPotion);//here
+                player->drinkPotion(*targetPotion);
+                //remove potion logo
+                targetCell.removePotion();
             }
-            continue;
         } else if (command == "a") {
             string dirStr;
             cin >> dirStr;
             dir = parseDirection(dirStr);
             targetPosition = getTargetPosition(player->getPosition, dir);
-            player->attack(!Enemy& enemy);//here
-            player->takeDamage(!int damage);//here
-            continue
+            Cell targetCell = currFloor->getTargetCell(targetPosition.row, targetPosition.col);
+            Enermy *targetEnermy = targetCell.getEnermy();
+            if (targetEnermy) {
+                player->attack(*targetEnermy);
+                // check if enemy die
+                if (!targetEnermy->is_alive()) {
+                    // if so, remove enemy logo
+                    targetCell.removeEnemy();
+                } 
+            }
         } else if (command == "f") {
+            enemyFrozen = true;
             //we need freeze function
             continue;
         } else if (command == "r") {
 
         } else if (command == "q") {
-            break;
+            gameOver = true;
+            result = GameResult::Quit;
+            continue;
         } else if (command == "no" || command == "so" ||
                    command == "ea" || command == "we" ||
                    command == "ne" || command == "nw" ||
@@ -263,7 +275,7 @@ GameResult Gameplay::mainLoop() {
         }
 
         // call movePlayer(Position oldPos, Direction dir)
-        **/
+        
 
         // 3. Handle Player Action
         switch (action) {
@@ -281,6 +293,7 @@ GameResult Gameplay::mainLoop() {
                 result = GameResult::Quit;
                 continue;
         }
+        **/
 
         // 4. Enemy Turn (if not paused)
         if (!enemyFrozen) {
@@ -288,16 +301,18 @@ GameResult Gameplay::mainLoop() {
                 if (enemy->isAdjacentTo(*player)) {
                     enemy->attack(*player);
                 } else {
-                    enemy->moveRandom();
+                    //enemy->moveRandom();
                 }
             }
         }
+
+        //player->takeDamage(targetEnermy->getAtk);
 
         // 5. Check for End Conditions
         if (player->isDead()) {
             gameOver = true;
             result = GameResult::Loss;
-        } else if (player->isAtStairs() && currentFloorNum == FINAL_FLOOR) {
+        } else if (player->isAtStairs() && AllFloorLevel->getCurrentFloorNum == 5) {
             gameOver = true;
             result = GameResult::Win;
         }

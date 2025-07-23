@@ -39,5 +39,6 @@ export class PlayerCharacter {
         virtual void attack(Enemy& enemy);
         virtual void drinkPotion(Potion& p);
         void takeDamage(int damage);  // Method for taking damage from enemies
+        bool isDead();
 };
 

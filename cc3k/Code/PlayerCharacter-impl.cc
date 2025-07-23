@@ -126,3 +126,7 @@ void PlayerCharacter::takeDamage(int damage) {
 void PlayerCharacter::setPosition(Position newPos) {
     this->pos = newPos; // setting the position of the PC.
 }
+
+bool isDead(){
+    return health <= 0;
+}
