@@ -1,7 +1,7 @@
 module potion;
 
-Potion::Potion(bool isPickable, Potion_Type type, bool isTemporary, int amount, char symbol)
-    : Item{isPickable}, type{type}, isTemporary{isTemporary}, amount{amount}, symbol{symbol} {}
+Potion::Potion(Potion_Type type, bool isTemporary, int amount, char symbol)
+    : type{type}, isTemporary{isTemporary}, amount{amount}, symbol{symbol} {}
 
 Potion_Type Potion::getType() const {
     return type;

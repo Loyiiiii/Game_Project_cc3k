@@ -1,8 +1,9 @@
 export module potion;
 
+import item;
 import Global_Constants;
 
-export class Potion : public Item {
+export class Potion {
     Potion_Type type;
     bool isTemporary; // whether the potion is temporary or permanent
     int amount; // the amount of the potion effect
