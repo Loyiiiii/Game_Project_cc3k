@@ -16,7 +16,8 @@ export class Cell {
 
     PlayerCharacter *pc = nullptr; // whether a pc is stepping on this cell
     Enemy *e = nullptr; // whether an enemy is stepping on this cell
-    Item *i = nullptr; // whether a potion is on this cell
+    Potion *p = nullptr; // whether a potion is on this cell
+    Gold *g = nullptr; // whether a gold pile is on this cell
 
 public:
     Cell(char symbol, int row, int col, bool isPassable);
@@ -27,9 +28,12 @@ public:
     // place or remove a enemy
     void placeEnemy(Enemy *e);
     void removeEnemy();
-    // place or remove an item (potion or gold)
-    void placeItem(Item *i);
-    void removeItem();
+    // place or remove a potion
+    void placePotion(Potion *p);
+    void removePotion();
+    // place or remove a gold pile
+    void placeGold(Gold *g);
+    void removeGold();
 
     // Getters
     char getSymbol() const;

@@ -12,9 +12,13 @@ void Cell::placeEnemy(Enemy *e) { e = e; }
 
 void Cell::removeEnemy() { e = nullptr; }
 
-void Cell::placeItem(Item *i) { i = i; }
+void Cell::placePotion(Potion *p) { p = p; }
 
-void Cell::removeItem() { p = nullptr; }
+void Cell::removePotion() { p = nullptr; }
+
+void Cell::placeGold(Gold *g) { g = g; }
+
+void Cell::removeGold() { g = nullptr; }
 
 char Cell::getSymbol() {
     if (pc) {
@@ -23,8 +27,10 @@ char Cell::getSymbol() {
         return e->getSymbol();
     } else if (p) {
         return p->getSymbol();
+    } else if (g) {
+        return g->symbol();
     } else {
-        return symbol;
+        return baseSymbol;
     }
 }
 char Cell::getBaseSymbol() const { return baseSymbol; }
