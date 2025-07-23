@@ -123,11 +123,8 @@ module GamePlay;
 import <iostream>;
 import <string>;
 import <vector>;
-import GamePlay;//
 import PlayerCharacter;
-import Direction;//
 import floor;
-import MapPrinter;//
 import Global_Constants;
 import position;
 import floor_level;
@@ -311,13 +308,16 @@ GameResult Gameplay::mainLoop() {
         //player->takeDamage(targetEnermy->getAtk);
 
         // 5. Check for End Conditions
+        Position stairPosition = CurrFloor->getStairPos();
+        Position playerPosition = player->getPosition();
+
         if (player->isDead()) {
             gameOver = true;
             result = GameResult::Loss;
-        } else if (player->isAtStairs() && AllFloorLevel.getCurrentFloorNum() == 5) {
+        } else if ((stairPosition == playerPosition) && (AllFloorLevel.getCurrentFloorNum() == 5)) {
             gameOver = true;
             result = GameResult::Win;
-        }  else if (player->isAtStairs()) {
+        }  else if (stairPosition == playerPosition) {
             AllFloorLevel.goToNextFloor();
             CurrFloor = AllFloorLevel.getCurrentFloor();
             CurrFloor->floor_init(player.get(), "emptyfloor.txt");
