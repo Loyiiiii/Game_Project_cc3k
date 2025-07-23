@@ -179,6 +179,7 @@ GameResult Gameplay::mainLoop() {
     GameResult result = GameResult::Quit; // default if quit
     FloorLevel::FloorLevel AllFloorLevel;
     AllFloorLevel = FloorLevel(5);
+    enemyFrozen = false;
 
     while (!gameOver) {
         // 1. Display the Game State
@@ -197,7 +198,6 @@ GameResult Gameplay::mainLoop() {
 
         Direction dir;
         Position targetPosition;
-        bool enemyFrozen = false;
 
         if (command == "u") {
             string dirStr;
@@ -227,11 +227,13 @@ GameResult Gameplay::mainLoop() {
                 } 
             }
         } else if (command == "f") {
+            cout << "Enemy has been forzen!" << endl;
             enemyFrozen = true;
             //we need freeze function
-            continue;
         } else if (command == "r") {
-
+            result = GameResult::Restart;
+            gameOver = true;
+            continue;
         } else if (command == "q") {
             gameOver = true;
             result = GameResult::Quit;
@@ -244,10 +246,10 @@ GameResult Gameplay::mainLoop() {
             dir = parseDirection(command);
             // Move the player
             Position oldPos = player->getPosition();
-            Position newPos = currentFloor->movePlayer(oldPos, dir);
+            Position newPos = CurrFloor->movePlayer(oldPos, dir);
             player->setPosition(newPos);
-            continue;
         } else {
+            cout << "Undefined input, please retry..." << endl;
             continue;
         }
 
@@ -312,9 +314,13 @@ GameResult Gameplay::mainLoop() {
         if (player->isDead()) {
             gameOver = true;
             result = GameResult::Loss;
-        } else if (player->isAtStairs() && AllFloorLevel->getCurrentFloorNum == 5) {
+        } else if (player->isAtStairs() && AllFloorLevel.getCurrentFloorNum() == 5) {
             gameOver = true;
             result = GameResult::Win;
+        }  else if (player->isAtStairs()) {
+            AllFloorLevel.goToNextFloor();
+            CurrFloor = AllFloorLevel.getCurrentFloor();
+            CurrFloor->floor_init(player.get(), "emptyfloor.txt");
         }
 
         // 6. Loop or Exit handled by loop condition
