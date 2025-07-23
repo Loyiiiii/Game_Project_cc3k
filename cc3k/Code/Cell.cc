@@ -5,7 +5,6 @@ import Enemy;
 import Potion;
 import Global_Constants;
 import position;
-import item;
 import gold;
 
 export class Cell {

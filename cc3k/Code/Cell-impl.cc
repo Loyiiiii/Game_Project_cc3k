@@ -14,24 +14,26 @@ void Cell::placeEnemy(Enemy *e) { this->e = e; }
 
 void Cell::removeEnemy() { this->e = nullptr; }
 
-void Cell::placeItem(Item *i) { this->i = i; }
+void Cell::placePotion(Potion *p) { this->p = p; }
 
-void Cell::removeItem() { this->i = nullptr; }
+void Cell::removePotion() { this->p = nullptr; }
+
+void Cell::placeGold(Gold *g) { this->g = g; }
+
+void Cell::removeGold() { this->g = nullptr; }
 
 char Cell::getSymbol() const {
     if (pc) {
         return '@';
     } else if (e) {
         return e->getSymbol();
-    } else if (i) {
-        // We need to figure out if the item is Gold or a Potion
-        if (auto gold_ptr = dynamic_cast<Gold*>(i)) {
-            return gold_ptr->getSymbol();
-        } else if (auto potion_ptr = dynamic_cast<Potion*>(i)) {
-            return potion_ptr->getSymbol();
-        }
+    } else if (p) {
+        return p->getSymbol();
+    } else if (g) {
+        return g->getSymbol();
+    } else {
+        return baseSymbol;
     }
-    return baseSymbol;
 }
 char Cell::getBaseSymbol() const { return baseSymbol; }
 int Cell::getRow() const { return row; }
