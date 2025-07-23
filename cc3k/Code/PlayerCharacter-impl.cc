@@ -127,6 +127,6 @@ void PlayerCharacter::setPosition(Position newPos) {
     this->pos = newPos; // setting the position of the PC.
 }
 
-bool isDead(){
+bool PlayerCharacter::isDead(){
     return health <= 0;
 }
