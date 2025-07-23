@@ -1,4 +1,4 @@
-export module GamePlay;
+/** export module GamePlay;
 import <iostream>;
 import <fstream>;
 import <sstream>;
@@ -31,3 +31,44 @@ private:
 };
 
 //仍需和其他模块进行交互查看如何互相使用
+**/
+
+import <iostream>;
+import <string>;
+import <vector>;
+import GamePlay;
+import PlayerCharacter;
+import Direction;
+import Floor;
+import MapPrinter;
+import Global_Constants;
+
+using namespace std;
+
+export class Gameplay {
+public:
+    Gameplay();
+
+    void setPlayerRace(Race race);
+    void gameInit();
+    GameResult mainLoop();
+
+private:
+    int currentFloorNumber;
+    bool enemyFrozen;
+
+    unique_ptr<PlayerCharacter> player;
+    unique_ptr<Floor> currentFloor;
+
+    void displayGameState();
+    bool parseAndExecuteCommand(const string &cmd);
+    void enemyTurn();
+    bool checkEndConditions();
+
+    bool handleMove(Direction dir);
+    bool handleAttack(Direction dir);
+    bool handleUsePotion(Direction dir);
+
+    Direction parseDirection(const string &dirStr);
+    void printHelp();
+};
