@@ -1,14 +1,18 @@
 module PlayerCharacter;
 import <cmath>;
+import <vector>;
 import Global_Constants;
 import Enemy;
 import position;
 
-PlayerCharacter::PlayerCharacter(Position pos, int health, int maxHealth, 
+// New constructor: Initializes position to an invalid state {-1, -1}
+PlayerCharacter::PlayerCharacter(int health, int maxHealth, 
     int atk, int def, int gold, Race race, bool has_max_health):
-    pos{pos}, health{health}, maxHealth{maxHealth}, atk{atk}, def{def},
+    pos{-1, -1}, health{health}, maxHealth{maxHealth}, atk{atk}, def{def},
     goldATM{gold}, race{race}, has_max_health{has_max_health} {}
 
+
+PlayerCharacter::~PlayerCharacter() {}
 
 void PlayerCharacter::drinkPotion(Potion& p) {
     PotionInUse.emplace(p); // first add to the vector. 
@@ -119,6 +123,6 @@ void PlayerCharacter::takeDamage(int damage) {
     }
 }
 
-void PlayerCharacter::setPosition(Position pos) {
-    this->pos = pos; // setting the position of the PC.
+void PlayerCharacter::setPosition(Position newPos) {
+    this->pos = newPos; // setting the position of the PC.
 }
