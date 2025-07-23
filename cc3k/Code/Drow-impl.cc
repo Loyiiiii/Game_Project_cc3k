@@ -1,7 +1,9 @@
 module Drow;
+import PlayerCharacter;
+import Global_Constants;
 
-Drow::Drow(Position pos):
-    PlayerCharacter(pos, 150, 150, 25, 15, 0, Race::DROW) {}
+Drow::Drow():
+    PlayerCharacter{150, 150, 25, 15, 0, Race::DROW, true} {}
 
 void Drow::drinkPotion(Potion& p) {
     // all potions have effect magnified by 1.5x

@@ -8,7 +8,7 @@ export class Drow: public PlayerCharacter {
     // Ability: all potions have effect magnified by 1.5x
     float potion_effect_enhancement = 1.5;
     public: 
-        Drow(Position pos);
+        Drow();
         // need to override - all potions have effect magnified by 1.5x
         void drinkPotion(Potion& p) override; 
 };
