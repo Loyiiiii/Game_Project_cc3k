@@ -2,6 +2,7 @@ export module Enemy;
 import Gold;
 import Global_Constants;
 import PlayerCharacter;
+import position;
 
 export class Enemy {
     protected:

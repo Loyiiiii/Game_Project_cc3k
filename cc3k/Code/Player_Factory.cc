@@ -2,6 +2,7 @@ export module Player_Factory;
 import <memory>;
 import PlayerCharacter;
 import Global_Constants;
+import position;
 
 
 export class player_factory {

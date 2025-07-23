@@ -4,7 +4,7 @@ import PlayerCharacter;
 import Enemy;
 import Potion;
 import Global_Constants;
-import Position;
+import position;
 import item;
 import gold;
 

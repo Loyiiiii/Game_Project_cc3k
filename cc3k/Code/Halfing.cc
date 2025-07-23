@@ -1,7 +1,7 @@
 export module halfling;
 
 import Enemy;
-import Position;
+import position;
 import Global_Constants;
 
 export class Halfling : public Enemy {

@@ -2,6 +2,7 @@ module PlayerCharacter;
 import <cmath>;
 import Global_Constants;
 import Enemy;
+import position;
 
 PlayerCharacter::PlayerCharacter(Position pos, int health, int maxHealth, 
     int atk, int def, int gold, Race race, bool has_max_health):

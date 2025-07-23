@@ -2,6 +2,7 @@ export module PlayerCharacter;
 import <iostream>;
 import <string>;
 import Global_Constants;
+import position;
 
 export class PlayerCharacter {
     Position pos; // representing the position of the PC

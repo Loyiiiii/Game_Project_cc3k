@@ -1,6 +1,7 @@
 module Player_Factory;
 import <memory>;
 import PlayerCharacter;
+import position;
 
 
 std::unique_ptr<PlayerCharacter> player_factory::curr_game_PC(Position start_pos, Race start_race) {

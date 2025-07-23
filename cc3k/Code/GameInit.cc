@@ -4,7 +4,9 @@ import <fstream>;
 import <string>;
 import <memory>;
 import GamePlay;
+import PlayerCharacter;
 import Global_Constants;
+import position;
 using namespace std;
 
 export enum class GameResult {
