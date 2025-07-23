@@ -1,6 +1,5 @@
 export module potion;
 
-import item;
 import Global_Constants;
 
 export class Potion {

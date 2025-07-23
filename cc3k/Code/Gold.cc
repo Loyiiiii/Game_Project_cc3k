@@ -1,7 +1,5 @@
 export module gold;
 
-import item;
-
 export class Gold {
     int value;
     char symbol = 'G'; // Symbol to represent gold in the game
