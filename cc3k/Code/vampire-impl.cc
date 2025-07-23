@@ -1,4 +1,7 @@
 module Vampire;
+import PlayerCharacter; // For PlayerCharacter
+import Enemy;           // For Enemy
+import Global_Constants; // for Race enum
 
 void Vampire::gainHP() {
     if (health < maxHealth) {
@@ -10,8 +13,8 @@ void Vampire::gainHP() {
     }
 }
 
-Vampire::Vampire(Position pos):
-    PlayerCharacter(pos, 50, 50, 25, 25, 0, Race::VAMPIRE, false) {}
+Vampire::Vampire():
+    PlayerCharacter{50, 50, 25, 25, 0, Race::VAMPIRE, false} {}
 
 void Vampire::attack(Enemy& enemy) {
     // if encounters a dwarf, lose 5HP instead of gaining 5HP; 

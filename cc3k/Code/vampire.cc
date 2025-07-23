@@ -9,6 +9,6 @@ export class Vampire: public PlayerCharacter{
     private:
         void gainHP(); // gain 5HP per successful attack. 
     public:
-        Vampire(Position pos);
+        Vampire();
         void attack(Enemy& enemy) override;
 };
