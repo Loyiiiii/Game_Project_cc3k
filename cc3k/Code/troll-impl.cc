@@ -1,4 +1,6 @@
 module Troll;
+import PlayerCharacter;
+import Global_Constants;
 
 void Troll::gainHP() {
     // may never exceed 120 HP
@@ -9,6 +11,6 @@ void Troll::gainHP() {
         health +=5;
     }
 }
-
-Troll::Troll(Position pos):
-    PlayerCharacter(pos, 120, 120,25,15, 0, Race::TROLL) {}
+// remember to add 5HP every turn. 
+Troll::Troll():
+    PlayerCharacter{120, 120, 25, 15, 0, Race::TROLL, true} {}

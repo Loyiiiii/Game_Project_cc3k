@@ -9,5 +9,5 @@ export class Troll: public PlayerCharacter{
         // this should be called by GamePlay::move()
         void gainHP();
     public:
-        Troll(Position pos);
+        Troll();
 };
