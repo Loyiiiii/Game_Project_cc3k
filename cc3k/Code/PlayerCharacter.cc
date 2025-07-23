@@ -38,7 +38,7 @@ export class PlayerCharacter {
         void addGold(int amount);
         // Virtual methods that races can override
         virtual void attack(Enemy& enemy);
-        
+        void setPosition(Position pos);
         void takeDamage(int damage);  // Method for taking damage from enemies
 };
 

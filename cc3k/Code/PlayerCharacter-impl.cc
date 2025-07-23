@@ -118,3 +118,6 @@ void PlayerCharacter::takeDamage(int damage) {
     }
 }
 
+void PlayerCharacter::setPosition(Position pos) {
+    this->pos = pos; // setting the position of the PC.
+}
