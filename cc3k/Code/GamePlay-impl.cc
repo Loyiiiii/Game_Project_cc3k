@@ -134,17 +134,17 @@ import floor_level;
 
 using namespace std;
 
-void Gameplay::setPlayerRace(Race race, Position pos) {
+void Gameplay::setPlayerRace(Race race) {
     if (race == Race::DROW) {
-        player = make_unique<Drow>(pos);
+        player = make_unique<Drow>();
     } else if (race == Race::VAMPIRE) {
-        player = make_unique<Vampire>(pos);
+        player = make_unique<Vampire>();
     } else if (race == Race::TROLL) {
-        player = make_unique<Troll>(pos);
+        player = make_unique<Troll>();
     } else if (race == Race::GOBLIN) {
-        player = make_unique<Goblin>(pos);
+        player = make_unique<Goblin>();
     } else {
-        player = make_unique<Shade>(pos);
+        player = make_unique<Shade>();
     }
 }
 
@@ -197,7 +197,8 @@ GameResult Gameplay::mainLoop() {
             player->takeDamage(!int damage);//here
             continue
         } else if (command == "f") {
-
+            //we need freeze function
+            continue;
         } else if (command == "r") {
 
         } else if (command == "q") {
