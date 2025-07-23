@@ -12,7 +12,7 @@ export class FloorLevel {
 public:
     FloorLevel(int numFloors = 5); // constructor to initialize floors
 
-    Floor *getCurrentFloor();
-    int getCurrentFloorNum() const;
-    void goToNextFloor(PlayerCharacter *pc, const std::string &filename);
+    Floor *getCurrentFloor();   // get the current floor object
+    int getCurrentFloorNum() const;     // get the current floor number
+    void goToNextFloor(PlayerCharacter *pc, const std::string &filename); // move to the next floor
 }
