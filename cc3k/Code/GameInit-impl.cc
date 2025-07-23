@@ -116,12 +116,21 @@ void GameInit::run() {
         PlayerCharacterChoice = SHADE;
     }
 
-    Gameplay gameplay;
-    gameplay.setPlayerRace(PlayerCharacterChoice);
+    while (true) {
+        Gameplay gameplay;
+        gameplay.setPlayerRace(PlayerCharacterChoice);
 
-    gameplay.gameInit();
+        gameplay.gameInit();
 
-    GameResult result = gameplay.mainLoop();
+        GameResult result = gameplay.mainLoop();
+
+        if (result == GameResult::Restart) {
+            cout << "🔄 Restarting game...\n";
+            continue;
+        } else {
+            break;
+        }
+    }
 
     if (result == GameResult::Win) {
         cout << "🏆 Congratulations! You have conquered the dungeon!" << endl;

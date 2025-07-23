@@ -12,7 +12,8 @@ using namespace std;
 export enum class GameResult {
     Win,
     Loss,
-    Quit
+    Quit,
+    Restart
 };
 
 export class GameInit {
