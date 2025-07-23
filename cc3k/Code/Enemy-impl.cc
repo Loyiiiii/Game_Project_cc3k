@@ -27,6 +27,31 @@ int Enemy::getHP() const {
     return HP;
 }
 
+
+bool Enemy::isAdjacentTo(const PlayerCharacter& pc) const {
+    Position player_pos = pc.getPosition(); 
+    Position enemy_pos = this->pos; 
+    // check if the player is adjacent to the enemy // within a 1-cell distance
+    int row_diff = std::abs(player_pos.row - enemy_pos.row);
+    int col_diff = std::abs(player_pos.col - enemy_pos.col);
+    if (row_diff <= 1 && col_diff <= 1) {
+        return true; 
+    }
+    return false;
+}
+
+bool Enemy::getMoveStatus() const{
+    return movable;
+}
+
+Position Enemy::getPosition() const {
+    return pos;
+}
+
+void Enemy::setPosition(Position newPos) {
+    this->pos = newPos;
+}
+
 int Enemy::calculateDamage(int attackerAtk, int defenderDef) {
     // ceiling((100/(100 + Def (Defender))) * Atk(Attacker))
     float ratio = 100.0 / (100.0 + defenderDef);  // Float precision

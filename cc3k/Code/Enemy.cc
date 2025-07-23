@@ -13,7 +13,6 @@ export class Enemy {
         bool movable;
         bool is_neutral;
         char symbol;
-        
         // Combat utility method
         int calculateDamage(int attackAtk, int defenderDef);
     public:
@@ -21,12 +20,18 @@ export class Enemy {
         virtual ~Enemy();
         char getSymbol() const;
         bool is_alive() const;
+        bool isAdjacentTo(const PlayerCharacter& pc) const;
+        void setPosition(Position newPos); 
+        
         // these Pure Virtual Functions are the interface for the Enemy class
         virtual void attack(PlayerCharacter& pc) = 0; // needs to know facing what character
         virtual void dropGold(PlayerCharacter& pc) = 0;
         virtual void takeDamage(int damage) = 0;
+
         // Getters:
         int getAtk()const;
         int getDef() const;
         int getHP() const;
+        bool getMoveStatus() const;
+        Position getPosition() const; 
 };
