@@ -39,6 +39,9 @@ public:
     char getBaseSymbol() const;
     int getRow() const;
     int getCol() const;
+    Enemy* getEnemy() const;
+    Potion* getPotion() const;
+    Gold* getGold() const;
     // Setters
     void setSymbol(char symbol);
 };

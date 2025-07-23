@@ -38,4 +38,8 @@ char Cell::getSymbol() const {
 char Cell::getBaseSymbol() const { return baseSymbol; }
 int Cell::getRow() const { return row; }
 int Cell::getCol() const { return col; }
+Enemy* Cell::getEnemy() const { return e; }
+Potion* Cell::getPotion() const { return p; }
+Gold* Cell::getGold() const { return g; }
+
 void Cell::setSymbol(char symbol) { baseSymbol = symbol; }
