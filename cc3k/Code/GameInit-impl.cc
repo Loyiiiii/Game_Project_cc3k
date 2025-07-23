@@ -117,7 +117,8 @@ void GameInit::run() {
     }
 
     Gameplay gameplay;
-    gameplay.setPlayerRace(PlayerCharacterChoice);
+    Position DefaultPos {-1, -1};
+    gameplay.setPlayerRace(PlayerCharacterChoice, DefaultPos);
 
     gameplay.gameInit();
 

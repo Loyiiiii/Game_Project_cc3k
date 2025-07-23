@@ -123,22 +123,47 @@ module GamePlay;
 import <iostream>;
 import <string>;
 import <vector>;
-import GamePlay;
+import GamePlay;//
 import PlayerCharacter;
-import Direction;
-import Floor;
-import MapPrinter;
+import Direction;//
+import floor;
+import MapPrinter;//
 import Global_Constants;
+import floor_level;
 
 using namespace std;
+
+unique_ptr<PlayerCharacter> Gameplay::setPlayerRace(Position start_pos, Race start_race) {
+    if (start_race == Race::DROW) {
+        return make_unique<Drow>(start_pos);
+    }
+    else if (start_race == Race::VAMPIRE) {
+        return make_unique<Vampire>(start_pos);
+    }
+    else if (start_race == Race::TROLL){
+        return make_unique<Troll>(start_pos); 
+    }
+    else if (start_race == Race::GOBLIN) {
+        return make_unique<Goblin>(start_pos); 
+    }
+    else {
+        return make_unique<Shade>(start_pos); 
+    }
+}
+
 
 GameResult Gameplay::mainLoop() {
     bool gameOver = false;
     GameResult result = GameResult::Quit; // default if quit
+    FloorLevel::FloorLevel AllFloorLevel;
+    AllFloorLevel = FloorLevel(5);
 
     while (!gameOver) {
         // 1. Display the Game State
-        printMap(); // Show the current floor map
+        Floor* CurrFloor = FloorLevel::getCurrentFloor();
+        CurrFloor->floor_init();
+        CurrFloor->printMap();
+        //printMap(); // Show the current floor map
         player->printStats(); // Show player HP, Atk, Def, gold, etc.
         cout << "Floor: " << currentFloorNum << endl;
         printMessages(); // Show any queued messages
