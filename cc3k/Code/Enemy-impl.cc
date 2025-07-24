@@ -1,7 +1,8 @@
 module Enemy;
 import <cmath>;
 import Global_Constants;
-import PlayerCharacter;
+// Forward declaration instead of import
+class PlayerCharacter;
 
 Enemy::Enemy(Position pos, int health, int damage, int defense, bool movable, bool is_neutral, char symbol):
     pos{pos}, HP{health}, Atk{damage}, Def{defense}, movable{movable}, is_neutral{is_neutral}, symbol{symbol} {}

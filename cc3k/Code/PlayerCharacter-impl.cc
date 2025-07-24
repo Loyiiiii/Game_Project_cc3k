@@ -2,7 +2,8 @@ module PlayerCharacter;
 import <cmath>;
 import <vector>;
 import Global_Constants;
-import Enemy;
+// Forward declaration instead of import
+class Enemy;
 import position;
 
 // New constructor: Initializes position to an invalid state {-1, -1}
