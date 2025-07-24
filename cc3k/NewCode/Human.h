@@ -14,9 +14,9 @@ private:
 public:
     Human(Position pos);
     ~Human();
-    void attack(PlayerCharacter& pc) override;
-    void dropGold(PlayerCharacter& pc) override;
-    void takeDamage(int damage) override;
+    void attack(PlayerCharacter& pc) override; // attack PlayerCharacter - override 
+    void dropGold(PlayerCharacter& pc) override; // drop gold - override
+    void takeDamage(int damage) override; // receive damage from PC
 };
 
-#endif 
+#endif
