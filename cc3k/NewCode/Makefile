@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++2a -Wall -g
+CXXFLAGS = -std=c++20 -g -Wall -Werror=vla -MMD
 
 # Directories
 SRC_DIR = .
@@ -13,9 +13,8 @@ SOURCES = $(wildcard $(SRC_DIR)/*.cc)
 OBJECTS = $(patsubst $(SRC_DIR)/%.cc, $(OBJ_DIR)/%.o, $(SOURCES))
 
 # The executable file name
-EXEC = $(BIN_DIR)/a.out
+EXEC = $(BIN_DIR)/cc3k
 
-# The default target
 all: $(EXEC)
 
 # Rule to link the executable
