@@ -10,7 +10,7 @@ class Goblin : public PlayerCharacter {
         void StealGold();
     public:
         Goblin();
-        void attack(Enemy& e) override;
+        std::string attack(Enemy& e) override;
 };
 
 #endif 

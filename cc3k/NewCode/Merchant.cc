@@ -1,6 +1,7 @@
 #include "Merchant.h"
 #include "PlayerCharacter.h"
 #include "MerchantHoard.h"
+#include <string>
 
 // first initizlied to false. 
 bool Merchant::remainingMerchantHostile = false;
@@ -14,11 +15,14 @@ Merchant::Merchant(Position pos, std::unique_ptr<MerchantHoard> m_hoard) :
     mer_hoard->setIsPickable(false); // merchant is alive, hoard is not pickable. 
 }
 
-void Merchant::attack(PlayerCharacter& pc) {
+std::string Merchant::attack(PlayerCharacter& pc) {
     if (is_hostile || remainingMerchantHostile) {
         int damage = calculateDamage(getAtk(), pc.getDef());
         pc.takeDamage(damage);
+        std::string msg = std::string(1, this->getSymbol()) + " deals " + std::to_string(damage) + " damage to PC. ";
+        return msg;
     }
+    return "";
 }
 
 // when merchant is dead, hoard is pickable. 

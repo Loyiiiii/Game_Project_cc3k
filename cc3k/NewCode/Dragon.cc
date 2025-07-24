@@ -2,6 +2,7 @@
 #include "PlayerCharacter.h"
 #include "DragonHoard.h"
 #include "Global_Constants.h"
+#include <string>
 
 Dragon::Dragon(Position pos, std::unique_ptr<DragonHoard> hoard) :
     Enemy{ pos, 150, 20, 20, false, true, 'D' }, drag_hoard{ std::move(hoard) } {
@@ -10,9 +11,11 @@ Dragon::Dragon(Position pos, std::unique_ptr<DragonHoard> hoard) :
 
 Dragon::~Dragon() {}
 
-void Dragon::attack(PlayerCharacter& pc) {
+std::string Dragon::attack(PlayerCharacter& pc) {
     int damage = calculateDamage(this->getAtk(), pc.getDef());
     pc.takeDamage(damage);
+    std::string msg = std::string(1, this->getSymbol()) + " deals " + std::to_string(damage) + " damage to PC. ";
+    return msg;
 }
 
 void Dragon::dropGold(PlayerCharacter& pc) {

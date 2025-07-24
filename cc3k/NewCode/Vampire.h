@@ -11,7 +11,7 @@ class Vampire : public PlayerCharacter {
         void gainHP(); // gain 5HP per successful attack. 
     public:
         Vampire();
-        void attack(Enemy& enemy) override;
+        std::string attack(Enemy& enemy) override;
 };
 
 #endif 

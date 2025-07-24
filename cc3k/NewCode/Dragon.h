@@ -12,7 +12,7 @@ class Dragon : public Enemy {
 public:
     Dragon(Position pos, std::unique_ptr<DragonHoard> hoard);
     ~Dragon();
-    void attack(PlayerCharacter& pc) override;
+    std::string attack(PlayerCharacter& pc) override;
     void dropGold(PlayerCharacter& pc) override;
     void takeDamage(int dmg) override;
 };

@@ -44,7 +44,7 @@ public:
     void setDef(int new_def);
     void setPosition(Position newPos);
     // virtual functions that to be overridden by subclasses
-    virtual void attack(Enemy& enemy);
+    virtual std::string attack(Enemy& enemy);
     virtual void drinkPotion(Potion& p);
     // take damage - same logic for all races 
     void takeDamage(int damage);

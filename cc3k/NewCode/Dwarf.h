@@ -9,7 +9,7 @@ class Dwarf : public Enemy {
 public:
     Dwarf(Position pos);
     ~Dwarf();
-    void attack(PlayerCharacter& pc) override;
+    std::string attack(PlayerCharacter& pc) override;
     void dropGold(PlayerCharacter& pc) override;
     void takeDamage(int damage) override;
 };

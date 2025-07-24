@@ -7,9 +7,11 @@
 Halfling::Halfling(Position pos) : 
     Enemy{ pos, 100, 15, 20, true, true, 'L' } {}
 
-void Halfling::attack(PlayerCharacter& pc) {
+std::string Halfling::attack(PlayerCharacter& pc) {
     int damage = calculateDamage(getAtk(), pc.getDef());
     pc.takeDamage(damage);
+    std::string msg = std::string(1, this->getSymbol()) + " deals " + std::to_string(damage) + " damage to PC. ";
+    return msg;
 }
 
 void Halfling::dropGold(PlayerCharacter& pc) {

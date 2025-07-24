@@ -11,7 +11,7 @@
 class Halfling : public Enemy {
 public:
     Halfling(Position pos);
-    void attack(PlayerCharacter& pc) override;
+    std::string attack(PlayerCharacter& pc) override;
     void dropGold(PlayerCharacter& pc) override;
     void takeDamage(int damage) override;
 };
