@@ -9,6 +9,7 @@
 #include "FloorLevel.h"
 #include "Cell.h"
 #include <string>
+#include <cstdlib>
 
 GamePlay::GamePlay() : enemyFrozen{ false }, player{ nullptr }, allFloorLevel{ nullptr } {}
 GamePlay::~GamePlay() {}
@@ -199,7 +200,13 @@ GameResult GamePlay::mainLoop() {
             for (auto const& enemy : enemies) {
                 if (enemy && enemy->is_alive()) {
                     if (enemy->isAdjacentTo(player->getPosition())) {
-                        actionMessage += enemy->attack(*player);
+                        int ifAtkMiss = rand() % 2; // 50% chance to miss attack
+                        if (ifAtkMiss == 0) {
+                            actionMessage += enemy->getSymbol() + " misses the attack! ";
+                        } else {
+                            // enemy attacks player
+                            actionMessage += enemy->attack(*player);
+                        }
                     }
                     else {
                         currentFloor->moveRandom(enemy.get());
