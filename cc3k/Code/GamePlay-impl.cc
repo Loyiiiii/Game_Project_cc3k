@@ -93,11 +93,11 @@ GameResult Gameplay::mainLoop() {
             dir = parseDirection(dirStr);
             targetPosition = getTargetPosition(player->getPosition, dir);
             Cell targetCell = currFloor->getTargetCell(targetPosition.row, targetPosition.col);
-            Enermy *targetEnermy = targetCell.getEnermy();
-            if (targetEnermy) {
-                player->attack(*targetEnermy);
+            Enemy *targetEnemy = targetCell.getEnemy();
+            if (targetEnemy) {
+                player->attack(*targetEnemy);
                 // check if enemy die
-                if (!targetEnermy->is_alive()) {
+                if (!targetEnemy->is_alive()) {
                     // if so, remove enemy logo
                     targetCell.removeEnemy();
                 } 
