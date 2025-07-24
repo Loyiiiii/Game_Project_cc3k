@@ -21,7 +21,7 @@ std::string GameInit::getRaceName(char race) {
 
 std::string GameInit::getRaceEmoji(char race) {
     if (race == 's' || race == 'S'){
-        return "🧙‍♂️";
+        return "🧙‍";
     } else if (race == 'd' || race == 'D') {
         return "🧪";
     } else if (race == 'v' || race == 'V') {
@@ -31,7 +31,7 @@ std::string GameInit::getRaceEmoji(char race) {
     } else if (race == 'g' || race == 'G') {
         return "💰";
     } else {
-        return "🧙‍♂️";
+        return "🧙‍";
     }
 }
 
@@ -62,7 +62,7 @@ void GameInit::run() {
         }
         else if (raceChar == 'v' || raceChar == 'V') {
             std::cout << "Character: Vampire \n  HP:50 \n  Atk:25 \n  Def:25 " << std::endl;
-            std::cout << "Special Ability: Each successful attack will suck blood +5 HP (no upper limit!), but therapeutic potions cannot be used." << std::endl;
+            std::cout << "Special Ability: Each successful attack will suck blood +5 HP (no upper limit!)." << std::endl;
             std::cout << "Difficulty: ⭐⭐⭐⭐⭐" << std::endl;
             std::cout << "💉 To stay alive by fighting and sucking blood, it is very suitable for the style of sustaining battles through battles." << std::endl;
         }
