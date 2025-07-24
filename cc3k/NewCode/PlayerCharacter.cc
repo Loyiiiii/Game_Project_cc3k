@@ -1,5 +1,6 @@
 #include "PlayerCharacter.h"
 #include <cmath>
+#include <string>
 #include "Enemy.h"
 
 PlayerCharacter::PlayerCharacter(int health, int maxHealth,
@@ -104,13 +105,17 @@ int PlayerCharacter::calculateDamage(int attackerAtk, int defenderDef) {
 }
 
 // Virtual Methods that can be overridden by subclasses
-void PlayerCharacter::attack(Enemy& enemy) {
+std::string PlayerCharacter::attack(Enemy& enemy) {
      // Calculate damage using proper formula
     int damage = calculateDamage(this->atk, enemy.getDef());
     enemy.takeDamage(damage); // enemy takes damage
+    std::string msg = "PC deals " + std::to_string(damage) + " to " + std::string(1, enemy.getSymbol())
+                      + "(" + std::to_string(enemy.getHP()) + "). ";
     if (!enemy.is_alive()) {
         enemy.dropGold(*this);
+        msg += std::string(1, enemy.getSymbol()) + " is slain!";
     }
+    return msg;
 }
 
 void PlayerCharacter::takeDamage(int damage) {

@@ -10,7 +10,7 @@
 class Orcs : public Enemy {
 public:
     Orcs(Position pos);
-    void attack(PlayerCharacter& pc) override;
+    std::string attack(PlayerCharacter& pc) override;
     void dropGold(PlayerCharacter& pc) override;
     void takeDamage(int damage) override;
 };

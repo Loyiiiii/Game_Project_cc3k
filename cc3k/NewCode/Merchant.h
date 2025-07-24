@@ -16,7 +16,7 @@ class Merchant : public Enemy {
 
 public:
     Merchant(Position pos, std::unique_ptr<MerchantHoard> m_hoard);
-    void attack(PlayerCharacter& pc) override;
+    std::string attack(PlayerCharacter& pc) override;
     void dropGold(PlayerCharacter& pc) override;
     void setHostile();
     void takeDamage(int dmg) override;

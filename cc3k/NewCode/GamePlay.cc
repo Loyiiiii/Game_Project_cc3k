@@ -8,6 +8,7 @@
 #include "Shade.h"
 #include "FloorLevel.h"
 #include "Cell.h"
+#include <string>
 
 GamePlay::GamePlay() : enemyFrozen{ false }, player{ nullptr }, allFloorLevel{ nullptr } {}
 GamePlay::~GamePlay() {}
@@ -27,14 +28,14 @@ std::string raceToString(Race race) {
 }
 
 
-void printInfo(PlayerCharacter* pc, FloorLevel* floorlevel_ptr) {
+void printInfo(PlayerCharacter* pc, FloorLevel* floorlevel_ptr, std::string msg) {
     std::cout << "Race: " << raceToString(pc->getRace()) << " Gold: " << pc->getGold() 
               << "                                              "
               << " Floor: " << floorlevel_ptr->getCurrentFloorNum() << std::endl;
     std::cout << "HP: " << pc->getHP() << std::endl;
     std::cout << "Atk: " << pc->getAtk() << std::endl;
     std::cout << "Def: " << pc->getDef() << std::endl;
-    std::cout << "Action: " << std::endl;
+    std::cout << "Action: " << msg << std::endl;
 }
 
 
@@ -88,12 +89,13 @@ Position GamePlay::getTargetPosition(Position pos, Direction dir) {
 GameResult GamePlay::mainLoop() {
     bool gameOver = false;
     GameResult result = GameResult::Quit;
+    std::string actionMessage = "Player character has spawned. ";
 
     while (!gameOver) {
         Floor* currentFloor = allFloorLevel->getCurrentFloor();
         currentFloor->printMap(player.get());
-        printInfo(player.get(), allFloorLevel.get());
-        // std::cout << "Floor: " << allFloorLevel->getCurrentFloorNum() << std::endl;
+        printInfo(player.get(), allFloorLevel.get(), actionMessage);
+        actionMessage.clear(); // clear actionMessage
 
         std::string command;
         std::cin >> command >> std::endl >> std::endl;
@@ -135,7 +137,7 @@ GameResult GamePlay::mainLoop() {
                 Cell& targetCell = currentFloor->getTargetCell(targetPosition.row, targetPosition.col);
                 Enemy* targetEnemy = targetCell.getEnemy();
                 if (targetEnemy) {
-                    player->attack(*targetEnemy);
+                    actionMessage += player->attack(*targetEnemy);
                     if (!targetEnemy->is_alive()) {
                         targetCell.removeEnemy();
                     }
@@ -190,7 +192,7 @@ GameResult GamePlay::mainLoop() {
             for (auto const& enemy : enemies) {
                 if (enemy && enemy->is_alive()) {
                     if (enemy->isAdjacentTo(player->getPosition())) {
-                        enemy->attack(*player);
+                        actionMessage += enemy->attack(*player);
                     }
                     else {
                         currentFloor->moveRandom(enemy.get());

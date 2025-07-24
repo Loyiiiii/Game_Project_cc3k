@@ -1,15 +1,18 @@
 #include "Dwarf.h"
 #include "PlayerCharacter.h"
 #include <cstdlib>
+#include <string>
 
 Dwarf::Dwarf(Position pos) :
     Enemy{pos, 100, 20, 30, true, true, 'D'} {}
 
 Dwarf::~Dwarf() {}
 
-void Dwarf::attack(PlayerCharacter& pc) {
+std::string Dwarf::attack(PlayerCharacter& pc) {
     int damage = calculateDamage(getAtk(), pc.getDef());
     pc.takeDamage(damage);
+    std::string msg = std::string(1, this->getSymbol()) + " deals " + std::to_string(damage) + " damage to PC. ";
+    return msg;
 }
 
 void Dwarf::dropGold(PlayerCharacter& pc) {

@@ -14,7 +14,7 @@ private:
 public:
     Human(Position pos);
     ~Human();
-    void attack(PlayerCharacter& pc) override; // attack PlayerCharacter - override 
+    std::string attack(PlayerCharacter& pc) override; // attack PlayerCharacter - override 
     void dropGold(PlayerCharacter& pc) override; // drop gold - override
     void takeDamage(int damage) override; // receive damage from PC
 };

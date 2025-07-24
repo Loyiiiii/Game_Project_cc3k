@@ -3,6 +3,7 @@
 
 #include "Position.h"
 #include "Global_Constants.h"
+#include <string>
 
 class PlayerCharacter;
 
@@ -28,7 +29,7 @@ public:
     void setPosition(Position newPos);
     void setHP(int hp);
 
-    virtual void attack(PlayerCharacter& pc) = 0;
+    virtual std::string attack(PlayerCharacter& pc) = 0;
     virtual void dropGold(PlayerCharacter& pc) = 0;
     virtual void takeDamage(int damage) = 0;
 
