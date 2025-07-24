@@ -6,16 +6,18 @@ Orcs::Orcs(Position pos) :
 
 void Orcs::attack(PlayerCharacter& pc) {
     int normal_damage = calculateDamage(getAtk(), pc.getDef());
+    // checking if the PC is Goblins
     if (pc.getRace() == Race::GOBLIN) {
-        int augmented_dmg = normal_damage * 1.5;
-        pc.takeDamage(augmented_dmg);
+        int augmented_dmg = normal_damage * 1.5; // 50% more damage to Goblins.
+        pc.takeDamage(augmented_dmg); 
     }
     else {
-        pc.takeDamage(normal_damage);
+        pc.takeDamage(normal_damage); // else just normal damage.
     }
 }
 
 void Orcs::dropGold(PlayerCharacter& pc) {
+    // 50% small gold, 50% normal gold
     int randomNum = rand() % 2;
     int value = (randomNum == 0) ? 1 : 2;
     pc.addGold(value);
@@ -23,7 +25,7 @@ void Orcs::dropGold(PlayerCharacter& pc) {
 
 void Orcs::takeDamage(int dmg) {
     if (getHP() - dmg <= 0) {
-        setHP(0);
+        setHP(0); // dead.
     }
     else {
         setHP(getHP() - dmg);

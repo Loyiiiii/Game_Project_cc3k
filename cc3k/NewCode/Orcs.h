@@ -5,6 +5,8 @@
 #include "PlayerCharacter.h"
 #include "Global_Constants.h"
 
+// Orcs: 180 HP, 30 Atk, 25 Def
+// 50% more damage to Goblins.
 class Orcs : public Enemy {
 public:
     Orcs(Position pos);
