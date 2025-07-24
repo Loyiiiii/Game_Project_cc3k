@@ -1,4 +1,4 @@
-CXX = g++-14.2.0 -std=c++20 -fmodules-ts
+CXX = g++ -std=c++20 -fmodules-ts
 CXXFLAGS = -Wall -g
 HEADERFLAGS = -c -x c++-system-header
 HEADERS = iostream fstream memory vector algorithm random cstdlib cmath string
@@ -44,12 +44,20 @@ one:
 	$(CXX) $(HEADERFLAGS) $(HEADERS)
 
 two:
-	$(CXX) $(CXXFLAGS) -c $(HUMAN) $(DWARF) $(ELF) $(ORCS) $(MERCHANT) $(HALFING) $(DRAGON) $(ENEMY)
-	$(CXX) $(CXXFLAGS) -c $(POTION) $(RH) $(BA) $(BD) $(PH) $(WA) $(WD)
-	$(CXX) $(CXXFLAGS) -c $(GOLD) $(SG) $(NG) $(MH) $(DH)
-	$(CXX) $(CXXFLAGS) -c $(CELL) $(FLOOR) $(FLOORLEVEL)
-	$(CXX) $(CXXFLAGS) -c $(PC) $(SHADE) $(DROW) $(VAMPIRE) $(TROLL) $(GOBLIN)
-	$(CXX) $(CXXFLAGS) -c $(GAMEPLAY) $(GAMEINIT) $(GC) $(POSITION)
+	$(CXX) $(CXXFLAGS) -c $(GC) $(POSITION)
+	$(CXX) $(CXXFLAGS) -c $(GOLD) 
+	$(CXX) $(CXXFLAGS) -c $(SG) $(NG) $(MH) $(DH)
+	$(CXX) $(CXXFLAGS) -c $(ENEMY) 
+	$(CXX) $(CXXFLAGS) -c $(HUMAN) $(DWARF) $(ELF) $(ORCS) $(MERCHANT) $(HALFING) $(DRAGON)
+	$(CXX) $(CXXFLAGS) -c $(POTION) 
+	$(CXX) $(CXXFLAGS) -c $(RH) $(BA) $(BD) $(PH) $(WA) $(WD)
+	$(CXX) $(CXXFLAGS) -c $(SHADE) $(DROW) $(VAMPIRE) $(TROLL) $(GOBLIN)
+	$(CXX) $(CXXFLAGS) -c $(PC) 
+	$(CXX) $(CXXFLAGS) -c $(CELL)
+	$(CXX) $(CXXFLAGS) -c $(FLOOR)
+	$(CXX) $(CXXFLAGS) -c $(FLOORLEVEL)
+	$(CXX) $(CXXFLAGS) -c $(GAMEPLAY)
+	$(CXX) $(CXXFLAGS) -c $(GAMEINIT)
 	$(CXX) $(CXXFLAGS) *.o $(MAIN) -o ${EXEC}
 
 
