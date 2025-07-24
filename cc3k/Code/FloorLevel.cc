@@ -15,4 +15,4 @@ public:
     Floor *getCurrentFloor();   // get the current floor object
     int getCurrentFloorNum() const;     // get the current floor number
     void goToNextFloor(PlayerCharacter *pc, const std::string &filename); // move to the next floor
-}
+};
