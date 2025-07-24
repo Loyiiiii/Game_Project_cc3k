@@ -34,7 +34,7 @@ bool Enemy::isAdjacentTo(const PlayerCharacter& pc) const {
     // check if the player is adjacent to the enemy // within a 1-cell distance
     int row_diff = std::abs(player_pos.row - enemy_pos.row);
     int col_diff = std::abs(player_pos.col - enemy_pos.col);
-    if (row_diff <= 1 && col_diff <= 1) {
+    if (row_diff <= 1 && col_diff <= 1 && (row_diff != 0 || col_diff != 0)) {
         return true; 
     }
     return false;
