@@ -15,7 +15,7 @@ import position;
 import PlayerCharacter;
 import Global_Constants;
 
-Floor::Floor(): map{rows, std::vector<Cell>(col, Cell{'.', 0, 0})} {}
+Floor::Floor(): map{numRows, std::vector<Cell>(numCol, Cell{'.', 0, 0, false})} {}
 
 // helper: printInfo(PlayerCharacter *pc);
 void printInfo(PlayerCharacter *pc) {
@@ -27,13 +27,14 @@ void printInfo(PlayerCharacter *pc) {
     std::cout << "HP: " << hp << std::endl;
     std::cout << "Atk: " << atk << std:: endl;
     std::cout << "Def: " << def << std::endl;
-    std::cout << "Action: " << endl;
+    std::cout << "Action: " << std::endl;
 }
 
 
-void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
+void Floor::floor_init(PlayerCharacter *pc, const std::string &filename) {
     // clear the original map
     map.clear();
+    map.resize(numRows, std::vector<Cell>(numCols, Cell{'.', 0, 0, false}))
 
     std::ifstream file{filename};
     std::string line;
@@ -73,7 +74,7 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
     // place 10 potions using index 2 - 11
     for (int i = 2; i < 12; i++) {
         int randomNum = rand() % 6;
-        std::unique_ptr<Item> potionPtr;
+        std::unique_ptr<Potion> potionPtr;
         // randomly choose a potion type
         // 0: HEALTH_RESTORE, 1: ATK_BOOST, 2: DEF_BOOST, 3. POISON_HEALTH, 4. WOUND_ATK, 5. WOUND_DEF
         if (randomNum == 0) {
@@ -98,7 +99,7 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
     // place 10 piles of gold using index 12 - 21
     for (int j = 12; j < 22; j++) {
         int randomNum_gold = rand() % 8; // 0-7
-        std::unique_ptr<Item> goldPtr;
+        std::unique_ptr<Gold> goldPtr;
         // randomly choose a gold type
         // 0 - 4: normal gold, 5: dragon hoard, 6 - 7: small gold
         if (randomNum_gold < 5) {
