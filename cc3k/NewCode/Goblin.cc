@@ -2,15 +2,19 @@
 #include "Enemy.h"
 
 void Goblin::StealGold() {
-    addGold(5);
+    addGold(5); // add 5 gold
 }
 
+
 Goblin::Goblin() :
+    // superclass ctor runs 
     PlayerCharacter{ 110, 110, 15, 20, 0, Race::GOBLIN, true } {}
+
 
 void Goblin::attack(Enemy& e) {
     PlayerCharacter::attack(e);
+    // check if the enemy is dead
     if (e.getHP() <= 0) {
-        StealGold();
+        StealGold(); // steal 5 gold from the enemy
     }
 } 

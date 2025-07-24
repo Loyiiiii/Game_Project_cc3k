@@ -9,4 +9,4 @@ public:
     Shade();
 };
 
-#endif 
+#endif

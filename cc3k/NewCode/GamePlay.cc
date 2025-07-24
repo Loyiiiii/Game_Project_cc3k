@@ -130,6 +130,13 @@ GameResult GamePlay::mainLoop() {
             }
         }
 
+        // if (player->getRace() == Race::TROLL) {
+        //     Troll* troll = dynamic_cast<Troll*>(player.get());
+        //     if (troll) {
+        //         troll->gainHP();
+        //     }
+        // }
+
         if (!enemyFrozen) {
             auto& enemies = currentFloor->getEnemies();
             for (auto const& enemy : enemies) {

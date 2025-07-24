@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++20 -g -Wall -Werror=vla -MMD
 
 # Directories
 SRC_DIR = .
-OBJ_DIR = ./obj
+OBJ_DIR = ./AllObjects
 BIN_DIR = .
 
 # Find all .cc files in the source directory

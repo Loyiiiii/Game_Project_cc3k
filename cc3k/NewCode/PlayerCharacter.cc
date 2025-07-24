@@ -4,81 +4,122 @@
 
 PlayerCharacter::PlayerCharacter(int health, int maxHealth,
     int atk, int def, int gold, Race race, bool has_max_health) :
-    pos{ -1, -1 }, health{ health }, maxHealth{ maxHealth }, atk{ atk }, def{ def },
-    goldATM{ gold }, race{ race }, has_max_health{ has_max_health } {}
+    // we set the default position to be (-1, -1) - later on to be changed once floor selects its random position
+    pos{-1, -1}, health{health}, maxHealth{maxHealth}, atk{atk}, def{def},
+    goldATM{gold}, race{race}, has_max_health{has_max_health} {}
 
 PlayerCharacter::~PlayerCharacter() {}
 
 void PlayerCharacter::drinkPotion(Potion& p) {
-    PotionInUse.push_back(p);
+    PotionInUse.push_back(p); // add the potion to the effect in use list
+    // Positive Effects: 
+    // HEALTH_RESTORE
     if (p.getType() == Potion_Type::HEALTH_RESTORE) {
         if (has_max_health) {
             if (health + p.getAmount() > maxHealth) {
-                health = maxHealth;
+                health = maxHealth; // set to max
             }
             else {
-                health += p.getAmount();
+                health += p.getAmount(); // add the amount 
             }
         }
         else {
-            health += p.getAmount();
+            health += p.getAmount(); // add the amount 
         }
     }
+    // ATK_BOOST
     else if (p.getType() == Potion_Type::ATK_BOOST) {
-        atk += p.getAmount();
+        atk += p.getAmount(); // add the amount 
     }
+    // DEF_BOOST
     else if (p.getType() == Potion_Type::DEF_BOOST) {
         def += p.getAmount();
     }
+    // Negative Effects: 
+    // POISON_HEALTH
     else if (p.getType() == Potion_Type::POISON_HEALTH) {
         if (health + p.getAmount() < 0) {
-            health = 0;
+            health = 0; // set to 0 -> pc is dead
         }
         else {
-            health += p.getAmount();
+            health += p.getAmount(); // add the amount 
         }
     }
+    // WOUND_ATK
     else if (p.getType() == Potion_Type::WOUND_ATK) {
-        atk += p.getAmount();
+        atk += p.getAmount(); // add the negative effect: the potion will add -5 atk
     }
+    // WOUND_DEF
     else if (p.getType() == Potion_Type::WOUND_DEF) {
-        def += p.getAmount();
+        def += p.getAmount(); // add the negative effect: the potion will add -5 def
     }
 }
+// getters:
+Position PlayerCharacter::getPosition() const {
+    return pos;
+}
+int PlayerCharacter::getHP() const {
+    return health;
+}
+int PlayerCharacter::getMaxHP() const {
+    return maxHealth;
+}
+bool PlayerCharacter::hasMaxHealth() const {
+    return has_max_health;
+}
+int PlayerCharacter::getAtk() const {
+    return atk;
+}
+int PlayerCharacter::getDef() const {
+    return def;
+}
+int PlayerCharacter::getGold() const {
+    return goldATM;
+}
+Race PlayerCharacter::getRace() const {
+    return race;
+}
+// setters:
+void PlayerCharacter::addGold(int amount) {
+    goldATM += amount;
+}
 
-Position PlayerCharacter::getPosition() const { return pos; }
-int PlayerCharacter::getHP() const { return health; }
-void PlayerCharacter::setHP(int hp) { health = hp; }
-int PlayerCharacter::getMaxHP() const { return maxHealth; }
-bool PlayerCharacter::hasMaxHealth() const { return has_max_health; }
-int PlayerCharacter::getAtk() const { return atk; }
-void PlayerCharacter::setAtk(int new_atk) { atk = new_atk; }
-int PlayerCharacter::getDef() const { return def; }
-void PlayerCharacter::setDef(int new_def) { def = new_def; }
-int PlayerCharacter::getGold() const { return goldATM; }
-Race PlayerCharacter::getRace() const { return race; }
-void PlayerCharacter::addGold(int amount) { goldATM += amount; }
+void PlayerCharacter::setHP(int hp) {
+    health = hp;
+}
 
+void PlayerCharacter::setAtk(int new_atk) {
+    atk = new_atk;
+}
+
+void PlayerCharacter::setDef(int new_def) {
+    def = new_def;
+}
+
+// calculate the damage that the PC deals to the enemy
 int PlayerCharacter::calculateDamage(int attackerAtk, int defenderDef) {
     float ratio = 100.0 / (100.0 + defenderDef);
     float damage = ratio * attackerAtk;
-    return int(std::ceil(damage));
+    return static_cast<int>(std::ceil(damage)); // cast to an int 
 }
 
+// Virtual Methods that can be overridden by subclasses
 void PlayerCharacter::attack(Enemy& enemy) {
+     // Calculate damage using proper formula
     int damage = calculateDamage(this->atk, enemy.getDef());
-    enemy.takeDamage(damage);
+    enemy.takeDamage(damage); // enemy takes damage
     if (!enemy.is_alive()) {
         enemy.dropGold(*this);
     }
 }
 
 void PlayerCharacter::takeDamage(int damage) {
-    if (health - damage < 0) {
-        health = 0;
+    // use getters and setters to update the health
+    if (this->getHP() - damage < 0) {
+        this->setHP(0);
     }
     else {
-        health -= damage;
+        this->setHP(this->getHP() - damage);
     }
 }
 
@@ -87,5 +128,5 @@ void PlayerCharacter::setPosition(Position newPos) {
 }
 
 bool PlayerCharacter::isDead() const {
-    return health <= 0;
-} 
+    return this->getHP() <= 0;
+}
