@@ -176,7 +176,7 @@ GameResult Gameplay::mainLoop() {
         // 4. Enemy Turn (if not paused)
         if (!enemyFrozen) {
             for (auto &enemy : currFloor->getEnemies()) {
-                if (enemy->isAdjacentTo(*player, enemy->getPosition())) {
+                if (enemy->isAdjacentTo(player->getPosition())) {
                     enemy->attack(*player);
                 } else {
                     //enemy->moveRandom();

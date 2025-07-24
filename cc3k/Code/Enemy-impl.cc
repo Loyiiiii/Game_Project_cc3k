@@ -30,11 +30,11 @@ int Enemy::getHP() const {
 }
 
 
-bool Enemy::isAdjacentTo(const PlayerCharacter& pc, const Position& enemy_pos) const {
+bool Enemy::isAdjacentTo(const Position& pc_pos) const {
     Position enemy_pos = this->pos; 
     // check if the player is adjacent to the enemy // within a 1-cell distance
-    int row_diff = std::abs(player_pos.row - enemy_pos.row);
-    int col_diff = std::abs(player_pos.col - enemy_pos.col);
+    int row_diff = std::abs(enemy_pos.row - pc_pos.row);
+    int col_diff = std::abs(enemy_pos.col - pc_pos.col);
     if (row_diff <= 1 && col_diff <= 1 && (row_diff != 0 || col_diff != 0)) {
         return true; 
     }

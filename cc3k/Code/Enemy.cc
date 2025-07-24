@@ -22,7 +22,7 @@ export class Enemy {
         virtual ~Enemy();
         char getSymbol() const;
         bool is_alive() const;
-        bool isAdjacentTo(const PlayerCharacter& pc, const Position& enemy_pos) const;
+        bool isAdjacentTo(const Position& pc_pos) const;
         void setPosition(Position newPos); 
         
         // these Pure Virtual Functions are the interface for the Enemy class
