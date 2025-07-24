@@ -146,7 +146,6 @@ GameResult GamePlay::mainLoop() {
                 if (player->getRace() == Race::VAMPIRE) {
                     Vampire* vampire = dynamic_cast<Vampire*>(player.get());
                     if (vampire) {
-                        vampire->gainHP();
                         std::cout << "Vampire's bloodsucking: +5 HP" << std::endl;  //did not output
                     }
                 }
