@@ -69,19 +69,28 @@ GameResult GamePlay::mainLoop() {
         std::cout << "Floor: " << allFloorLevel->getCurrentFloorNum() << std::endl;
 
         std::string command;
-        std::cin >> command;
+        std::cin >> command >> std::endl >> std::endl;
 
         if (command == "u") {
             std::string dirStr;
-            std::cin >> dirStr;
+            std::cin >> dirStr >> std::endl >> std::endl;
             try {
                 Direction dir = parseDirection(dirStr);
                 Position targetPosition = getTargetPosition(player->getPosition(), dir);
                 Cell& targetCell = currentFloor->getTargetCell(targetPosition.row, targetPosition.col);
                 Potion* targetPotion = targetCell.getPotion();
                 if (targetPotion) {
-                    player->drinkPotion(*targetPotion);
-                    targetCell.removePotion();
+                    // if the player is a drow, potion effects are enhanced by 1.5x
+                    if (player->getRace() == Race::DROW) {
+                        DROW* Drow = dynamic_cast<Drow*>(player.get());
+                        if (Drow) {
+                            Drow->drinkPotion(*targetPotion);
+                            targetCell.removePotion();
+                        }
+                    } else {
+                        player->drinkPotion(*targetPotion);
+                        targetCell.removePotion();
+                    }
                 }
             }
             catch (const std::invalid_argument& e) {
@@ -90,7 +99,7 @@ GameResult GamePlay::mainLoop() {
         }
         else if (command == "a") {
             std::string dirStr;
-            std::cin >> dirStr;
+            std::cin >> dirStr >> std::endl >> std::endl;
             try {
                 Direction dir = parseDirection(dirStr);
                 Position targetPosition = getTargetPosition(player->getPosition(), dir);
@@ -100,6 +109,13 @@ GameResult GamePlay::mainLoop() {
                     player->attack(*targetEnemy);
                     if (!targetEnemy->is_alive()) {
                         targetCell.removeEnemy();
+                    }
+                }
+                // if the player is a vampire, gain 5 HP every attack
+                if (player->getRace() == Race::VAMPIRE) {
+                    VAMPIRE* Vampire = dynamic_cast<Vampire*>(player.get());
+                    if (Vampire) {
+                        Vampire->gainHP();
                     }
                 }
             }
@@ -129,6 +145,7 @@ GameResult GamePlay::mainLoop() {
                 continue;
             }
         }
+
         // if the player is a troll, gain 5 HP every turn
         if (player->getRace() == Race::TROLL) {
             Troll* troll = dynamic_cast<Troll*>(player.get());
