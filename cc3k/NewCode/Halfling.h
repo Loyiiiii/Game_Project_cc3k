@@ -5,6 +5,9 @@
 #include "Position.h"
 #include "Global_Constants.h"
 
+// Halfling: 100 HP, 15 Atk, 20 Def
+// 50% chance for PC to miss. 
+
 class Halfling : public Enemy {
 public:
     Halfling(Position pos);
