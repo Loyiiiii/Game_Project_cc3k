@@ -84,8 +84,10 @@ GameResult GamePlay::mainLoop() {
                     if (player->getRace() == Race::DROW) {
                         DROW* Drow = dynamic_cast<Drow*>(player.get());
                         if (Drow) {
-                            Drow->drinkPotion(*targetPotion);
+                            targetPotion.amount = targetPotion->getAmount() * 1.5;
+                            player->drinkPotion(*targetPotion);
                             targetCell.removePotion();
+                            std::cout << "Drow's potion effect enhanced: " << targetPotion->getAmount() * 1.5 << std::endl; //did not output
                         }
                     } else {
                         player->drinkPotion(*targetPotion);
@@ -116,6 +118,7 @@ GameResult GamePlay::mainLoop() {
                     VAMPIRE* Vampire = dynamic_cast<Vampire*>(player.get());
                     if (Vampire) {
                         Vampire->gainHP();
+                        std::cout << "Vampire's bloodsucking: +5 HP" << std::endl;  //did not output
                     }
                 }
             }
@@ -150,6 +153,7 @@ GameResult GamePlay::mainLoop() {
         if (player->getRace() == Race::TROLL) {
             Troll* troll = dynamic_cast<Troll*>(player.get());
             if (troll) {
+                std::cout << "Troll's regeneration: +5 HP (till Max HP)" << std::endl;  //did not output
                 troll->gainHP();
             }
         }
