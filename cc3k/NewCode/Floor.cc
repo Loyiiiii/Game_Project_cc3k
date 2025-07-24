@@ -104,9 +104,11 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
     map[playerPos.row][playerPos.col].placeCharacter(pc);
     player = pc;
 
+    // place the stairway at the second available floor cell
     stairPos = availableFloorCells[1];
     map[stairPos.row][stairPos.col].setSymbol('\\');
 
+    // place 10 potions using index 2 - 11
     for (int i = 2; i < 12; i++) {
         int randomNum = rand() % 6;
         std::unique_ptr<Potion> potionPtr;
@@ -128,10 +130,12 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
         else {
             potionPtr = std::make_unique<WoundDef>();
         }
+        // place the potion in the map and store in potions container
         map[availableFloorCells[i].row][availableFloorCells[i].col].placePotion(potionPtr.get());
         potions.push_back(std::move(potionPtr));
     }
 
+    // place 10 piles of gold using index 12 - 21
     for (int j = 12; j < 22; j++) {
         int randomNum_gold = rand() % 8;
         std::unique_ptr<Gold> goldPtr;
@@ -144,10 +148,12 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
         else {
             goldPtr = std::make_unique<SmallGold>();
         }
+        // place the gold in the map and store in goldPiles
         map[availableFloorCells[j].row][availableFloorCells[j].col].placeGold(goldPtr.get());
         goldsPiles.push_back(std::move(goldPtr));
     }
 
+    // place 20 enemies using index 22 - 41
     for (int r = 22; r < 42; r++) {
         int randomNum_enemy = rand() % 18;
         std::unique_ptr<Enemy> enemyPtr;
@@ -170,6 +176,7 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
         else {
             enemyPtr = std::make_unique<Merchant>(enemyPos, std::make_unique<MerchantHoard>());
         }
+        // place the enemy in the map and store in enemies
         map[enemyPos.row][enemyPos.col].placeEnemy(enemyPtr.get());
         enemies.push_back(std::move(enemyPtr));
     }
