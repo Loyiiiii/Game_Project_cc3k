@@ -17,6 +17,7 @@ public:
     bool getIsTemporary() const;
     int getAmount() const;
     char getSymbol() const;
+    int setAmount(int newAmount);
 };
 
 #endif 

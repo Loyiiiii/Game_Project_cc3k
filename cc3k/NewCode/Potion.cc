@@ -18,3 +18,8 @@ int Potion::getAmount() const {
 char Potion::getSymbol() const {
     return symbol;
 } 
+
+int Potion::setAmount(int newAmount) {
+    amount = newAmount;
+    return amount;
+}

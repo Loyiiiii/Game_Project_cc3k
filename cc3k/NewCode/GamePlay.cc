@@ -113,7 +113,7 @@ GameResult GamePlay::mainLoop() {
                     if (player->getRace() == Race::DROW) {
                         Drow* drow = dynamic_cast<Drow*>(player.get());
                         if (drow) {
-                            targetPotion.amount = targetPotion->getAmount() * 1.5;
+                            targetPotion->setAmount(targetPotion->getAmount() * 3 / 2);
                             player->drinkPotion(*targetPotion);
                             targetCell.removePotion();
                             std::cout << "Drow's potion effect enhanced: " << targetPotion->getAmount() * 1.5 << std::endl; //did not output
