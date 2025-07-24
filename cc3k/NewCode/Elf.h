@@ -6,11 +6,11 @@
 #include "Global_Constants.h"
 
 class Elf : public Enemy {
-public:
-    Elf(Position pos);
-    void attack(PlayerCharacter& pc) override;
-    void dropGold(PlayerCharacter& pc) override;
-    void takeDamage(int damage) override;
+    public:
+        Elf(Position pos);
+        void attack(PlayerCharacter& pc) override;
+        void dropGold(PlayerCharacter& pc) override;
+        void takeDamage(int damage) override;
 };
 
 #endif 

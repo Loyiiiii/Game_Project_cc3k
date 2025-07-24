@@ -7,21 +7,22 @@ Elf::Elf(Position pos) :
     Enemy{ pos, 140, 30, 10, true, true, 'E' } {}
 
 void Elf::attack(PlayerCharacter& pc) {
+    // checking if the PC is Drow 
     if (pc.getRace() == Race::DROW) {
         int damage = calculateDamage(getAtk(), pc.getDef());
-        pc.takeDamage(damage);
+        pc.takeDamage(damage); // only get one attack
     }
     else {
         for (int i = 0; i < 2; i++) {
             int damage = calculateDamage(getAtk(), pc.getDef());
-            pc.takeDamage(damage);
+            pc.takeDamage(damage); // get 2 attacks.
         }
     }
 }
 
 void Elf::dropGold(PlayerCharacter& pc) {
     int randomNum_gold = rand() % 2;
-    int value = (randomNum_gold == 0) ? 1 : 2;
+    int value = (randomNum_gold == 0) ? 1 : 2; // 1 for small gold, 2 for normal gold
     pc.addGold(value);
 }
 
