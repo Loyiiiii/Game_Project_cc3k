@@ -1,11 +1,10 @@
 export module Enemy;
 import gold;
 import Global_Constants;
-export module Enemy;
-
+import position;
 // Forward declaration instead of import
 class PlayerCharacter;
-import position;
+
 
 export class Enemy {
     protected:
