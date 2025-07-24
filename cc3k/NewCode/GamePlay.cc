@@ -129,13 +129,13 @@ GameResult GamePlay::mainLoop() {
                 continue;
             }
         }
-
-        // if (player->getRace() == Race::TROLL) {
-        //     Troll* troll = dynamic_cast<Troll*>(player.get());
-        //     if (troll) {
-        //         troll->gainHP();
-        //     }
-        // }
+        // if the player is a troll, gain 5 HP every turn
+        if (player->getRace() == Race::TROLL) {
+            Troll* troll = dynamic_cast<Troll*>(player.get());
+            if (troll) {
+                troll->gainHP();
+            }
+        }
 
         if (!enemyFrozen) {
             auto& enemies = currentFloor->getEnemies();
