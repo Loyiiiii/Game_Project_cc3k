@@ -12,6 +12,32 @@
 GamePlay::GamePlay() : enemyFrozen{ false }, player{ nullptr }, allFloorLevel{ nullptr } {}
 GamePlay::~GamePlay() {}
 
+
+// helper function (local)
+
+std::string raceToString(Race race) {
+    switch (race) {
+        case Race::SHADE: return "Shade";
+        case Race::DROW: return "Drow";
+        case Race::VAMPIRE: return "Vampire";
+        case Race::TROLL: return "Troll";
+        case Race::GOBLIN: return "Goblin";
+        default: return "Unknown";
+    }
+}
+
+
+void printInfo(PlayerCharacter* pc, FloorLevel* floorlevel_ptr) {
+    std::cout << "Race: " << raceToString(pc->getRace()) << " Gold: " << pc->getGold() 
+              << "                                              "
+              << " Floor: " << floorlevel_ptr->getCurrentFloorNum() << std::endl;
+    std::cout << "HP: " << pc->getHP() << std::endl;
+    std::cout << "Atk: " << pc->getAtk() << std::endl;
+    std::cout << "Def: " << pc->getDef() << std::endl;
+    std::cout << "Action: " << std::endl;
+}
+
+
 void GamePlay::setPlayerRace(Race race) {
     if (race == Race::DROW) {
         player = std::make_unique<Drow>();
@@ -66,7 +92,8 @@ GameResult GamePlay::mainLoop() {
     while (!gameOver) {
         Floor* currentFloor = allFloorLevel->getCurrentFloor();
         currentFloor->printMap(player.get());
-        std::cout << "Floor: " << allFloorLevel->getCurrentFloorNum() << std::endl;
+        printInfo(player.get(), allFloorLevel.get());
+        // std::cout << "Floor: " << allFloorLevel->getCurrentFloorNum() << std::endl;
 
         std::string command;
         std::cin >> command;

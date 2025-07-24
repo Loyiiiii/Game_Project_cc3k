@@ -36,6 +36,7 @@ std::string colorText(const std::string& text, const std::string& colorCode) {
     return "\033[" + colorCode + "m" + text + "\033[0m";
 }
 
+/*
 std::string raceToString(Race race) {
     switch (race) {
         case Race::SHADE: return "Shade";
@@ -46,6 +47,7 @@ std::string raceToString(Race race) {
         default: return "Unknown";
     }
 }
+*/
 
 Floor::Floor() : map(), stairPos{ -1, -1 }, player{ nullptr } {
     map.reserve(numRows);
@@ -59,6 +61,7 @@ Floor::Floor() : map(), stairPos{ -1, -1 }, player{ nullptr } {
     }
 }
 
+/*
 void printInfo(PlayerCharacter* pc) {
     std::cout << "Race: " << raceToString(pc->getRace()) << " Gold: " << pc->getGold() << " Floor: " << std::endl;
     std::cout << "HP: " << pc->getHP() << std::endl;
@@ -66,6 +69,7 @@ void printInfo(PlayerCharacter* pc) {
     std::cout << "Def: " << pc->getDef() << std::endl;
     std::cout << "Action: " << std::endl;
 }
+*/
 
 void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
     // Do not clear the map, just the objects on it.
@@ -208,7 +212,6 @@ void Floor::printMap(PlayerCharacter* pc) {
         }
         std::cout << std::endl;
     }
-    printInfo(pc);
 }
 
 const std::vector<std::unique_ptr<Enemy>>& Floor::getEnemies() const {
@@ -235,7 +238,8 @@ Position Floor::movePlayer(Position oldPos, Direction dir) {
     else if (dir == Direction::SW) { newRow++; newCol--; }
 
     // if new position is within the game board and not the boundary of game board -> place pc on the map and return the updated position
-    if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols && map[newRow][newCol].getBaseSymbol() != '|' && map[newRow][newCol].getBaseSymbol() != '-') {
+    if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols && 
+        map[newRow][newCol].getBaseSymbol() != '|' && map[newRow][newCol].getBaseSymbol() != '-' && map[newRow][newCol].getBaseSymbol() != ' ') {
         map[oldPos.row][oldPos.col].removeCharacter();
         map[newRow][newCol].placeCharacter(player);
         return Position{newRow, newCol};
