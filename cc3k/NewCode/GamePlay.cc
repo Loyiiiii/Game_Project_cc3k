@@ -111,8 +111,8 @@ GameResult GamePlay::mainLoop() {
                 if (targetPotion) {
                     // if the player is a drow, potion effects are enhanced by 1.5x
                     if (player->getRace() == Race::DROW) {
-                        Drow* Drow = dynamic_cast<Drow*>(player.get());
-                        if (Drow) {
+                        Drow* drow = dynamic_cast<drow*>(player.get());
+                        if (drow) {
                             targetPotion.amount = targetPotion->getAmount() * 1.5;
                             player->drinkPotion(*targetPotion);
                             targetCell.removePotion();
@@ -144,9 +144,9 @@ GameResult GamePlay::mainLoop() {
                 }
                 // if the player is a vampire, gain 5 HP every attack
                 if (player->getRace() == Race::VAMPIRE) {
-                    Vampire* Vampire = dynamic_cast<Vampire*>(player.get());
-                    if (Vampire) {
-                        Vampire->gainHP();
+                    Vampire* vampire = dynamic_cast<vampire*>(player.get());
+                    if (vampire) {
+                        vampire->gainHP();
                         std::cout << "Vampire's bloodsucking: +5 HP" << std::endl;  //did not output
                     }
                 }
