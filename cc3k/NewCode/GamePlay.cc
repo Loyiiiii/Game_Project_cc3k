@@ -98,11 +98,11 @@ GameResult GamePlay::mainLoop() {
         actionMessage.clear(); // clear actionMessage
 
         std::string command;
-        std::cin >> command >> std::endl >> std::endl;
+        std::cin >> command;
 
         if (command == "u") {
             std::string dirStr;
-            std::cin >> dirStr >> std::endl >> std::endl;
+            std::cin >> dirStr;
             try {
                 Direction dir = parseDirection(dirStr);
                 Position targetPosition = getTargetPosition(player->getPosition(), dir);
@@ -130,7 +130,7 @@ GameResult GamePlay::mainLoop() {
         }
         else if (command == "a") {
             std::string dirStr;
-            std::cin >> dirStr >> std::endl >> std::endl;
+            std::cin >> dirStr;
             try {
                 Direction dir = parseDirection(dirStr);
                 Position targetPosition = getTargetPosition(player->getPosition(), dir);
