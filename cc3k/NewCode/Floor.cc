@@ -224,7 +224,8 @@ const std::vector<std::unique_ptr<Gold>>& Floor::getGoldPiles() const {
     return goldsPiles;
 }
 
-Position Floor::movePlayer(Position oldPos, Direction dir) {
+// 
+Position Floor::movePlayer(Position oldPos, Direction dir, bool& goldCollected) {
     int newRow = oldPos.row;
     int newCol = oldPos.col;
 
@@ -239,7 +240,27 @@ Position Floor::movePlayer(Position oldPos, Direction dir) {
 
     // if new position is within the game board and not the boundary of game board -> place pc on the map and return the updated position
     if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols && 
-        map[newRow][newCol].getBaseSymbol() != '|' && map[newRow][newCol].getBaseSymbol() != '-' && map[newRow][newCol].getBaseSymbol() != ' ') {
+        map[newRow][newCol].getBaseSymbol() != '|' && 
+        map[newRow][newCol].getBaseSymbol() != '-' && map[newRow][newCol].getBaseSymbol() != ' ') {
+        
+        // Check for gold collection before moving
+        Cell& targetCell = map[newRow][newCol];
+        Gold* gold = targetCell.getGold();
+        goldCollected = false;
+        if (gold && gold->getIsPickable()) {
+            // Add gold to player
+            player->addGold(gold->getValue());
+            goldCollected = true;
+            // Remove gold from cell and floor
+            targetCell.removeGold();
+            // Remove from goldsPiles vector
+            auto it = std::find_if(goldsPiles.begin(), goldsPiles.end(),
+                [gold](const std::unique_ptr<Gold>& g) { return g.get() == gold; });
+            if (it != goldsPiles.end()) {
+                goldsPiles.erase(it);
+            }
+        }
+        
         map[oldPos.row][oldPos.col].removeCharacter();
         map[newRow][newCol].placeCharacter(player);
         return Position{newRow, newCol};

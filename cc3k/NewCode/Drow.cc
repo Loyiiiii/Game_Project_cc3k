@@ -9,7 +9,7 @@ Drow::Drow() :
 // override the drinkPotion method - magnifying the potion effect *1.5.
 void Drow::drinkPotion(Potion& p) {
 
-    float after_enhancement = p.getAmount() * potion_effect_enhancement;
+    int after_enhancement = static_cast<int>(p.getAmount() * potion_effect_enhancement);
 
     PotionInUse.push_back(p); // add the potion to the effect in use list
 

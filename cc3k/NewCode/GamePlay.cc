@@ -113,14 +113,13 @@ GameResult GamePlay::mainLoop() {
                     if (player->getRace() == Race::DROW) {
                         Drow* drow = dynamic_cast<Drow*>(player.get());
                         if (drow) {
-                            targetPotion->setAmount(targetPotion->getAmount() * 3 / 2);
                             player->drinkPotion(*targetPotion);
                             targetCell.removePotion();
-                            std::cout << "Drow's potion effect enhanced: " << targetPotion->getAmount() * 1.5 << std::endl; //did not output
+                            std::cout << "Drow's potion effect enhanced by 1.5x" << std::endl;
                         }
                     } else {
-                        player->drinkPotion(*targetPotion);
-                        targetCell.removePotion();
+                    player->drinkPotion(*targetPotion);
+                    targetCell.removePotion();
                     }
                 }
             }
@@ -168,8 +167,17 @@ GameResult GamePlay::mainLoop() {
             try {
                 Direction dir = parseDirection(command);
                 Position oldPos = player->getPosition();
-                Position newPos = currentFloor->movePlayer(oldPos, dir);
+                bool goldCollected = false;
+                Position newPos = currentFloor->movePlayer(oldPos, dir, goldCollected);
                 player->setPosition(newPos);
+                
+                // Add movement message
+                if (newPos != oldPos) {
+                    actionMessage += "PC moves " + command + ". ";
+                    if (goldCollected) {
+                        actionMessage += "Gold collected! ";
+                    }
+                }
             }
             catch (const std::invalid_argument& e) {
                 std::cout << e.what() << std::endl;

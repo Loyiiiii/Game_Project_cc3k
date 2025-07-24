@@ -29,7 +29,7 @@ class Floor {
 
 public:
     Floor();
-    
+
     // initialize the map with pc, stair, enemies, potions, gold randomly generated
     void floor_init(PlayerCharacter* pc, const std::string& filename);
     void printMap(PlayerCharacter* pc); // print the whole map onto screen
@@ -40,7 +40,7 @@ public:
     const std::vector<std::unique_ptr<Gold>>& getGoldPiles() const; // get gold
 
     // move the playercharacter
-    Position movePlayer(Position oldPos, Direction dir);
+    Position movePlayer(Position oldPos, Direction dir, bool& goldCollected);
 
     Cell& getTargetCell(int row, int col);  // return the cell at (row, col)
     Position getStairPos() const;   // return the position of stairway
