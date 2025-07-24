@@ -29,7 +29,7 @@ void Merchant::dropGold(PlayerCharacter& pc) {
 void Merchant::setHostile() {
     is_hostile = true;
     is_neutral = false;
-    remainingMerchantHostile = true;
+    setAllHostile(); // set all remaining merchant to hostile. 
 }
 
 
