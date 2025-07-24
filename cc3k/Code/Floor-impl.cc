@@ -210,6 +210,15 @@ Position Floor::movePlayer(Position oldPos, Direction dir) {
     }
 }
 
+Cell& getTargetCell(int row, int col) {
+    return map[row][col];
+}
+
+Position Floor::getStairPos() const {
+    return stairPos;
+}
+
+
 void Floor::moveRandom(Enemy* enemy) {
     if (enemy == nullptr || enemy->getMoveStatus() == false) {
         return;
