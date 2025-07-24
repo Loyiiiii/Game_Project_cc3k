@@ -1,7 +1,7 @@
+export module Drow;
+
 import PlayerCharacter;
 import Global_Constants;
-
-export module Drow;
 
 export class Drow: public PlayerCharacter {
     // drow: 150 HP, 25 ATK, 15 Def.

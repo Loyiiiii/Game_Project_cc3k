@@ -1,6 +1,8 @@
 module Cell;
-import gold; // Need to import so we can dynamic_cast
-import Potion; // Need to import so we can dynamic_cast
+import gold; 
+import potion; 
+import Enemy;
+import PlayerCharacter
 
 Cell::Cell(char symbol, int row, int col, bool isPassable): 
     baseSymbol{symbol}, row{row}, col{col}, isPassable{isPassable} {}

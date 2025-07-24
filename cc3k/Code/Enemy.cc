@@ -34,6 +34,7 @@ export class Enemy {
         int getAtk() const;
         int getDef() const;
         int getHP() const;
+        void setHP();       // ********************* add this
         bool getMoveStatus() const;
         Position getPosition() const; 
 };

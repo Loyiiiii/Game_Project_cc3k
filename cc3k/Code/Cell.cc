@@ -3,7 +3,7 @@ export module Cell;
 import PlayerCharacter;
 import Enemy;
 import Potion;
-import Global_Constants;
+// import Global_Constants;
 import position;
 import gold;
 

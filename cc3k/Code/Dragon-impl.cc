@@ -1,5 +1,5 @@
 module Dragon;
-import Enemy;
+// import Enemy;
 import PlayerCharacter;
 import DragonHoard;
 import Global_Constants;
@@ -27,6 +27,7 @@ void Dragon::takeDamage(int dmg) {
         HP = 0;
     } else {
         HP -= dmg;
+        // setHP
     }
 }
 
