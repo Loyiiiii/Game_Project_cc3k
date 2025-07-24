@@ -40,6 +40,7 @@ public:
     Cell& getTargetCell(int row, int col);
     Position getStairPos() const;
 
+    void addGoldPile(std::unique_ptr<Gold> gold, Position pos);
     void moveRandom(Enemy* enemy);
 };
 

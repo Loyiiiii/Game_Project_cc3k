@@ -178,20 +178,20 @@ void Floor::printMap(PlayerCharacter* pc) {
         for (int j = 0; j < numCols; j++) {
             // Check to prevent out-of-bounds access on map rows
             if (i < map.size() && j < map[i].size()) {
-                if (map[i][j].getSymbol() == "@") {
-                    std::cout << colorText(map[i][j].getSymbol(), "34");
-                } else if (map[i][j].getSymbol() == "H" ||
-                           map[i][j].getSymbol() == "W" ||
-                           map[i][j].getSymbol() == "E" ||
-                           map[i][j].getSymbol() == "O" ||
-                           map[i][j].getSymbol() == "M" ||
-                           map[i][j].getSymbol() == "D" ||
-                           map[i][j].getSymbol() == "L") {
-                    std::cout << colorText(map[i][j].getSymbol(), "31");
-                } else if (map[i][j].getSymbol() == "G") {
-                    std::cout << colorText(map[i][j].getSymbol(), "33");
-                } else if (map[i][j].getSymbol() == "P") {
-                    std::cout << colorText(map[i][j].getSymbol(), "32");
+                if (map[i][j].getSymbol() == '@') {
+                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "34");
+                } else if (map[i][j].getSymbol() == 'H' ||
+                           map[i][j].getSymbol() == 'W' ||
+                           map[i][j].getSymbol() == 'E' ||
+                           map[i][j].getSymbol() == 'O' ||
+                           map[i][j].getSymbol() == 'M' ||
+                           map[i][j].getSymbol() == 'D' ||
+                           map[i][j].getSymbol() == 'L') {
+                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "31");
+                } else if (map[i][j].getSymbol() == 'G') {
+                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "33");
+                } else if (map[i][j].getSymbol() == 'P') {
+                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "32");
                 } else {
                     std::cout << map[i][j].getSymbol();
                 }
