@@ -254,10 +254,18 @@ Position Floor::movePlayer(Position oldPos, Direction dir, bool& goldCollected) 
             // Remove gold from cell and floor
             targetCell.removeGold();
             // Remove from goldsPiles vector
+            /*
             auto it = std::find_if(goldsPiles.begin(), goldsPiles.end(),
                 [gold](const std::unique_ptr<Gold>& g) { return g.get() == gold; });
             if (it != goldsPiles.end()) {
                 goldsPiles.erase(it);
+            }
+            */
+            for (int i = 0; i < goldsPiles.size(); i++) {
+                if (goldsPiles[i].get() == gold) {
+                    goldsPiles.erase(goldsPiles.begin() + i);
+                    break;      // stop searching
+                }
             }
         }
         
