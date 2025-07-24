@@ -3,7 +3,9 @@
 #include <cstdlib>
 
 Dwarf::Dwarf(Position pos) :
-    Enemy{ pos, 100, 20, 30, true, true, 'W' } {}
+    Enemy{pos, 100, 20, 30, true, true, 'D'} {}
+
+Dwarf::~Dwarf() {}
 
 void Dwarf::attack(PlayerCharacter& pc) {
     int damage = calculateDamage(getAtk(), pc.getDef());
@@ -11,9 +13,10 @@ void Dwarf::attack(PlayerCharacter& pc) {
 }
 
 void Dwarf::dropGold(PlayerCharacter& pc) {
+    // 50% small gold, 50% normal gold
     int randomNum = rand() % 2;
-    int value = (randomNum == 0) ? 1 : 2;
-    pc.addGold(value);
+    int value = (randomNum == 0) ? 1 : 2; // 1 for small gold, 2 for normal gold
+    pc.addGold(value); 
 }
 
 void Dwarf::takeDamage(int damage) {
