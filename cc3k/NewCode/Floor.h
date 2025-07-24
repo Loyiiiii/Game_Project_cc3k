@@ -14,31 +14,36 @@
 #include "Global_Constants.h"
 
 class Floor {
-    int numRows = 25;
-    int numCols = 79;
-    std::vector<std::vector<Cell>> map;
-    Position stairPos;
+    int numRows = 25;   // number of rows in the map
+    int numCols = 79;   // number of columns in the map
+    std::vector<std::vector<Cell>> map;     // 2D vector of Cell to store map
+    Position stairPos;      // store the position of stairway
 
+    // container for Enemy, Potion, and Gold
     std::vector<std::unique_ptr<Enemy>> enemies;
     std::vector<std::unique_ptr<Potion>> potions;
     std::vector<std::unique_ptr<Gold>> goldsPiles;
 
+    // keep track of playercharacter
     PlayerCharacter* player;
 
 public:
     Floor();
-
+    
+    // initialize the map with pc, stair, enemies, potions, gold randomly generated
     void floor_init(PlayerCharacter* pc, const std::string& filename);
-    void printMap(PlayerCharacter* pc);
+    void printMap(PlayerCharacter* pc); // print the whole map onto screen
 
-    const std::vector<std::unique_ptr<Enemy>>& getEnemies() const;
-    const std::vector<std::unique_ptr<Potion>>& getPotions() const;
-    const std::vector<std::unique_ptr<Gold>>& getGoldPiles() const;
+    // accessor
+    const std::vector<std::unique_ptr<Enemy>>& getEnemies() const; // get enemies
+    const std::vector<std::unique_ptr<Potion>>& getPotions() const; // get potions
+    const std::vector<std::unique_ptr<Gold>>& getGoldPiles() const; // get gold
 
+    // move the playercharacter
     Position movePlayer(Position oldPos, Direction dir);
 
-    Cell& getTargetCell(int row, int col);
-    Position getStairPos() const;
+    Cell& getTargetCell(int row, int col);  // return the cell at (row, col)
+    Position getStairPos() const;   // return the position of stairway
 
     void addGoldPile(std::unique_ptr<Gold> gold, Position pos);
     void moveRandom(Enemy* enemy);

@@ -196,11 +196,11 @@ void Floor::printMap(PlayerCharacter* pc) {
                            map[i][j].getSymbol() == 'M' ||
                            map[i][j].getSymbol() == 'D' ||
                            map[i][j].getSymbol() == 'L') {
-                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "31");
+                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "31"); // enemy color
                 } else if (map[i][j].getSymbol() == 'G') {
-                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "33");
+                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "33"); // gold color
                 } else if (map[i][j].getSymbol() == 'P') {
-                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "32");
+                    std::cout << colorText(std::string(1, map[i][j].getSymbol()), "32"); // potion color
                 } else {
                     std::cout << map[i][j].getSymbol();
                 }
@@ -234,46 +234,52 @@ Position Floor::movePlayer(Position oldPos, Direction dir) {
     else if (dir == Direction::SE) { newRow++; newCol++; }
     else if (dir == Direction::SW) { newRow++; newCol--; }
 
+    // if new position is within the game board and not the boundary of game board -> place pc on the map and return the updated position
     if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols && map[newRow][newCol].getBaseSymbol() != '|' && map[newRow][newCol].getBaseSymbol() != '-') {
         map[oldPos.row][oldPos.col].removeCharacter();
         map[newRow][newCol].placeCharacter(player);
-        return Position{ newRow, newCol };
+        return Position{newRow, newCol};
     }
+    // movement failed, return original position
     return oldPos;
 }
 
+// return the cell at (row, col)
 Cell& Floor::getTargetCell(int row, int col) {
     return map[row][col];
 }
 
+// return the positon of stairway
 Position Floor::getStairPos() const {
     return stairPos;
 }
 
 void Floor::moveRandom(Enemy* enemy) {
-    if (enemy == nullptr || !enemy->getMoveStatus()) {
+    if (enemy == nullptr || !enemy->getMoveStatus()) { // if there is no enemy or enemy cannot move
         return;
     }
-    Position currPos = enemy->getPosition();
-    std::vector<Position> validlandingPos;
+    Position currPos = enemy->getPosition(); // store the current position of enemy
+    std::vector<Position> validlandingPos;  // stores the 8 surrounding positions around enemy
 
+    // loop through the surrounding 8 positions around the enemy
     for (int row_diff = -1; row_diff <= 1; row_diff++) {
         for (int col_diff = -1; col_diff <= 1; col_diff++) {
-            if (row_diff == 0 && col_diff == 0) continue;
+            if (row_diff == 0 && col_diff == 0) continue; // skip enemy's position
 
             Position newPos = { currPos.row + row_diff, currPos.col + col_diff };
 
             if (newPos.row >= 0 && newPos.row < numRows &&
-                newPos.col >= 0 && newPos.col < numCols &&
-                map[newPos.row][newPos.col].getBaseSymbol() == '.' &&
-                map[newPos.row][newPos.col].getEnemy() == nullptr &&
-                map[newPos.row][newPos.col].getSymbol() != '@') {
-                validlandingPos.emplace_back(newPos);
+                newPos.col >= 0 && newPos.col < numCols &&  // if new position is within the board
+                map[newPos.row][newPos.col].getBaseSymbol() == '.' && // new position is empty
+                map[newPos.row][newPos.col].getEnemy() == nullptr &&    // no enemy at new position
+                map[newPos.row][newPos.col].getSymbol() != '@') {   // pc is not at new position
+                validlandingPos.emplace_back(newPos);   // store this position into validlandingPos
             }
         }
     }
-
-    if (!validlandingPos.empty()) {
+    
+    // random generation logic
+    if (!validlandingPos.empty()) { // if there is valid landing position
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distrib(0, validlandingPos.size() - 1);
@@ -281,8 +287,8 @@ void Floor::moveRandom(Enemy* enemy) {
         int randomIndex = distrib(gen);
         Position newPos = validlandingPos[randomIndex];
 
-        map[currPos.row][currPos.col].removeEnemy();
-        enemy->setPosition(newPos);
-        map[newPos.row][newPos.col].placeEnemy(enemy);
+        map[currPos.row][currPos.col].removeEnemy();    // remove enemy from original position
+        enemy->setPosition(newPos);     // set enemy to new position - update enemy's field
+        map[newPos.row][newPos.col].placeEnemy(enemy);      // place enemy to new position on map
     }
 } 
