@@ -175,7 +175,7 @@ GameResult Gameplay::mainLoop() {
 
         // 4. Enemy Turn (if not paused)
         if (!enemyFrozen) {
-            for (auto &enemy : enemies) {
+            for (auto &enemy : currFloor->getEnemies()) {
                 if (enemy->isAdjacentTo(*player)) {
                     enemy->attack(*player);
                 } else {
