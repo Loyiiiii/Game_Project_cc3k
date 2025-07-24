@@ -7,9 +7,8 @@
 // vampire: 50 HP, 25 ATK, 25 Def.
 // no Max HP, and gains 5HP per successful attack. 
 class Vampire : public PlayerCharacter {
-    private:
-        void gainHP(); // gain 5HP per successful attack. 
     public:
+        void gainHP(); // gain 5HP per successful attack. 
         Vampire();
         std::string attack(Enemy& enemy) override;
 };
