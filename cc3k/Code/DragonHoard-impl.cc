@@ -1,4 +1,5 @@
 module dragon_hoard;
+import position;
 
 DragonHoard::DragonHoard(Position position): 
 Gold{6, false}, pos{position} {}

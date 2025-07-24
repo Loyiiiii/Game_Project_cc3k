@@ -1,17 +1,15 @@
 export module floor;
-
 import <iostream>;
 import <vector>;
 import <string>;
 import <memory>;
 import <algorithm>;
 import <random>;
-import <cstdlib>;
 
 import Cell;
 import Enemy;
-import Potion;
-import Gold;
+import potion;
+import gold;
 import position;
 import PlayerCharacter;
 import Global_Constants;
@@ -52,4 +50,6 @@ public:
 
     Cell& getTargetCell(int row, int col);
     Position getStairPos() const;
+    // moveEnemyFunction is not responsible for deleting the enemy.
+    void moveRandom(Enemy *enemy);
 };

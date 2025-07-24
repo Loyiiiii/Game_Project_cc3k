@@ -15,8 +15,6 @@ export class Gameplay {
 public:
     Gameplay();
 
-    void setPlayerRace(Race race);
-    void gameInit();
     GameResult mainLoop();
 
 private:
@@ -26,18 +24,7 @@ private:
     unique_ptr<PlayerCharacter> player;
     unique_ptr<Floor> currentFloor;
 
-    void displayGameState();
-    bool parseAndExecuteCommand(const string &cmd);
-    void enemyTurn();
-    bool checkEndConditions();
-
-    bool handleMove(Direction dir);
-    bool handleAttack(Direction dir);
-    bool handleUsePotion(Direction dir);
-
-    Direction parseDirection(const string &dirStr);
-    void printHelp();
-
+    void setPlayerRace(Race race);
     Direction parseDirection(const string& dirStr);
     Position getTargetPosition(Position pos, Direction dir);
 };

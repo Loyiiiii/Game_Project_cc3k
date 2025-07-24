@@ -1,6 +1,7 @@
 export module dragon_hoard;
 
 import gold;
+import position;
 import Global_Constants;
 
 export class DragonHoard : public Gold {

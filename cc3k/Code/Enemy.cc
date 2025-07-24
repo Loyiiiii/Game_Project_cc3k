@@ -1,5 +1,5 @@
 export module Enemy;
-import Gold;
+import gold;
 import Global_Constants;
 import PlayerCharacter;
 import position;

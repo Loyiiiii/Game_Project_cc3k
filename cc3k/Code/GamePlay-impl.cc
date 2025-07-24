@@ -11,7 +11,7 @@ import potion;
 
 using namespace std;
 
-void Gameplay::setPlayerRace(Race race) {
+void Gameplay::setPlayerRace(Race::Race race) {
     if (race == Race::DROW) {
         player = make_unique<Drow>();
     } else if (race == Race::VAMPIRE) {

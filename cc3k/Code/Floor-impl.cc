@@ -1,4 +1,19 @@
 module floor;
+import <iostream>;
+import <vector>;
+import <string>;
+import <memory>;
+import <algorithm>;
+import <random>;
+import <cstdlib>;
+
+import Cell;
+import Enemy;
+import potion;
+import gold;
+import position;
+import PlayerCharacter;
+import Global_Constants;
 
 Floor::Floor(): map{rows, std::vector<Cell>(col, Cell{'.', 0, 0})} {}
 
@@ -53,9 +68,7 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
 
 
     // place the stairway at the second available floor cell
-    Position randomStairPos = availableFloorCells[1];
-    stairPos = randomStairPos;
-    map[randomStairPos.row][randomStairPos.col].setSymbol('\\');
+    map[availableFloorCells[1].row][availableFloorCells[1].col].setSymbol('\\');
 
     // place 10 potions using index 2 - 11
     for (int i = 2; i < 12; i++) {
@@ -123,8 +136,6 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename):  {
         }
         // place the enemy in the map and store in enemies
         map[enemyPos.row][enemyPos.col].placeEnemy(enemyPtr.get());
-
-        // moves the ownership of the pointer into enemy vector
         enemies.push_back(std::move(enemyPtr));
     }
     // assign pc to the player pointer
@@ -199,9 +210,47 @@ Position Floor::movePlayer(Position oldPos, Direction dir) {
     }
 }
 
-Cell& Floor::getTargetCell(int row, int col) {
-    return map[row][col];
+void Floor::moveRandom(Enemy* enemy) {
+    if (enemy == nullptr || enemy->getMoveStatus() == false) {
+        return;
+    }
+    Position currPos = enemy->getPosition();
+    std::vector<Position> validlandingPos;
+
+    // Loop through all 8 adjacent tiles by checking row/col offsets from -1 to 1
+    for (int row_diff = -1; row_diff <= 1; row_diff++) {
+        for (int col_diff = -1; col_diff <= 1; col_diff++) {
+            // Skip the center (curr_enemy_pos)
+            if (row_diff == 0 && col_diff == 0) {
+                continue;
+            }
+            // calculate a potential new position
+            Position newPos = {currPos.row + row_diff, currPos.col + col_diff};
+
+            // Check if the move is valid
+            // 1. within bounds -> >= 0 && < numRows/numCols      
+            if (newPos.row >= 0 && newPos.row < numRows &&
+                newPos.col >= 0 && newPos.col < numCols &&
+                // . represents the place you can move to.
+                map[newPos.row][newPos.col].getBaseSymbol() == '.' &&
+                map[newPos.row][newPos.col].pc == nullptr &&
+                map[newPos.row][newPos.col].getEnemy() == nullptr) {
+                validlandingPos.emplace_back(newPos);
+            }
+        }
+    }
+
+    if (!validlandingPos.empty()) {
+        // Use a more modern and uniform way to generate a random number
+        std::random_device rd; // Used to obtain a seed for the random number engine
+        std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+        std::uniform_int_distribution<> distrib(0, validlandingPos.size() - 1);
+        
+        int randomIndex = distrib(gen);
+        Position newPos = validlandingPos[randomIndex];
+        // Update the map state
+        map[currPos.row][currPos.col].removeEnemy();
+        enemy->setPosition(newPos);
+        map[newPos.row][newPos.col].placeEnemy(enemy);
+    }
 }
-
-Position Floor::getStairPos() const { return stairPos; }
-
