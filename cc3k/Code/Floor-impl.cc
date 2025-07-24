@@ -64,8 +64,9 @@ void Floor::floor_init(PlayerCharacter *pc, const std::string &filename) {
     std::shuffle(availableFloorCells.begin(), availableFloorCells.end(), std::mt19937{std::random_device{}()});
     // place the player character at the first available floor cell
     Position playerPos = availableFloorCells[0];
-    pc.setPosition(playerPos);
+    pc->setPosition(playerPos);
     map[playerPos.row][playerPos.col].placeCharacter(pc);
+    player = pc;    // assign pc to player
 
 
     // place the stairway at the second available floor cell
