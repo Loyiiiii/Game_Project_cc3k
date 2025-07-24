@@ -95,8 +95,10 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
             }
         }
     }
-    std::shuffle(availableFloorCells.begin(), availableFloorCells.end(), std::mt19937{ std::random_device{}() });
 
+    // shuffle the available floor cells
+    std::shuffle(availableFloorCells.begin(), availableFloorCells.end(), std::mt19937{ std::random_device{}() });
+    // place the player character at the first available floor cell
     Position playerPos = availableFloorCells[0];
     pc->setPosition(playerPos);
     map[playerPos.row][playerPos.col].placeCharacter(pc);
