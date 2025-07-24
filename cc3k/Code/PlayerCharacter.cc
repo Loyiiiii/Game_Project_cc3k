@@ -5,6 +5,10 @@ import <vector>;
 import Global_Constants;
 import position;
 
+export module Enemy;
+export class Enemy;
+export class Potion;
+
 export class PlayerCharacter {
     Position pos; // representing the position of the PC
     int health; // representing the HP

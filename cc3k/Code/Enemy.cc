@@ -4,6 +4,8 @@ import Global_Constants;
 import PlayerCharacter;
 import position;
 
+export class PlayerCharacter;
+
 export class Enemy {
     protected:
         Position pos;
