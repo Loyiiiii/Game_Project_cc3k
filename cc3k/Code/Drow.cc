@@ -10,5 +10,5 @@ export class Drow: public PlayerCharacter {
     public: 
         Drow();
         // need to override - all potions have effect magnified by 1.5x
-        void drinkPotion(Potion& p) override; 
+        void drinkPotion(Potion& p) override;
 };

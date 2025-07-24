@@ -15,7 +15,7 @@ export class Gameplay {
 public:
     Gameplay();
 
-    GameResult mainLoop();
+    GameResult mainLoop(); 
 
 private:
     int currentFloorNumber;

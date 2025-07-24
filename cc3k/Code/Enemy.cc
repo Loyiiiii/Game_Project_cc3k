@@ -32,7 +32,7 @@ export class Enemy {
         virtual void takeDamage(int damage) = 0;
 
         // Getters:
-        int getAtk()const;
+        int getAtk() const;
         int getDef() const;
         int getHP() const;
         bool getMoveStatus() const;
