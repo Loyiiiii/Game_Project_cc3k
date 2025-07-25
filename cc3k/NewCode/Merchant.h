@@ -21,6 +21,7 @@ public:
     void setHostile();
     void takeDamage(int dmg) override;
     static void setAllHostile();
+    bool getMoveStatus() const override;
 };
 
 #endif 

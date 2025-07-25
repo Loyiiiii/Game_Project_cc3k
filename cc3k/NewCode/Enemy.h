@@ -37,7 +37,7 @@ public:
     int getAtk() const;
     int getDef() const;
     int getHP() const;
-    bool getMoveStatus() const;
+    virtual bool getMoveStatus() const;
     Position getPosition() const;
 };
 

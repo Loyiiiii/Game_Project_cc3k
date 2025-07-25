@@ -34,7 +34,7 @@ void Merchant::setHostile() {
     is_hostile = true;
     is_neutral = false;
     setAllHostile(); // set all remaining merchant to hostile. 
-    setMovable(true); // set all
+    //setMovable(true); // set all
 }
 
 
@@ -52,3 +52,7 @@ void Merchant::takeDamage(int dmg) {
 void Merchant::setAllHostile() {
     remainingMerchantHostile = true;
 } 
+
+bool Merchant::getMoveStatus() const {
+    return is_hostile || remainingMerchantHostile;
+}

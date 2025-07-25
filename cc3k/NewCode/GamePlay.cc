@@ -11,6 +11,7 @@
 #include "Cell.h"
 #include <string>
 #include <cstdlib>
+#include "Merchant.h"
 
 GamePlay::GamePlay() : enemyFrozen{ false }, player{ nullptr }, allFloorLevel{ nullptr } {}
 GamePlay::~GamePlay() {}
@@ -245,7 +246,32 @@ ResultCombo GamePlay::mainLoop() {
                         }
                     }
 
-                    if (!attacked && enemy->isAdjacentTo(player->getPosition())) {
+                    // Check if enemy is a merchant
+                    Merchant *merchant = dynamic_cast<Merchant*>(enemy.get());
+                    if (merchant) {
+                        std::cout << "DEBUG: Merchant at (" << enemy->getPosition().row << "," << enemy->getPosition().col 
+                                  << "), Player at (" << player->getPosition().row << "," << player->getPosition().col 
+                                  << "), Adjacent: " << enemy->isAdjacentTo(player->getPosition()) 
+                                  << ", Hostile: " << merchant->getMoveStatus() << std::endl;
+                        // Only attack if merchant is hostile AND adjacent AND hasn't attacked yet
+                        if (!attacked && merchant->getMoveStatus() && enemy->isAdjacentTo(player->getPosition())) {
+                            int ifAtkMiss = rand() % 2; // 50% chance to miss attack
+                            if (ifAtkMiss == 0) {
+                                actionMessage += std::string(1, enemy->getSymbol()) + " misses the attack! ";
+                            } else {
+                                // merchant attacks player
+                                actionMessage += enemy->attack(*player);
+                            }
+                            attacked = true; // Mark as attacked to prevent double attacks
+                            continue; // Skip to next enemy after attack
+                        } else {
+                            // Merchant is not hostile or not adjacent or has already attacked, so it moves instead
+                            currentFloor->moveRandom(enemy.get());
+                        }
+                        continue; // Skip to next enemy after merchant processing
+                    }
+                    else if (!attacked && enemy->isAdjacentTo(player->getPosition())) {
+                        // Handle non-merchant enemies as before
                         int ifAtkMiss = rand() % 2; // 50% chance to miss attack
                         if (ifAtkMiss == 0) {
                             actionMessage += std::string(1, enemy->getSymbol()) + " misses the attack! ";
