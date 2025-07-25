@@ -83,14 +83,120 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
     // shuffle the available floor cells
     std::shuffle(availableFloorCells.begin(), availableFloorCells.end(), std::mt19937{ std::random_device{}() });
     // place the player character at the first available floor cell
-    Position playerPos = availableFloorCells[0];
+
+
+
+    std::vector<Position> chamberA, chamberB, chamberC, chamberD, chamberE;
+
+    // Fill chamberA
+    for (int row = 3; row <= 7; ++row) {
+        for (int col = 3; col <= 29; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberA.push_back(Position(row, col));
+            }
+        }
+    }
+    // Fill chamberB
+    for (int row = 3; row <= 7; ++row) {
+        for (int col = 39; col <= 62; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberB.push_back(Position(row, col));
+            }
+        }
+    }
+    for (int row = 5; row <= 7; ++row) {
+        for (int col = 62; col <= 70; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberB.push_back(Position(row, col));
+            }
+        }
+    }
+    for (int row = 6; row <= 7; ++row) {
+        for (int col = 70; col <= 73; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberB.push_back(Position(row, col));
+            }
+        }
+    }
+    for (int row = 7; row <= 13; ++row) {
+        for (int col = 61; col <= 76; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberB.push_back(Position(row, col));
+            }
+        }
+    }
+    // Fill chamberC
+    for (int row = 10; row <= 13; ++row) {
+        for (int col = 38; col <= 51; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberC.push_back(Position(row, col));
+            }
+        }
+    }
+    // Fill chamberD
+    for (int row = 15; row <= 22; ++row) {
+        for (int col = 4; col <= 25; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberD.push_back(Position(row, col));
+            }
+        }
+    }
+    // Fill chamberE
+    for (int row = 16; row <= 19; ++row) {
+        for (int col = 65; col <= 76; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberE.push_back(Position(row, col));
+            }
+        }
+    }
+    for (int row = 19; row <= 22; ++row) {
+        for (int col = 37; col <= 76; ++col) {
+            if (map[row][col].getBaseSymbol() == '.') {
+                chamberE.push_back(Position(row, col));
+            }
+        }
+    }
+
+    std::vector<std::vector<Position>> chambers = {chamberA, chamberB, chamberC, chamberD, chamberE};
+
+    // Randomly select a chamber for the player
+    int playerChamberIdx = rand() % chambers.size();
+    Position playerPos = chambers[playerChamberIdx][rand() % chambers[playerChamberIdx].size()];
+
+    // Place player
     pc->setPosition(playerPos);
     map[playerPos.row][playerPos.col].placeCharacter(pc);
     player = pc;
 
-    // place the stairway at the second available floor cell
-    stairPos = availableFloorCells[1];
+    // Randomly select a different chamber for the stairway
+    int stairChamberIdx;
+    do {
+        stairChamberIdx = rand() % chambers.size();
+    } while (stairChamberIdx == playerChamberIdx);
+
+    Position stairPos = chambers[stairChamberIdx][rand() % chambers[stairChamberIdx].size()];
+
+    // Place stairway
     map[stairPos.row][stairPos.col].setSymbol('\\');
+
+    // clear the availableFloorCells
+    availableFloorCells.clear();
+    // re-collect available cells
+    for (int a = 0; a < numRows; a++) {
+        for (int b = 0; b < numCols; b++) {
+            // Only add cells that are floor, have no gold, no enemy, no player, no stairway, etc.
+            if (map[a][b].getSymbol() == '.') {
+                availableFloorCells.push_back(Position(a, b));
+            }
+        }
+    }
+    // shuffle the new availableFloorCells
+    std::shuffle(availableFloorCells.begin(), availableFloorCells.end(), std::mt19937{ std::random_device{}() });
+    // use the updated availableFloorCells for generation of the rest of objects
+
+
+
+
 
     // place 10 potions using index 2 - 11
     for (int i = 2; i < 12; i++) {
