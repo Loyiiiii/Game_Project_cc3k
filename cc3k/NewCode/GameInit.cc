@@ -109,20 +109,26 @@ void GameInit::run() {
         GamePlay gameplay;
         gameplay.setPlayerRace(playerRace);
         gameplay.gameInit();
-        GameResult result = gameplay.mainLoop();
+        ResultCombo resultCombo;
+        resultCombo = gameplay.mainLoop();
 
-        if (result == GameResult::Restart) {
+        if (resultCombo.GameResult == GameResult::Restart) {
             std::cout << "🔄 Restarting game...\n";
             continue;
         }
-        else if (result == GameResult::Win) {
+        else if (resultCombo.GameResult == GameResult::Win) {
             std::cout << "🏆 Congratulations! You have conquered the dungeon!" << std::endl;
+            std::cout << "Your final score is: " << resultCombo.finalScore << std::endl;
+            std::cout << "Thank you for playing! 🎮" << std::endl;
         }
-        else if (result == GameResult::Loss) {
+        else if (resultCombo.GameResult == GameResult::Loss) {
             std::cout << "💀 You have fallen in the depths of the dungeon." << std::endl;
+            std::cout << "Your final score is: " << resultCombo.finalScore << std::endl;
+            std::cout << "Better luck next time! 🏰" << std::endl
         }
-        else if (result == GameResult::Quit) {
+        else if (resultCombo.GameResult == GameResult::Quit) {
             std::cout << "🚪 You quit the adventure early. Until next time!" << std::endl;
+            break;
         }
         break;
     }
