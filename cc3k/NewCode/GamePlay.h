@@ -23,7 +23,7 @@ public:
 
     void setPlayerRace(Race race);
     void gameInit();
-    GameResult mainLoop();
+    ResultCombo mainLoop();
 };
 
 #endif 
