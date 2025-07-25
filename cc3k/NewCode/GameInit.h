@@ -10,6 +10,11 @@ enum class GameResult {
     Restart
 };
 
+struct ResultCombo {
+    GameResult type;
+    int finalScore;
+};
+
 class GameInit {
 public:
     void run();

@@ -99,7 +99,7 @@ Position GamePlay::getTargetPosition(Position pos, Direction dir) {
     return pos;
 }
 
-GameResult GamePlay::mainLoop() {
+ResultCombo GamePlay::mainLoop() {
     bool gameOver = false;
     GameResult result = GameResult::Quit;
     std::string actionMessage = "Player character has spawned. ";
@@ -249,5 +249,15 @@ GameResult GamePlay::mainLoop() {
             }
         }
     }
-    return result;
+
+    int rawGold = player->getGold();
+    if (player->getRace() == Race::SHADE) {
+        rawGold = static_cast<int>(rawGold * 1.5);
+    }
+
+    ResultCombo resultCombo;
+    resultCombo.type = result;
+    resultCombo.finalScore = rawGold;
+
+    return resultCombo;
 } 
