@@ -174,10 +174,11 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
         stairChamberIdx = rand() % chambers.size();
     } while (stairChamberIdx == playerChamberIdx);
 
-    Position stairPos = chambers[stairChamberIdx][rand() % chambers[stairChamberIdx].size()];
+    Position stair_position = chambers[stairChamberIdx][rand() % chambers[stairChamberIdx].size()];
+    stairPos = stair_position;
 
     // Place stairway
-    map[stairPos.row][stairPos.col].setSymbol('\\');
+    map[stair_position.row][stair_position.col].setSymbol('\\');
 
     // clear the availableFloorCells
     availableFloorCells.clear();
