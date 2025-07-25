@@ -5,6 +5,7 @@
 #include "Global_Constants.h"
 #include "Position.h"
 #include "Potion.h"
+#include <string>
 
 class Enemy; // forward declaration
 
