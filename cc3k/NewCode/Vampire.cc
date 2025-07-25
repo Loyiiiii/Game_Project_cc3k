@@ -14,7 +14,7 @@ std::string Vampire::attack(Enemy& enemy) {
     std::string retval;
     if (enemy.getSymbol() == 'W') { // Dwarf
         takeDamage(5);
-        retval = "Vampire attacks Dwarf and loses 5 HP";
+        retval = "Vampire attacks Dwarf and loses 5 HP. ";
     }
     else {
         gainHP();

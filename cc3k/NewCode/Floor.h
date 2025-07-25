@@ -45,7 +45,6 @@ public:
     Cell& getTargetCell(int row, int col);  // return the cell at (row, col)
     Position getStairPos() const;   // return the position of stairway
 
-    void addGoldPile(std::unique_ptr<Gold> gold, Position pos);
     void moveRandom(Enemy* enemy);
 };
 

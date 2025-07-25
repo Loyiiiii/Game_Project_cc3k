@@ -268,10 +268,12 @@ Position Floor::movePlayer(Position oldPos, Direction dir, bool& goldCollected) 
     else if (dir == Direction::SE) { newRow++; newCol++; }
     else if (dir == Direction::SW) { newRow++; newCol--; }
 
-    // if new position is within the game board and not the boundary of game board -> place pc on the map and return the updated position
+    // if new position is within the game board and not the boundary of game board, 
+    // not occupied by Dragon or Merchant -> place pc on the map and return the updated position
     if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols && 
-        map[newRow][newCol].getBaseSymbol() != '|' && 
-        map[newRow][newCol].getBaseSymbol() != '-' && map[newRow][newCol].getBaseSymbol() != ' ') {
+        map[newRow][newCol].getBaseSymbol() != '|' && map[newRow][newCol].getBaseSymbol() != '-' && 
+        map[newRow][newCol].getBaseSymbol() != ' ' && 
+        (map[newRow][newCol].getEnemy() == nullptr || (map[newRow][newCol].getEnemy()->getSymbol() != 'D' && map[newRow][newCol].getEnemy()->getSymbol() != 'M'))) {
         
         // Check for gold collection before moving
         Cell& targetCell = map[newRow][newCol];
@@ -284,13 +286,6 @@ Position Floor::movePlayer(Position oldPos, Direction dir, bool& goldCollected) 
             // Remove gold from cell and floor
             targetCell.removeGold();
             // Remove from goldsPiles vector
-            /*
-            auto it = std::find_if(goldsPiles.begin(), goldsPiles.end(),
-                [gold](const std::unique_ptr<Gold>& g) { return g.get() == gold; });
-            if (it != goldsPiles.end()) {
-                goldsPiles.erase(it);
-            }
-            */
             for (int i = 0; i < goldsPiles.size(); i++) {
                 if (goldsPiles[i].get() == gold) {
                     goldsPiles.erase(goldsPiles.begin() + i);
@@ -298,7 +293,7 @@ Position Floor::movePlayer(Position oldPos, Direction dir, bool& goldCollected) 
                 }
             }
         }
-        
+        // remove pc from old position, place pc to new position
         map[oldPos.row][oldPos.col].removeCharacter();
         map[newRow][newCol].placeCharacter(player);
         return Position{newRow, newCol};

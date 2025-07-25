@@ -10,18 +10,18 @@
 class Enemy; // forward declaration
 
 class PlayerCharacter {
-    protected:
-        Position pos; // representing the position of the PC
-        int health; // representing the health of the PC
-        int maxHealth; // representing the max health of the PC
-        int atk; // representing the attack power
-        int def; // representing the defense power
-        int goldATM; // representing the amount of gold that the PC has at the moment
-        Race race; // representing the race of the PC
-        bool has_max_health; // representing whether the PC has the max health - reserved for Vampire use (False)
-        std::vector<Potion> PotionInUse; // representing the potions that the PC is using
-        // formula: ceiling((100/(100 + Def (Defender))) * Atk(Attacker))
-        int calculateDamage(int attackerAtk, int defenderDef); // calculating the damage that the PC deals to the enemy
+protected:
+    Position pos; // representing the position of the PC
+    int health; // representing the health of the PC
+    int maxHealth; // representing the max health of the PC
+    int atk; // representing the attack power
+    int def; // representing the defense power
+    int goldATM; // representing the amount of gold that the PC has at the moment
+    Race race; // representing the race of the PC
+    bool has_max_health; // representing whether the PC has the max health - reserved for Vampire use (False)
+    std::vector<Potion> PotionInUse; // representing the potions that the PC is using
+    // formula: ceiling((100/(100 + Def (Defender))) * Atk(Attacker))
+    int calculateDamage(int attackerAtk, int defenderDef); // calculating the damage that the PC deals to the enemy
 
 public:
     // default to be Shade
