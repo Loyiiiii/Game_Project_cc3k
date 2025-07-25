@@ -156,8 +156,8 @@ ResultCombo GamePlay::mainLoop() {
                         if (player->getRace() == Race::GOBLIN) {
                             Goblin* goblin = dynamic_cast<Goblin*>(player.get());
                             if (goblin) {
-                                goblin->stealGold(5); // steal 5 gold from slain enemy
-                                std::cout << "Goblin's gold: +5 " << std::endl;  //did not output
+                                //goblin->stealGold(5); // steal 5 gold from slain enemy
+                                //std::cout << "Goblin's gold: +5 " << std::endl;  //did not output
                             }
                         }
                     }
@@ -179,10 +179,16 @@ ResultCombo GamePlay::mainLoop() {
             std::cout << "Enemies are " << (enemyFrozen ? "frozen" : "unfrozen") << "!" << std::endl;
         }
         else if (command == "r") {
-            return ResultCombol{Restart, 0};
+            ResultCombo result;
+            result.type = GameResult::Restart;
+            result.finalScore = 0;
+            return result;
         }
         else if (command == "q") {
-            return ResultCombol{Quit, 0};
+            ResultCombo result;
+            result.type = GameResult::Quit;
+            result.finalScore = 0;
+            return result;
         }
         else {
             try {
@@ -252,7 +258,7 @@ ResultCombo GamePlay::mainLoop() {
 
     int rawGold = player->getGold();
     if (player->getRace() == Race::SHADE) {
-        rawGold = static_cast<int>(rawGold * 1.5);
+        rawGold = static_cast<int>(rawGold * 3 / 2);
     }
 
     ResultCombo resultCombo;
