@@ -39,6 +39,18 @@ void printInfo(PlayerCharacter* pc, FloorLevel* floorlevel_ptr, std::string msg)
     std::cout << "Action: " << msg << std::endl;
 }
 
+std::string commandToDirection(const std::string& dirStr) {
+    if (dirStr == "no") return "North";
+    if (dirStr == "so") return "South";
+    if (dirStr == "ea") return "East";
+    if (dirStr == "we") return "West";
+    if (dirStr == "ne") return "North East";
+    if (dirStr == "nw") return "North West";
+    if (dirStr == "se") return "South East";
+    if (dirStr == "sw") return "South West";
+    throw std::invalid_argument("Invalid direction");
+}
+
 
 void GamePlay::setPlayerRace(Race race) {
     if (race == Race::DROW) {
@@ -174,7 +186,7 @@ GameResult GamePlay::mainLoop() {
                 
                 // Add movement message
                 if (newPos != oldPos) {
-                    actionMessage += "PC moves " + command + ". ";
+                    actionMessage += "PC moves " + commandToDirection(command) + ". ";
                     if (goldCollected) {
                         actionMessage += "Gold collected! ";
                     }
@@ -202,7 +214,7 @@ GameResult GamePlay::mainLoop() {
                     if (enemy->isAdjacentTo(player->getPosition())) {
                         int ifAtkMiss = rand() % 2; // 50% chance to miss attack
                         if (ifAtkMiss == 0) {
-                            actionMessage += enemy->getSymbol() + " misses the attack! ";
+                            actionMessage += std::string(1, enemy->getSymbol()) + " misses the attack! ";
                         } else {
                             // enemy attacks player
                             actionMessage += enemy->attack(*player);
