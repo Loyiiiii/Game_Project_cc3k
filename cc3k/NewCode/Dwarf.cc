@@ -4,7 +4,7 @@
 #include <string>
 
 Dwarf::Dwarf(Position pos) :
-    Enemy{pos, 100, 20, 30, true, true, 'D'} {}
+    Enemy{pos, 100, 20, 30, true, true, 'W'} {}
 
 Dwarf::~Dwarf() {}
 
