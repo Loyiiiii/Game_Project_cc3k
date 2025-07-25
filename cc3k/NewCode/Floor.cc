@@ -37,18 +37,6 @@ std::string colorText(const std::string& text, const std::string& colorCode) {
     return "\033[" + colorCode + "m" + text + "\033[0m";
 }
 
-/*
-std::string raceToString(Race race) {
-    switch (race) {
-        case Race::SHADE: return "Shade";
-        case Race::DROW: return "Drow";
-        case Race::VAMPIRE: return "Vampire";
-        case Race::TROLL: return "Troll";
-        case Race::GOBLIN: return "Goblin";
-        default: return "Unknown";
-    }
-}
-*/
 
 Floor::Floor() : map(), stairPos{ -1, -1 }, player{ nullptr } {
     map.reserve(numRows);
@@ -62,15 +50,6 @@ Floor::Floor() : map(), stairPos{ -1, -1 }, player{ nullptr } {
     }
 }
 
-/*
-void printInfo(PlayerCharacter* pc) {
-    std::cout << "Race: " << raceToString(pc->getRace()) << " Gold: " << pc->getGold() << " Floor: " << std::endl;
-    std::cout << "HP: " << pc->getHP() << std::endl;
-    std::cout << "Atk: " << pc->getAtk() << std::endl;
-    std::cout << "Def: " << pc->getDef() << std::endl;
-    std::cout << "Action: " << std::endl;
-}
-*/
 
 void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
     // Do not clear the map, just the objects on it.
