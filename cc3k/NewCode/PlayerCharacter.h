@@ -51,6 +51,7 @@ public:
     void takeDamage(int damage);
     // check if the PC is dead
     bool isDead() const;
+    void clearTempPotionEffects();
 };
 
 #endif 

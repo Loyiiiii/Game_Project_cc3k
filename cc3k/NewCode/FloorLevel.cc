@@ -16,6 +16,8 @@ int FloorLevel::getCurrentFloorNum() const { // return current floor number
 
 void FloorLevel::goToNextFloor(PlayerCharacter* pc, const std::string& filename) {
     if (currentFloorNum < floors.size()) { // if player has not reached the highest level
+        // clear the temp potion effects before transitioning to new floor
+        pc->clearTempPotionEffects();
         currentFloorNum++;  // increment floor number
         floors[currentFloorNum - 1]->floor_init(pc, filename);  // initialize Floor at new level
     }

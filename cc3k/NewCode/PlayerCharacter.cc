@@ -135,3 +135,34 @@ void PlayerCharacter::setPosition(Position newPos) {
 bool PlayerCharacter::isDead() const {
     return this->getHP() <= 0;
 }
+
+void PlayerCharacter::clearTempPotionEffects() {
+    // clear the temporary potion effects
+    PotionInUse.clear();
+    // reset the stats to the base values (default atk and def)
+    // we know that the HP is not affected by the potion effects
+    switch (race) {
+        case Race::SHADE:
+            setAtk(25);
+            setDef(25);
+            break;
+        case Race::DROW:
+            setAtk(25);
+            setDef(15);
+            break;
+        case Race::VAMPIRE:
+            setAtk(25);
+            setDef(25);
+            break;
+        case Race::TROLL:
+            setAtk(25);
+            setDef(15);
+            break;
+        case Race::GOBLIN:
+            setAtk(15);
+            setDef(20);
+            break;
+        default:
+            break;
+    }
+}
