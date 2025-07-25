@@ -8,9 +8,9 @@
 #include <memory>
 
 class Dragon : public Enemy {
-    std::unique_ptr<DragonHoard> drag_hoard;
+    DragonHoard *drag_hoard;
 public:
-    Dragon(Position pos, std::unique_ptr<DragonHoard> hoard);
+    Dragon(Position pos, DragonHoard *hoard);
     ~Dragon();
     std::string attack(PlayerCharacter& pc) override;
     void dropGold(PlayerCharacter& pc) override;
