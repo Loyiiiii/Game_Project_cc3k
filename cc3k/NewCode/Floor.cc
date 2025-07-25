@@ -57,11 +57,11 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
     potions.clear();
     goldsPiles.clear();
 
-    std::ifstream file{ "../" + filename };
+    std::ifstream file{ filename };
     std::string line;
     int row = 0;
     while (std::getline(file, line) && row < numRows) {
-        for (int col = 0; col < line.length() && col < numCols; ++col) {
+        for (size_t col = 0; col < line.length() && col < numCols; ++col) {
             char symbol = line[col];
             // Overwrite the existing cells instead of clearing and pushing back
             map[row][col].setSymbol(symbol);
