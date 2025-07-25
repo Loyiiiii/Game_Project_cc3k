@@ -152,6 +152,14 @@ GameResult GamePlay::mainLoop() {
                     actionMessage += player->attack(*targetEnemy);
                     if (!targetEnemy->is_alive()) {
                         targetCell.removeEnemy();
+                        // if the player is a goblin, gain 5 gold every slain enemy
+                        if (player->getRace() == Race::GOBLIN) {
+                            Goblin* goblin = dynamic_cast<Goblin*>(player.get());
+                            if (goblin) {
+                                goblin->stealGold(5); // steal 5 gold from slain enemy
+                                std::cout << "Goblin's gold: +5 " << std::endl;  //did not output
+                            }
+                        }
                     }
                 }
                 // if the player is a vampire, gain 5 HP every attack
