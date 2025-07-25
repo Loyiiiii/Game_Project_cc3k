@@ -30,6 +30,8 @@ void Enemy::setHP(int hp) {
     HP = hp;
 }
 
+void Enemy::setMovable(bool isMovable) { movable = isMovable; }
+
 bool Enemy::isAdjacentTo(const Position& pc_pos) const {
     Position enemy_pos = this->pos;
     int row_diff = std::abs(enemy_pos.row - pc_pos.row);

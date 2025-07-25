@@ -15,6 +15,7 @@ public:
     std::string attack(PlayerCharacter& pc) override;
     void dropGold(PlayerCharacter& pc) override;
     void takeDamage(int dmg) override;
+    DragonHoard* getHoard() const;
 };
 
 #endif 

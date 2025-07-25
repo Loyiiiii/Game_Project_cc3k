@@ -28,6 +28,7 @@ public:
     bool isAdjacentTo(const Position& pc_pos) const;
     void setPosition(Position newPos);
     void setHP(int hp);
+    void setMovable(bool isMovable);
 
     virtual std::string attack(PlayerCharacter& pc) = 0;
     virtual void dropGold(PlayerCharacter& pc) = 0;

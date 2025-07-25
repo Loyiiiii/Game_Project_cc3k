@@ -9,7 +9,7 @@ bool Merchant::remainingMerchantHostile = false;
 Merchant::Merchant(Position pos, std::unique_ptr<MerchantHoard> m_hoard) :
     // superclass ctor runs
     // first initizlied to true -> merchant is neutral. 
-    Enemy{ pos, 30, 70, 5, true, true, 'M' },
+    Enemy{ pos, 30, 70, 5, false, true, 'M' },
     is_hostile{false},
     mer_hoard{std::move(m_hoard)} {
     mer_hoard->setIsPickable(false); // merchant is alive, hoard is not pickable. 
@@ -34,6 +34,7 @@ void Merchant::setHostile() {
     is_hostile = true;
     is_neutral = false;
     setAllHostile(); // set all remaining merchant to hostile. 
+    setMovable(true); // set all
 }
 
 
