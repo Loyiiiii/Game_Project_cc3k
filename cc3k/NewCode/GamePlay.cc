@@ -6,6 +6,7 @@
 #include "Troll.h"
 #include "Goblin.h"
 #include "Shade.h"
+#include "Dragon.h"
 #include "FloorLevel.h"
 #include "Cell.h"
 #include <string>
@@ -225,7 +226,26 @@ ResultCombo GamePlay::mainLoop() {
             auto& enemies = currentFloor->getEnemies();
             for (auto const& enemy : enemies) {
                 if (enemy && enemy->is_alive()) {
-                    if (enemy->isAdjacentTo(player->getPosition())) {
+                    // determine if pc is near dragon hoard
+                    Dragon *dragon = dynamic_cast<Dragon*>(enemy.get());
+                    bool attacked = false;      // if Dragon has already attacked pc - avoid attack twice
+                    if (dragon) {   // if current enemy is a dragon
+                        DragonHoard *dragon_hoard = dragon->getHoard(); // fetch the dragon hoard
+                        if (dragon_hoard) {
+                            // check if player is adjacent to the hoard
+                            Position dragon_hoardPos = dragon_hoard->getPosition();
+                            Position playerPos = player->getPosition();
+                            int rowOffset = std::abs(dragon_hoardPos.row - playerPos.row);
+                            int colOffset = std::abs(dragon_hoardPos.col - playerPos.col);
+                            // if player is adjacent to dragon hoard
+                            if ((rowOffset <= 1 && colOffset <= 1) && (rowOffset != 0 || colOffset != 0)) {
+                                actionMessage += dragon->attack(*player);
+                                attacked = true;    // mark attacked as true showing that dragon has attacked pc
+                            }
+                        }
+                    }
+
+                    if (!attacked && enemy->isAdjacentTo(player->getPosition())) {
                         int ifAtkMiss = rand() % 2; // 50% chance to miss attack
                         if (ifAtkMiss == 0) {
                             actionMessage += std::string(1, enemy->getSymbol()) + " misses the attack! ";

@@ -30,3 +30,5 @@ void Dragon::takeDamage(int dmg) {
         setHP(this->getHP() - dmg);
     }
 } 
+
+DragonHoard* Dragon::getHoard() const { return drag_hoard; }
