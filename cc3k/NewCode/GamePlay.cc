@@ -179,10 +179,10 @@ ResultCombo GamePlay::mainLoop() {
             std::cout << "Enemies are " << (enemyFrozen ? "frozen" : "unfrozen") << "!" << std::endl;
         }
         else if (command == "r") {
-            return GameResult::Restart;
+            return ResultCombol{Restart, 0};
         }
         else if (command == "q") {
-            return GameResult::Quit;
+            return ResultCombol{Quit, 0};
         }
         else {
             try {
