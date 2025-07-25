@@ -144,13 +144,13 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
         int randomNum_gold = rand() % 8;
         std::unique_ptr<Gold> goldPtr;
         if (randomNum_gold < 5) {
-            goldPtr = std::make_unique<NormalGold>();
+            goldPtr = std::make_unique<NormalGold>();   // generate NormalGold
         }
         else if (randomNum_gold == 5) {
-            goldPtr = std::make_unique<DragonHoard>(availableFloorCells[j]);
+            goldPtr = std::make_unique<DragonHoard>(availableFloorCells[j]);    // generate Dragon Hoard
         }
         else {
-            goldPtr = std::make_unique<SmallGold>();
+            goldPtr = std::make_unique<SmallGold>();    // genereta small gold
         }
         // place the gold in the map and store in goldPiles
         map[availableFloorCells[j].row][availableFloorCells[j].col].placeGold(goldPtr.get());
