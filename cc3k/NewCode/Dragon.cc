@@ -4,8 +4,8 @@
 #include "Global_Constants.h"
 #include <string>
 
-Dragon::Dragon(Position pos, std::unique_ptr<DragonHoard> hoard) :
-    Enemy{ pos, 150, 20, 20, false, true, 'D' }, drag_hoard{ std::move(hoard) } {
+Dragon::Dragon(Position pos, DragonHoard *hoard) :
+    Enemy{ pos, 150, 20, 20, false, true, 'D' }, drag_hoard{hoard} {
     drag_hoard->setIsPickable(false);
 }
 

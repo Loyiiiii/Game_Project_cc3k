@@ -22,6 +22,7 @@
 #include "WoundAtk.h"
 #include "WoundDef.h"
 #include "NormalGold.h"
+#include "Dragon.h"
 #include "DragonHoard.h"
 #include "SmallGold.h"
 #include "Human.h"
@@ -139,17 +140,67 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
         potions.push_back(std::move(potionPtr));
     }
 
-    // place 10 piles of gold using index 12 - 21
-    for (int j = 12; j < 22; j++) {
+
+    // generate dragon hoard together with a dragon with probability 1/8
+    int dragonHoardCount = 0;
+    for (int idx = 12; idx < 22; idx++) {
         int randomNum_gold = rand() % 8;
+        std::unique_ptr<DragonHoard> dragonHoardPtr;
+        if (randomNum_gold == 0) {
+            dragonHoardPtr = std::make_unique<DragonHoard>(availableFloorCells[idx]);    // generate Dragon Hoard
+            dragonHoardCount++;
+            // obtain the position of DragonHoard
+            Position DragonHoardPos = availableFloorCells[idx];
+            // collect available dragon spots
+            std::vector<Position> dragonSpots;
+            for (int r = -1; r <= 1; r++) {
+                for (int c = -1; c <= 1; c++) {
+                    if (r == 0 && c == 0) continue;
+                    int new_r = DragonHoardPos.row + r;
+                    int new_c = DragonHoardPos.col + c;
+                    if (new_r >= 0 && new_r < numRows && new_c >= 0 && new_c < numCols &&
+                        map[new_r][new_c].getSymbol() == '.') {
+                        dragonSpots.push_back(Position(new_r, new_c));
+                    }
+                }
+            }
+
+            // if there are available spots for dragon
+            if (dragonSpots.size() != 0) {
+                int randomNum_dragon = rand() % dragonSpots.size();
+                Position dragonPos = dragonSpots[randomNum_dragon]; // randomly pick a positon from dragonSpots
+                std::unique_ptr<Dragon> dragon = std::make_unique<Dragon>(dragonPos, dragonHoardPtr.get()); // create a dragon
+                map[dragonPos.row][dragonPos.col].placeEnemy(dragon.get()); // place dragon on map
+                enemies.push_back(std::move(dragon));   // add dragon to enemies
+            }
+            // place the dragon hoard in the map and store in goldPiles
+            map[availableFloorCells[idx].row][availableFloorCells[idx].col].placeGold(dragonHoardPtr.get());
+            goldsPiles.push_back(std::move(dragonHoardPtr));
+        }
+    }
+
+    // clear the availableFloorCells
+    availableFloorCells.clear();
+    // re-collect available cells
+    for (int a = 0; a < numRows; a++) {
+        for (int b = 0; b < numCols; b++) {
+            // Only add cells that are floor, have no gold, no enemy, no player, no stairway, etc.
+            if (map[a][b].getSymbol() == '.') {
+                availableFloorCells.push_back(Position(a, b));
+            }
+        }
+    }
+    // shuffle the new availableFloorCells
+    std::shuffle(availableFloorCells.begin(), availableFloorCells.end(), std::mt19937{ std::random_device{}() });
+    // use the updated availableFloorCells for generation of the rest of objects
+
+    // place 10 - dragonHoardCount piles of gold using index 0 - 10-dragonHoardNum
+    for (int j = 0; j < 10 - dragonHoardCount; j++) {
+        int randomNum_gold = rand() % 7;
         std::unique_ptr<Gold> goldPtr;
         if (randomNum_gold < 5) {
             goldPtr = std::make_unique<NormalGold>();   // generate NormalGold
-        }
-        else if (randomNum_gold == 5) {
-            goldPtr = std::make_unique<DragonHoard>(availableFloorCells[j]);    // generate Dragon Hoard
-        }
-        else {
+        } else {
             goldPtr = std::make_unique<SmallGold>();    // genereta small gold
         }
         // place the gold in the map and store in goldPiles
@@ -157,8 +208,8 @@ void Floor::floor_init(PlayerCharacter* pc, const std::string& filename) {
         goldsPiles.push_back(std::move(goldPtr));
     }
 
-    // place 20 enemies using index 22 - 41
-    for (int r = 22; r < 42; r++) {
+    // place 20 enemies using index 11 - 30
+    for (int r = 11; r < 30; r++) {
         int randomNum_enemy = rand() % 18;
         std::unique_ptr<Enemy> enemyPtr;
         Position enemyPos = availableFloorCells[r];
